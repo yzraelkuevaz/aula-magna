@@ -182,7 +182,7 @@ function ContinueReading({
                 <div className="mt-1.5 text-[11px] text-ink-soft">{Math.round(r.progress * 100)}% completado</div>
               </div>
             </div>
-            void onToggleFav;
+            
           </button>
         ))}
       </div>
