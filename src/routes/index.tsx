@@ -141,7 +141,7 @@ function FiltersBar() {
 }
 
 function ContinueReading({
-  items, onOpen, onToggleFav,
+  items, onOpen,
 }: {
   items: (Resource & { progress: number })[];
   onOpen: (r: Resource) => void;
