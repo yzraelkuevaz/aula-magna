@@ -58,14 +58,20 @@ export function Sidebar({ active, onSelect, onAskAI }: SidebarProps) {
             <button
               key={key}
               onClick={() => onSelect(key)}
-              className={`group flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-all duration-200 ${
+              className={`group relative flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-all duration-200 ${
                 isActive
-                  ? "bg-primary/10 text-primary font-medium"
-                  : "text-ink-soft hover:bg-secondary hover:text-ink"
+                  ? "bg-white/[0.06] text-ink font-medium"
+                  : "text-ink-soft hover:bg-white/[0.04] hover:text-ink"
               }`}
               title={collapsed ? label : undefined}
             >
-              <Icon className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-primary" : ""}`} />
+              {isActive && (
+                <span
+                  className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-full"
+                  style={{ background: "var(--gradient-neon)", boxShadow: "0 0 12px var(--neon-coral)" }}
+                />
+              )}
+              <Icon className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-[var(--neon-coral)]" : ""}`} />
               {!collapsed && <span className="truncate">{label}</span>}
             </button>
           );
@@ -76,13 +82,16 @@ export function Sidebar({ active, onSelect, onAskAI }: SidebarProps) {
 
   return (
     <aside
-      className={`hidden lg:flex flex-col shrink-0 h-screen sticky top-0 border-r border-border bg-surface transition-[width] duration-300 ${
+      className={`hidden lg:flex flex-col shrink-0 h-screen sticky top-0 glass border-r border-white/10 transition-[width] duration-300 ${
         collapsed ? "w-[76px]" : "w-[264px]"
       }`}
     >
-      <div className="flex items-center gap-2.5 px-5 h-16 border-b border-border">
-        <div className="h-9 w-9 rounded-xl bg-primary/10 grid place-items-center shrink-0">
-          <Library className="h-[18px] w-[18px] text-primary" />
+      <div className="flex items-center gap-2.5 px-5 h-16 border-b border-white/10">
+        <div
+          className="h-9 w-9 rounded-xl grid place-items-center shrink-0 ring-1 ring-white/20"
+          style={{ background: "var(--gradient-neon)" }}
+        >
+          <Library className="h-[18px] w-[18px] text-white drop-shadow" />
         </div>
         {!collapsed && (
           <div className="min-w-0">
@@ -99,11 +108,11 @@ export function Sidebar({ active, onSelect, onAskAI }: SidebarProps) {
         <Group items={[{ key: "papelera", label: "Papelera", icon: Trash2 }]} />
       </div>
 
-      <div className="p-3 border-t border-border space-y-2">
+      <div className="p-3 border-t border-white/10 space-y-2">
         {!collapsed && (
           <button
             onClick={onAskAI}
-            className="w-full flex items-center gap-2 rounded-xl bg-ink text-background px-3 py-2.5 text-sm font-medium hover:bg-ink/90 transition-colors"
+            className="w-full flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-3 py-2.5 text-sm font-semibold hover:brightness-110 transition-all shadow-[0_10px_28px_-8px_var(--neon-coral)]"
           >
             <Sparkles className="h-4 w-4" />
             Preguntar al IAsistente
@@ -111,7 +120,7 @@ export function Sidebar({ active, onSelect, onAskAI }: SidebarProps) {
         )}
         <button
           onClick={() => setCollapsed((c) => !c)}
-          className="w-full flex items-center justify-center gap-2 rounded-lg px-2 py-1.5 text-xs text-ink-soft hover:bg-secondary"
+          className="w-full flex items-center justify-center gap-2 rounded-lg px-2 py-1.5 text-xs text-ink-soft hover:bg-white/[0.05]"
         >
           <ChevronLeft className={`h-3.5 w-3.5 transition-transform ${collapsed ? "rotate-180" : ""}`} />
           {!collapsed && "Contraer"}
