@@ -1,4 +1,4 @@
-import { Search, Wand2, Command } from "lucide-react";
+import { Search, Wand2 } from "lucide-react";
 import { PulsoDocente } from "./PulsoDocente";
 
 interface HeroProps {
@@ -67,5 +67,3 @@ export function Hero({ query, onQuery, onAskAI }: HeroProps) {
   );
 }
 
-// Prevent unused-import warning for the icon exposed via kbd hint
-void Command;
