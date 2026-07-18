@@ -43,6 +43,7 @@ function BibliotecaViva() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+  const toggleFav = (id: string) =>
     setResources((rs) => rs.map((r) => (r.id === id ? { ...r, favorite: !r.favorite } : r)));
 
   const filtered = useMemo(() => {
