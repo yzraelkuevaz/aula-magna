@@ -1,25 +1,25 @@
 import { BookOpen, GraduationCap, ClipboardList, FileType, Scale, Video, Music, FileText } from "lucide-react";
 
 const categories = [
-  { key: "libro-sep", label: "Libros SEP", icon: BookOpen, count: 214, cover: "clay" },
-  { key: "libro-maestro", label: "Libros del Maestro", icon: GraduationCap, count: 96, cover: "ink" },
-  { key: "planeacion", label: "Planeaciones", icon: ClipboardList, count: 148, cover: "ochre" },
+  { key: "libro-sep", label: "Libros SEP", icon: BookOpen, count: 214, cover: "ocean" },
+  { key: "libro-maestro", label: "Libros del Maestro", icon: GraduationCap, count: 96, cover: "lilac" },
+  { key: "planeacion", label: "Planeaciones", icon: ClipboardList, count: 148, cover: "clay" },
   { key: "formato", label: "Formatos", icon: FileType, count: 72, cover: "sage" },
-  { key: "reglamento", label: "Reglamentos", icon: Scale, count: 24, cover: "lilac" },
-  { key: "video", label: "Videos", icon: Video, count: 63, cover: "ocean" },
-  { key: "audio", label: "Audios", icon: Music, count: 41, cover: "forest" },
-  { key: "oficio", label: "Oficios", icon: FileText, count: 33, cover: "rose" },
+  { key: "reglamento", label: "Reglamentos", icon: Scale, count: 24, cover: "rose" },
+  { key: "video", label: "Videos", icon: Video, count: 63, cover: "forest" },
+  { key: "audio", label: "Audios", icon: Music, count: 41, cover: "ochre" },
+  { key: "oficio", label: "Oficios", icon: FileText, count: 33, cover: "ink" },
 ] as const;
 
 const gradientMap: Record<string, string> = {
-  clay: "from-[oklch(0.78_0.11_45)] to-[oklch(0.58_0.15_30)]",
-  ink: "from-[oklch(0.48_0.05_250)] to-[oklch(0.22_0.03_260)]",
-  ochre: "from-[oklch(0.85_0.12_80)] to-[oklch(0.62_0.14_60)]",
-  sage: "from-[oklch(0.80_0.08_155)] to-[oklch(0.50_0.09_165)]",
-  lilac: "from-[oklch(0.80_0.09_300)] to-[oklch(0.52_0.12_290)]",
-  ocean: "from-[oklch(0.76_0.09_230)] to-[oklch(0.42_0.11_245)]",
-  forest: "from-[oklch(0.66_0.09_145)] to-[oklch(0.32_0.06_155)]",
-  rose: "from-[oklch(0.85_0.09_20)] to-[oklch(0.58_0.14_15)]",
+  clay:   "from-[oklch(0.82_0.17_55)] to-[oklch(0.62_0.20_35)]",
+  sage:   "from-[oklch(0.82_0.18_145)] to-[oklch(0.58_0.16_155)]",
+  ochre:  "from-[oklch(0.86_0.16_80)] to-[oklch(0.70_0.18_55)]",
+  lilac:  "from-[oklch(0.74_0.20_300)] to-[oklch(0.52_0.20_285)]",
+  ink:    "from-[oklch(0.42_0.06_265)] to-[oklch(0.20_0.03_265)]",
+  rose:   "from-[oklch(0.78_0.22_350)] to-[oklch(0.58_0.24_340)]",
+  ocean:  "from-[oklch(0.78_0.15_230)] to-[oklch(0.50_0.20_250)]",
+  forest: "from-[oklch(0.78_0.15_200)] to-[oklch(0.45_0.14_215)]",
 };
 
 interface Props {
@@ -34,21 +34,22 @@ export function CategoryCards({ onSelect }: Props) {
           <button
             key={key}
             onClick={() => onSelect(key)}
-            className="card-lift card-lift-hover group relative overflow-hidden rounded-2xl aspect-[4/3] text-left shadow-[var(--shadow-soft)]"
+            className="card-lift card-lift-hover group relative overflow-hidden rounded-3xl aspect-[4/3] text-left glass p-4 flex flex-col justify-between"
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${gradientMap[cover]}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            <div className="absolute inset-0 opacity-20 mix-blend-overlay"
-              style={{ background: "radial-gradient(120% 60% at 100% 0%, #fff, transparent)" }}
+            {/* Ícono con degradado vívido tipo referencia */}
+            <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${gradientMap[cover]} grid place-items-center shadow-[0_10px_24px_-6px_oklch(0_0_0/60%)] ring-1 ring-white/15`}>
+              <Icon className="h-6 w-6 text-white drop-shadow" />
+            </div>
+
+            {/* Glow halo del color del ícono, solo en hover */}
+            <div
+              className={`pointer-events-none absolute -inset-4 opacity-0 group-hover:opacity-70 transition-opacity duration-500 blur-2xl bg-gradient-to-br ${gradientMap[cover]}`}
+              style={{ zIndex: -1 }}
             />
-            <div className="relative h-full p-5 flex flex-col justify-between text-primary-foreground">
-              <div className="h-10 w-10 rounded-xl bg-white/15 backdrop-blur grid place-items-center">
-                <Icon className="h-5 w-5" />
-              </div>
-              <div>
-                <div className="font-serif text-lg leading-tight">{label}</div>
-                <div className="text-xs opacity-80 mt-0.5">{count} recursos</div>
-              </div>
+
+            <div>
+              <div className="font-serif text-lg leading-tight text-ink">{label}</div>
+              <div className="text-xs text-ink-soft mt-0.5">{count} recursos</div>
             </div>
           </button>
         ))}
