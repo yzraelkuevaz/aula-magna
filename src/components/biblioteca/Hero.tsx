@@ -1,4 +1,5 @@
 import { Search, Wand2 } from "lucide-react";
+import { PulsoDocente } from "./PulsoDocente";
 
 interface HeroProps {
   query: string;
@@ -18,15 +19,15 @@ export function Hero({ query, onQuery, onAskAI }: HeroProps) {
             "radial-gradient(60% 60% at 15% 0%, oklch(0.85 0.08 60 / 60%) 0%, transparent 60%), radial-gradient(50% 50% at 90% 20%, oklch(0.82 0.09 20 / 45%) 0%, transparent 60%)",
         }}
       />
-      <div className="px-5 lg:px-10 pt-14 pb-12 max-w-6xl mx-auto">
+      <div className="px-5 lg:px-10 pt-10 pb-12 max-w-6xl mx-auto">
         <div className="text-xs tracking-[0.18em] uppercase text-ink-soft mb-4">Biblioteca Viva · SIED MX</div>
         <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-ink max-w-3xl">
-          Bienvenido nuevamente.
+          Tu aula, en un solo lugar.
           <br />
-          <span className="text-ink-soft italic font-normal">¿qué deseas encontrar hoy?</span>
+          <span className="text-ink-soft italic font-normal">¿qué necesitas hoy?</span>
         </h1>
         <p className="mt-5 text-ink-soft max-w-xl text-[15px]">
-          Tu espacio para explorar, guardar y compartir todo el material que necesitas para tu aula.
+          Explora, guarda y comparte el material de tu clase. Pulsa <kbd className="border border-border rounded px-1.5 py-0.5 text-[11px] mx-1">⌘K</kbd> para pedirle cualquier cosa a SIED en tus propias palabras.
         </p>
 
         <div className="mt-8 relative max-w-2xl">
@@ -59,7 +60,10 @@ export function Hero({ query, onQuery, onAskAI }: HeroProps) {
             ))}
           </div>
         </div>
+
+        <PulsoDocente />
       </div>
     </section>
   );
 }
+
