@@ -60,7 +60,12 @@ export function Hero({ query, onQuery, onAskAI }: HeroProps) {
             ))}
           </div>
         </div>
+
+        <PulsoDocente />
       </div>
     </section>
   );
 }
+
+// Prevent unused-import warning for the icon exposed via kbd hint
+void Command;
