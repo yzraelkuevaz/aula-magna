@@ -42,75 +42,93 @@
   --color-sage: var(--sage);
   --color-ochre: var(--ochre);
   --color-lilac: var(--lilac);
+  --color-neon-coral: var(--neon-coral);
+  --color-neon-pink: var(--neon-pink);
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-violet: var(--neon-violet);
 }
 
+/* ============================================================
+   Dark neon glass — default theme
+   Inspiración: glassmorphism 3D con halo rosa/coral/cyan.
+   ============================================================ */
 :root {
-  --radius: 1rem;
+  --radius: 1.25rem;
 
-  /* Cream paper background, deep ink text, warm terracotta accent */
-  --background: oklch(0.977 0.011 85);
-  --surface: oklch(0.985 0.008 85);
-  --surface-elevated: oklch(1 0 0);
-  --foreground: oklch(0.24 0.02 260);
-  --ink: oklch(0.20 0.02 260);
-  --ink-soft: oklch(0.45 0.02 260);
+  --background: oklch(0.16 0.015 265);
+  --surface: oklch(0.20 0.018 265);
+  --surface-elevated: oklch(0.24 0.020 265 / 70%);
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.02 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.02 260);
+  --foreground: oklch(0.97 0.005 260);
+  --ink: oklch(0.97 0.005 260);
+  --ink-soft: oklch(0.72 0.015 260);
 
-  --primary: oklch(0.52 0.14 35);        /* terracotta */
-  --primary-foreground: oklch(0.985 0.008 85);
-  --secondary: oklch(0.94 0.014 85);
-  --secondary-foreground: oklch(0.28 0.02 260);
-  --muted: oklch(0.945 0.012 85);
-  --muted-foreground: oklch(0.5 0.015 260);
-  --accent: oklch(0.93 0.03 60);
-  --accent-foreground: oklch(0.28 0.02 260);
-  --destructive: oklch(0.55 0.19 27);
-  --destructive-foreground: oklch(0.985 0.003 247);
+  --card: oklch(0.22 0.018 265 / 75%);
+  --card-foreground: oklch(0.97 0.005 260);
+  --popover: oklch(0.20 0.018 265);
+  --popover-foreground: oklch(0.97 0.005 260);
 
-  --border: oklch(0.9 0.01 85);
-  --input: oklch(0.92 0.01 85);
-  --ring: oklch(0.52 0.14 35 / 40%);
+  /* Coral neón como en la referencia */
+  --primary: oklch(0.72 0.19 25);
+  --primary-foreground: oklch(0.15 0.01 265);
 
-  --clay: oklch(0.62 0.12 40);
-  --sage: oklch(0.62 0.06 155);
-  --ochre: oklch(0.72 0.13 75);
-  --lilac: oklch(0.62 0.09 300);
+  --secondary: oklch(0.28 0.018 265);
+  --secondary-foreground: oklch(0.97 0.005 260);
+  --muted: oklch(0.26 0.018 265);
+  --muted-foreground: oklch(0.70 0.012 260);
+  --accent: oklch(0.30 0.03 300);
+  --accent-foreground: oklch(0.97 0.005 260);
+  --destructive: oklch(0.66 0.20 25);
+  --destructive-foreground: oklch(0.98 0.003 247);
 
-  --shadow-soft: 0 1px 2px oklch(0.2 0.02 260 / 5%), 0 8px 24px -8px oklch(0.2 0.02 260 / 10%);
-  --shadow-lift: 0 2px 4px oklch(0.2 0.02 260 / 6%), 0 20px 40px -12px oklch(0.2 0.02 260 / 18%);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.72 0.19 25 / 55%);
+
+  /* Paleta neón para íconos y halos */
+  --neon-coral: oklch(0.72 0.19 25);
+  --neon-pink: oklch(0.68 0.24 340);
+  --neon-cyan: oklch(0.78 0.15 200);
+  --neon-violet: oklch(0.62 0.20 295);
+  --neon-lime: oklch(0.82 0.18 145);
+  --neon-amber: oklch(0.78 0.17 65);
+
+  --clay: oklch(0.72 0.14 40);
+  --sage: oklch(0.72 0.11 155);
+  --ochre: oklch(0.78 0.15 75);
+  --lilac: oklch(0.72 0.13 300);
+
+  --shadow-soft:
+    0 1px 2px oklch(0 0 0 / 40%),
+    0 12px 32px -12px oklch(0 0 0 / 55%);
+  --shadow-lift:
+    0 2px 6px oklch(0 0 0 / 45%),
+    0 30px 60px -20px oklch(0 0 0 / 65%);
+
+  /* Halo neón — se aplica como box-shadow externo */
+  --glow-coral:
+    0 0 0 1px oklch(0.72 0.19 25 / 30%),
+    0 0 24px -2px oklch(0.72 0.19 25 / 45%),
+    0 0 60px -10px oklch(0.68 0.24 340 / 40%);
+
+  --glow-rainbow:
+    0 0 0 1px oklch(1 0 0 / 8%),
+    0 -10px 40px -10px oklch(0.68 0.24 340 / 35%),
+    0 10px 40px -10px oklch(0.78 0.15 200 / 30%),
+    0 0 60px -20px oklch(0.78 0.17 65 / 35%);
+
+  --gradient-neon: linear-gradient(
+    90deg,
+    oklch(0.78 0.17 65) 0%,
+    oklch(0.72 0.19 25) 35%,
+    oklch(0.68 0.24 340) 70%,
+    oklch(0.78 0.15 200) 100%
+  );
 }
 
 .dark {
-  --background: oklch(0.16 0.012 260);
-  --surface: oklch(0.19 0.014 260);
-  --surface-elevated: oklch(0.22 0.014 260);
-  --foreground: oklch(0.96 0.006 85);
-  --ink: oklch(0.96 0.006 85);
-  --ink-soft: oklch(0.72 0.012 260);
-
-  --card: oklch(0.21 0.014 260);
-  --card-foreground: oklch(0.96 0.006 85);
-  --popover: oklch(0.22 0.014 260);
-  --popover-foreground: oklch(0.96 0.006 85);
-
-  --primary: oklch(0.72 0.14 45);
-  --primary-foreground: oklch(0.18 0.012 260);
-  --secondary: oklch(0.26 0.014 260);
-  --secondary-foreground: oklch(0.96 0.006 85);
-  --muted: oklch(0.24 0.014 260);
-  --muted-foreground: oklch(0.68 0.012 260);
-  --accent: oklch(0.28 0.02 60);
-  --accent-foreground: oklch(0.96 0.006 85);
-  --destructive: oklch(0.66 0.18 25);
-  --destructive-foreground: oklch(0.98 0.003 247);
-
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.72 0.14 45 / 50%);
+  /* dark = default; alias explícito por si algo lo requiere */
+  color-scheme: dark;
 }
 
 @layer base {
@@ -124,7 +142,21 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Fondo global con ambient orbs sutiles */
+  body {
+    background-image:
+      radial-gradient(45% 35% at 12% 8%, oklch(0.68 0.24 340 / 12%) 0%, transparent 60%),
+      radial-gradient(40% 30% at 92% 12%, oklch(0.78 0.15 200 / 10%) 0%, transparent 60%),
+      radial-gradient(50% 40% at 80% 95%, oklch(0.72 0.19 25 / 10%) 0%, transparent 60%);
+    background-attachment: fixed;
+  }
+
   .font-serif { font-family: var(--font-serif); font-feature-settings: "ss01", "ss02"; }
+
+  ::selection {
+    background: oklch(0.72 0.19 25 / 35%);
+    color: oklch(0.98 0 0);
+  }
 }
 
 @utility card-lift {
@@ -134,11 +166,93 @@
 @utility card-lift-hover {
   &:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-lift);
+    box-shadow: var(--shadow-lift), var(--glow-coral);
   }
 }
 
 @utility scrollbar-hide {
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
+}
+
+/* Glass panel — superficie translúcida con borde luminoso */
+@utility glass {
+  background: color-mix(in oklch, var(--surface) 60%, transparent);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid oklch(1 0 0 / 10%);
+}
+
+@utility glass-strong {
+  background: color-mix(in oklch, var(--surface-elevated) 82%, transparent);
+  backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid oklch(1 0 0 / 12%);
+}
+
+/* Halo neón coral+rosa alrededor del panel */
+@utility glow-coral {
+  box-shadow: var(--glow-coral);
+}
+
+/* Halo multicolor (naranja→coral→rosa→cyan) — para paneles hero */
+@utility glow-rainbow {
+  box-shadow: var(--glow-rainbow);
+}
+
+/* Borde con degradado neón — usa mask trick */
+@utility neon-border {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-neon);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
+/* Barra lateral luminosa (como los LEDs del monitor de la referencia) */
+@utility led-strip {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: -2px; top: 8%; bottom: 8%;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--gradient-neon);
+    filter: blur(1px);
+    opacity: 0.9;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: -12px; top: 8%; bottom: 8%;
+    width: 24px;
+    background: var(--gradient-neon);
+    filter: blur(18px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+}
+
+/* Pill tab activo con subrayado neón */
+@utility pill-active {
+  background: color-mix(in oklch, var(--surface-elevated) 90%, transparent);
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 0 transparent, 0 6px 18px -8px oklch(0.68 0.24 340 / 50%);
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 18%; right: 18%; bottom: 4px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--gradient-neon);
+  }
 }
