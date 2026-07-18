@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Filter } from "lucide-react";
 import { Sidebar } from "@/components/biblioteca/Sidebar";
@@ -9,6 +9,8 @@ import { ResourceRow } from "@/components/biblioteca/ResourceRow";
 import { ResourceCard } from "@/components/biblioteca/ResourceCard";
 import { PreviewModal } from "@/components/biblioteca/PreviewModal";
 import { AIPanel } from "@/components/biblioteca/AIPanel";
+import { MomentoRibbon } from "@/components/biblioteca/MomentoRibbon";
+import { CommandPalette } from "@/components/biblioteca/CommandPalette";
 import { resources as seed, continueReading, recentlyAdded, aiRecommended, type Resource } from "@/components/biblioteca/data";
 
 export const Route = createFileRoute("/")({
@@ -29,8 +31,18 @@ function BibliotecaViva() {
   const [aiOpen, setAiOpen] = useState(false);
   const [resources, setResources] = useState(seed);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
 
-  const toggleFav = (id: string) =>
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPaletteOpen((o) => !o);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
     setResources((rs) => rs.map((r) => (r.id === id ? { ...r, favorite: !r.favorite } : r)));
 
   const filtered = useMemo(() => {
