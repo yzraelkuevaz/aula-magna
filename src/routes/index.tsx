@@ -77,6 +77,7 @@ function BibliotecaViva() {
           />
         ) : (
           <>
+            <MomentoRibbon name="Maestra Alicia" />
             <Hero query={query} onQuery={setQuery} onAskAI={openAI} />
 
             <div className="px-5 lg:px-10 mt-10 flex items-baseline justify-between">
@@ -125,6 +126,7 @@ function BibliotecaViva() {
 
       <PreviewModal resource={preview} onClose={() => setPreview(null)} onToggleFav={toggleFav} />
       <AIPanel open={aiOpen} onClose={() => setAiOpen(false)} />
+      <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} onOpenResource={setPreview} />
     </div>
   );
 }
