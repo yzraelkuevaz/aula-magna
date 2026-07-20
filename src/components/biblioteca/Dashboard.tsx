@@ -294,7 +294,7 @@ function KpiCard({
   suffix?: string;
   trailing?: string;
   trailingTint?: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   iconTint: string;
   footer?: string;
   progress?: number;
