@@ -356,7 +356,7 @@ function Panel({ title, right, children }: { title: string; right?: React.ReactN
   );
 }
 
-function PanelFooter({ label, icon: Icon = ArrowRight }: { label: string; icon?: React.ComponentType<{ className?: string }> }) {
+function PanelFooter({ label, icon: Icon = ArrowRight }: { label: string; icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }> }) {
   return (
     <button className="mt-4 w-full h-9 rounded-xl bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 text-[12px] text-ink flex items-center justify-center gap-1.5 transition">
       <Icon className="h-3.5 w-3.5 text-[var(--neon-coral)]" />
