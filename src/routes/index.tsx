@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Filter } from "lucide-react";
 import { Sidebar } from "@/components/biblioteca/Sidebar";
 import { TopBar } from "@/components/biblioteca/TopBar";
+import { Dashboard } from "@/components/biblioteca/Dashboard";
 import { Hero } from "@/components/biblioteca/Hero";
 import { CategoryCards } from "@/components/biblioteca/CategoryCards";
 import { ResourceRow } from "@/components/biblioteca/ResourceRow";
@@ -25,7 +26,7 @@ const filterGroups = [
 ];
 
 function BibliotecaViva() {
-  const [active, setActive] = useState("inicio");
+  const [active, setActive] = useState("escritorio");
   const [query, setQuery] = useState("");
   const [preview, setPreview] = useState<Resource | null>(null);
   const [aiOpen, setAiOpen] = useState(false);
@@ -43,6 +44,7 @@ function BibliotecaViva() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
   const toggleFav = (id: string) =>
     setResources((rs) => rs.map((r) => (r.id === id ? { ...r, favorite: !r.favorite } : r)));
 
@@ -58,13 +60,15 @@ function BibliotecaViva() {
   }, [query, resources]);
 
   const openAI = () => setAiOpen(true);
+  const showDashboard = active === "escritorio" && !query.trim();
+  const showBiblioteca = active === "biblioteca" || active === "recursos";
 
   return (
     <div className="min-h-screen flex bg-background text-foreground">
-      <Sidebar active={active} onSelect={setActive} onAskAI={openAI} />
+      <Sidebar active={active} onSelect={setActive} />
 
       <main className="flex-1 min-w-0">
-        <TopBar query={query} onQuery={setQuery} onAskAI={openAI} />
+        <TopBar query={query} onQuery={setQuery} onCommand={() => setPaletteOpen(true)} />
 
         {query.trim() ? (
           <SearchResults
@@ -75,9 +79,11 @@ function BibliotecaViva() {
             filtersOpen={filtersOpen}
             setFiltersOpen={setFiltersOpen}
           />
-        ) : (
+        ) : showDashboard ? (
+          <Dashboard onAskAI={openAI} />
+        ) : showBiblioteca ? (
           <>
-            <MomentoRibbon name="Maestra Alicia" />
+            <MomentoRibbon name="Profesor Israel" />
             <Hero query={query} onQuery={setQuery} onAskAI={openAI} />
 
             <div className="px-5 lg:px-10 mt-10 flex items-baseline justify-between">
@@ -121,6 +127,11 @@ function BibliotecaViva() {
               Biblioteca Viva · Un órgano de SIED MX · Diseñado para docentes
             </footer>
           </>
+        ) : (
+          <div className="p-10 text-ink-soft">
+            <div className="font-serif text-2xl text-ink mb-2">Próximamente</div>
+            Este módulo está en construcción. Vuelve al <button className="text-[var(--neon-coral)]" onClick={() => setActive("escritorio")}>Escritorio</button>.
+          </div>
         )}
       </main>
 
@@ -197,7 +208,6 @@ function ContinueReading({
                 <div className="mt-1.5 text-[11px] text-ink-soft">{Math.round(r.progress * 100)}% completado</div>
               </div>
             </div>
-            
           </button>
         ))}
       </div>
