@@ -12,6 +12,7 @@ import { PreviewModal } from "@/components/biblioteca/PreviewModal";
 import { AIPanel } from "@/components/biblioteca/AIPanel";
 import { MomentoRibbon } from "@/components/biblioteca/MomentoRibbon";
 import { CommandPalette } from "@/components/biblioteca/CommandPalette";
+import { MiAula } from "@/components/aula/MiAula";
 import { resources as seed, continueReading, recentlyAdded, aiRecommended, type Resource } from "@/components/biblioteca/data";
 
 export const Route = createFileRoute("/")({
