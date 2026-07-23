@@ -12,6 +12,7 @@ import { PreviewModal } from "@/components/biblioteca/PreviewModal";
 import { AIPanel } from "@/components/biblioteca/AIPanel";
 import { MomentoRibbon } from "@/components/biblioteca/MomentoRibbon";
 import { CommandPalette } from "@/components/biblioteca/CommandPalette";
+import { MiAula } from "@/components/aula/MiAula";
 import { resources as seed, continueReading, recentlyAdded, aiRecommended, type Resource } from "@/components/biblioteca/data";
 
 export const Route = createFileRoute("/")({
@@ -61,6 +62,7 @@ function BibliotecaViva() {
 
   const openAI = () => setAiOpen(true);
   const showDashboard = active === "escritorio" && !query.trim();
+  const showAula = active === "aula";
   const showBiblioteca = active === "biblioteca" || active === "recursos";
 
   return (
@@ -81,6 +83,8 @@ function BibliotecaViva() {
           />
         ) : showDashboard ? (
           <Dashboard onAskAI={openAI} />
+        ) : showAula ? (
+          <MiAula onAskAI={openAI} />
         ) : showBiblioteca ? (
           <>
             <MomentoRibbon name="Profesor Israel" />
