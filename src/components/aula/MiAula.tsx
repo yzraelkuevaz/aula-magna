@@ -496,7 +496,7 @@ function Calendario() {
     { d: 18, m: "MAR", t: "Cumpleaños Diego", tag: "Cumpleaños", color: "var(--neon-pink)" },
     { d: 21, m: "MAR", t: "Ceremonia cívica", tag: "Ceremonia", color: "var(--neon-violet)" },
     { d: 25, m: "MAR", t: "Suspensión oficial", tag: "Suspensión", color: "var(--neon-coral)" },
-    { d: 02, m: "ABR", t: "Guardia de recreo", tag: "Guardia", color: "oklch(0.78 0.17 145)" },
+    { d: 2, m: "ABR", t: "Guardia de recreo", tag: "Guardia", color: "oklch(0.78 0.17 145)" },
   ];
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
