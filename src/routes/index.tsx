@@ -62,6 +62,7 @@ function BibliotecaViva() {
 
   const openAI = () => setAiOpen(true);
   const showDashboard = active === "escritorio" && !query.trim();
+  const showAula = active === "aula";
   const showBiblioteca = active === "biblioteca" || active === "recursos";
 
   return (
