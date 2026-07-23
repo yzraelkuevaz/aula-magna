@@ -83,6 +83,8 @@ function BibliotecaViva() {
           />
         ) : showDashboard ? (
           <Dashboard onAskAI={openAI} />
+        ) : showAula ? (
+          <MiAula onAskAI={openAI} />
         ) : showBiblioteca ? (
           <>
             <MomentoRibbon name="Profesor Israel" />
