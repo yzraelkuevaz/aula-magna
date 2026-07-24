@@ -91,6 +91,8 @@ function BibliotecaViva() {
           <MiAula onAskAI={openAI} />
         ) : showEvaluacion ? (
           <CentroEvaluacion onAskAI={openAI} />
+        ) : showPlaneaciones ? (
+          <Planeaciones onAskAI={openAI} />
         ) : showBiblioteca ? (
           <>
             <MomentoRibbon name="Profesor Israel" />
