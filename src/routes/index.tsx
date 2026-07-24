@@ -66,6 +66,7 @@ function BibliotecaViva() {
   const showDashboard = active === "escritorio" && !query.trim();
   const showAula = active === "aula";
   const showEvaluacion = active === "evaluaciones";
+  const showPlaneaciones = active === "planeaciones";
   const showBiblioteca = active === "biblioteca" || active === "recursos";
 
   return (
