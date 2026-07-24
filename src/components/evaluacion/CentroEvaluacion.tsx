@@ -27,7 +27,7 @@ type SectionKey =
   | "dashboard" | "evaluaciones" | "nueva" | "captura" | "rubricas"
   | "cotejo" | "analisis" | "comparativos" | "expediente" | "reportes";
 
-const sections: { key: SectionKey; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
+const sections: { key: SectionKey; label: string; icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }> }[] = [
   { key: "dashboard", label: "Panorama", icon: Activity },
   { key: "evaluaciones", label: "Evaluaciones", icon: ClipboardCheck },
   { key: "nueva", label: "Nueva evaluación", icon: Plus },
@@ -113,7 +113,7 @@ function Header({ onAskAI }: { onAskAI: () => void }) {
 }
 
 function Chip({ icon: Icon, label, tone = "default" }: {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   label: string;
   tone?: "default" | "cyan" | "coral";
 }) {
@@ -323,7 +323,7 @@ function Dashboard({ onAskAI, onNav }: { onAskAI: () => void; onNav: (s: Section
 
 /* ---------- KPI ---------- */
 function KPI({ icon: Icon, label, value, delta, hint, tone }: {
-  icon: React.ComponentType<{ className?: string }>; label: string; value: string;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>; label: string; value: string;
   delta?: string; hint?: string; tone: "cyan" | "coral" | "amber" | "lime" | "violet" | "pink";
 }) {
   const map: Record<string, string> = {
@@ -356,7 +356,7 @@ function KPI({ icon: Icon, label, value, delta, hint, tone }: {
 
 /* ---------- Panel ---------- */
 function Panel({ title, subtitle, icon: Icon, children, className = "", action, tone }: {
-  title: string; subtitle?: string; icon?: React.ComponentType<{ className?: string }>;
+  title: string; subtitle?: string; icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   children: React.ReactNode; className?: string; action?: React.ReactNode; tone?: "coral";
 }) {
   return (
@@ -381,7 +381,7 @@ function Panel({ title, subtitle, icon: Icon, children, className = "", action, 
   );
 }
 
-function QuickAction({ icon: Icon, label, onClick }: { icon: React.ComponentType<{ className?: string }>; label: string; onClick?: () => void }) {
+function QuickAction({ icon: Icon, label, onClick }: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>; label: string; onClick?: () => void }) {
   return (
     <button onClick={onClick} className="btn-3d group rounded-xl glass border border-white/10 p-3 text-left hover:border-[var(--neon-coral)]/40 transition">
       <Icon className="h-4 w-4 text-ink group-hover:text-[var(--neon-coral)] transition" />
@@ -884,7 +884,7 @@ function ListasCotejo({ onAskAI }: { onAskAI: () => void }) {
   );
 }
 
-function TriBtn({ active, onClick, color, icon: Icon }: { active: boolean; onClick: () => void; color: string; icon: React.ComponentType<{ className?: string }> }) {
+function TriBtn({ active, onClick, color, icon: Icon }: { active: boolean; onClick: () => void; color: string; icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }> }) {
   return (
     <button onClick={onClick} className="h-6 w-6 grid place-items-center rounded-md transition"
             style={active ? { background: color, color: "white" } : { color: "var(--ink-soft)" }}>
@@ -1164,7 +1164,7 @@ function Reportes() {
     </div>
   );
 }
-function BtnMini({ icon: Icon, label }: { icon: React.ComponentType<{ className?: string }>; label: string }) {
+function BtnMini({ icon: Icon, label }: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>; label: string }) {
   return (
     <button className="inline-flex items-center gap-1.5 text-[11px] rounded-lg glass border border-white/10 px-2.5 py-1.5 text-ink hover:text-[var(--neon-coral)] hover:border-[var(--neon-coral)]/40 transition">
       <Icon className="h-3.5 w-3.5" /> {label}
