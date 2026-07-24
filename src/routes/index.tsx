@@ -14,6 +14,7 @@ import { MomentoRibbon } from "@/components/biblioteca/MomentoRibbon";
 import { CommandPalette } from "@/components/biblioteca/CommandPalette";
 import { MiAula } from "@/components/aula/MiAula";
 import { CentroEvaluacion } from "@/components/evaluacion/CentroEvaluacion";
+import { Planeaciones } from "@/components/planeaciones/Planeaciones";
 import { resources as seed, continueReading, recentlyAdded, aiRecommended, type Resource } from "@/components/biblioteca/data";
 
 export const Route = createFileRoute("/")({
@@ -65,6 +66,7 @@ function BibliotecaViva() {
   const showDashboard = active === "escritorio" && !query.trim();
   const showAula = active === "aula";
   const showEvaluacion = active === "evaluaciones";
+  const showPlaneaciones = active === "planeaciones";
   const showBiblioteca = active === "biblioteca" || active === "recursos";
 
   return (
@@ -89,6 +91,8 @@ function BibliotecaViva() {
           <MiAula onAskAI={openAI} />
         ) : showEvaluacion ? (
           <CentroEvaluacion onAskAI={openAI} />
+        ) : showPlaneaciones ? (
+          <Planeaciones onAskAI={openAI} />
         ) : showBiblioteca ? (
           <>
             <MomentoRibbon name="Profesor Israel" />
