@@ -31,12 +31,14 @@ export function CategoryCards({ onSelect }: Props) {
   return (
     <section className="px-5 lg:px-10 mt-6">
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        {categories.map(({ key, label, icon: Icon, count, cover }) => (
+        {categories.map(({ key, label, term, icon: Icon, count, cover }) => (
           <button
             key={key}
-            onClick={() => onSelect(key)}
-            className="card-lift card-lift-hover group relative overflow-hidden rounded-3xl aspect-[4/3] text-left glass p-4 flex flex-col justify-between"
+            onClick={() => onSelect(term)}
+            aria-label={`Ver recursos de ${label}`}
+            className="card-lift card-lift-hover group relative overflow-hidden rounded-3xl aspect-[4/3] text-left glass p-4 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
           >
+
             {/* Ícono con degradado vívido tipo referencia */}
             <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${gradientMap[cover]} grid place-items-center shadow-[0_10px_24px_-6px_oklch(0_0_0/60%)] ring-1 ring-white/15`}>
               <Icon className="h-6 w-6 text-white drop-shadow" />
