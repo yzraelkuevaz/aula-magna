@@ -63,18 +63,35 @@ function BibliotecaViva() {
   }, [query, resources]);
 
   const openAI = () => setAiOpen(true);
+
+  // "ia" no es una pantalla: abre el panel del IAsistente y mantiene la vista actual.
+  const handleSelect = (key: string) => {
+    if (key === "ia") {
+      setAiOpen(true);
+      return;
+    }
+    setQuery("");
+    setActive(key);
+  };
+
   const showDashboard = active === "escritorio" && !query.trim();
   const showAula = active === "aula";
   const showEvaluacion = active === "evaluaciones";
   const showPlaneaciones = active === "planeaciones";
   const showBiblioteca = active === "biblioteca" || active === "recursos";
+  const pendiente = pendingModules[active];
 
   return (
     <div className="min-h-screen flex bg-background text-foreground">
-      <Sidebar active={active} onSelect={setActive} />
+      <Sidebar active={active} onSelect={handleSelect} />
 
       <main className="flex-1 min-w-0">
-        <TopBar query={query} onQuery={setQuery} onCommand={() => setPaletteOpen(true)} />
+        <TopBar
+          query={query}
+          onQuery={setQuery}
+          onCommand={() => setPaletteOpen(true)}
+          onNavigate={handleSelect}
+        />
 
         {query.trim() ? (
           <SearchResults
@@ -86,7 +103,7 @@ function BibliotecaViva() {
             setFiltersOpen={setFiltersOpen}
           />
         ) : showDashboard ? (
-          <Dashboard onAskAI={openAI} />
+          <Dashboard onAskAI={openAI} onNavigate={handleSelect} />
         ) : showAula ? (
           <MiAula onAskAI={openAI} />
         ) : showEvaluacion ? (
@@ -94,6 +111,7 @@ function BibliotecaViva() {
         ) : showPlaneaciones ? (
           <Planeaciones onAskAI={openAI} />
         ) : showBiblioteca ? (
+
           <>
             <MomentoRibbon name="Profesor Israel" />
             <Hero query={query} onQuery={setQuery} onAskAI={openAI} />
