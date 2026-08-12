@@ -384,15 +384,35 @@ function Panel({ title, right, children }: { title: string; right?: React.ReactN
   );
 }
 
-function PanelFooter({ label, icon: Icon = ArrowRight }: { label: string; icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }> }) {
+function PanelFooter({
+  label,
+  icon: Icon = ArrowRight,
+  onClick,
+}: {
+  label: string;
+  icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  onClick?: () => void;
+}) {
+  const soon = !onClick;
   return (
-    <button className="mt-4 w-full h-9 rounded-xl bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 text-[12px] text-ink flex items-center justify-center gap-1.5 transition">
+    <button
+      onClick={onClick}
+      disabled={soon}
+      title={soon ? `${label} — próximamente` : label}
+      aria-label={soon ? `${label} (próximamente)` : label}
+      className="mt-4 w-full h-9 rounded-xl bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 text-[12px] text-ink flex items-center justify-center gap-1.5 transition disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
+    >
       <Icon className="h-3.5 w-3.5 text-[var(--neon-coral)]" />
       {label}
-      <ArrowRight className="h-3 w-3 text-ink-soft" />
+      {soon ? (
+        <span className="text-[9px] uppercase tracking-[0.12em] text-ink-soft">Pronto</span>
+      ) : (
+        <ArrowRight className="h-3 w-3 text-ink-soft" />
+      )}
     </button>
   );
 }
+
 
 function Legend({ color, label }: { color: string; label: string }) {
   return (
