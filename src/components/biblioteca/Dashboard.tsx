@@ -161,25 +161,36 @@ export function Dashboard({
           <h3 className="text-sm font-medium text-ink mb-3 px-1">Accesos rápidos</h3>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
             {[
-              { label: "Biblioteca\nPedagógica", icon: BookOpen, tint: "var(--neon-coral)" },
-              { label: "Centro\nJurídico", icon: Scale, tint: "var(--neon-cyan)" },
-              { label: "Planeador\nInteligente", icon: Calendar, tint: "var(--neon-coral)" },
-              { label: "Bitácoras\nInteligentes", icon: Notebook, tint: "var(--neon-amber)" },
-              { label: "Repositorio\nNacional", icon: Cloud, tint: "var(--neon-cyan)" },
-              { label: "Documentos\nInteligentes", icon: FileText, tint: "var(--neon-lime)" },
-              { label: "Comunidad\nDocente", icon: Users, tint: "var(--neon-violet)" },
-              { label: "Centro\nTIC", icon: MonitorPlay, tint: "var(--neon-cyan)" },
-            ].map(({ label, icon: Icon, tint }) => (
-              <button key={label} className="card-lift card-lift-hover glass rounded-2xl p-3 flex flex-col items-center gap-2 text-center">
-                <div
-                  className="h-11 w-11 rounded-xl grid place-items-center ring-1 ring-white/15"
-                  style={{ background: `color-mix(in oklab, ${tint} 22%, transparent)` }}
+              { label: "Biblioteca\nPedagógica", icon: BookOpen, tint: "var(--neon-coral)", to: "biblioteca" },
+              { label: "Centro\nJurídico", icon: Scale, tint: "var(--neon-cyan)", to: "juridico", soon: true },
+              { label: "Planeador\nInteligente", icon: Calendar, tint: "var(--neon-coral)", to: "planeaciones" },
+              { label: "Bitácoras\nInteligentes", icon: Notebook, tint: "var(--neon-amber)", to: "bitacoras", soon: true },
+              { label: "Repositorio\nNacional", icon: Cloud, tint: "var(--neon-cyan)", to: "recursos" },
+              { label: "Documentos\nInteligentes", icon: FileText, tint: "var(--neon-lime)", to: "documentos", soon: true },
+              { label: "Comunidad\nDocente", icon: Users, tint: "var(--neon-violet)", to: "comunidad", soon: true },
+              { label: "Centro\nTIC", icon: MonitorPlay, tint: "var(--neon-cyan)", to: "tic", soon: true },
+            ].map(({ label, icon: Icon, tint, to, soon }) => {
+              const plain = label.replace("\n", " ");
+              return (
+                <button
+                  key={label}
+                  onClick={() => onNavigate?.(to)}
+                  aria-label={soon ? `${plain} (próximamente)` : `Abrir ${plain}`}
+                  title={soon ? `${plain} — próximamente` : plain}
+                  className="card-lift card-lift-hover glass rounded-2xl p-3 flex flex-col items-center gap-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
                 >
-                  <Icon className="h-5 w-5" style={{ color: tint }} />
-                </div>
-                <div className="text-[10.5px] leading-tight text-ink whitespace-pre-line">{label}</div>
-              </button>
-            ))}
+                  <div
+                    className="h-11 w-11 rounded-xl grid place-items-center ring-1 ring-white/15"
+                    style={{ background: `color-mix(in oklab, ${tint} 22%, transparent)` }}
+                  >
+                    <Icon className="h-5 w-5" style={{ color: tint }} aria-hidden="true" />
+                  </div>
+                  <div className="text-[10.5px] leading-tight text-ink whitespace-pre-line">{label}</div>
+                  {soon && <span className="text-[8.5px] uppercase tracking-[0.12em] text-ink-soft/80">Pronto</span>}
+                </button>
+              );
+            })}
+
           </div>
         </section>
       </div>
