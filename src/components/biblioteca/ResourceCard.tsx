@@ -60,7 +60,8 @@ export function ResourceCard({ resource, onOpen, onToggleFav }: Props) {
             Vista previa
           </div>
         </div>
-      </button>
+      </div>
+
 
       <div className="p-4 flex-1 flex flex-col gap-2">
         <h3 className="font-serif text-[15px] leading-snug text-ink line-clamp-2">{resource.title}</h3>
