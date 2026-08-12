@@ -1,15 +1,16 @@
 import { BookOpen, GraduationCap, ClipboardList, FileType, Scale, Video, Music, FileText } from "lucide-react";
 
 const categories = [
-  { key: "libro-sep", label: "Libros SEP", icon: BookOpen, count: 214, cover: "ocean" },
-  { key: "libro-maestro", label: "Libros del Maestro", icon: GraduationCap, count: 96, cover: "lilac" },
-  { key: "planeacion", label: "Planeaciones", icon: ClipboardList, count: 148, cover: "clay" },
-  { key: "formato", label: "Formatos", icon: FileType, count: 72, cover: "sage" },
-  { key: "reglamento", label: "Reglamentos", icon: Scale, count: 24, cover: "rose" },
-  { key: "video", label: "Videos", icon: Video, count: 63, cover: "forest" },
-  { key: "audio", label: "Audios", icon: Music, count: 41, cover: "ochre" },
-  { key: "oficio", label: "Oficios", icon: FileText, count: 33, cover: "ink" },
+  { key: "libro-sep", label: "Libros SEP", term: "Libro SEP", icon: BookOpen, count: 214, cover: "ocean" },
+  { key: "libro-maestro", label: "Libros del Maestro", term: "Maestro", icon: GraduationCap, count: 96, cover: "lilac" },
+  { key: "planeacion", label: "Planeaciones", term: "Planeación", icon: ClipboardList, count: 148, cover: "clay" },
+  { key: "formato", label: "Formatos", term: "Formato", icon: FileType, count: 72, cover: "sage" },
+  { key: "reglamento", label: "Reglamentos", term: "Reglamento", icon: Scale, count: 24, cover: "rose" },
+  { key: "video", label: "Videos", term: "Video", icon: Video, count: 63, cover: "forest" },
+  { key: "audio", label: "Audios", term: "Audio", icon: Music, count: 41, cover: "ochre" },
+  { key: "oficio", label: "Oficios", term: "Oficio", icon: FileText, count: 33, cover: "ink" },
 ] as const;
+
 
 const gradientMap: Record<string, string> = {
   clay:   "from-[oklch(0.82_0.17_55)] to-[oklch(0.62_0.20_35)]",
@@ -30,12 +31,14 @@ export function CategoryCards({ onSelect }: Props) {
   return (
     <section className="px-5 lg:px-10 mt-6">
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        {categories.map(({ key, label, icon: Icon, count, cover }) => (
+        {categories.map(({ key, label, term, icon: Icon, count, cover }) => (
           <button
             key={key}
-            onClick={() => onSelect(key)}
-            className="card-lift card-lift-hover group relative overflow-hidden rounded-3xl aspect-[4/3] text-left glass p-4 flex flex-col justify-between"
+            onClick={() => onSelect(term)}
+            aria-label={`Ver recursos de ${label}`}
+            className="card-lift card-lift-hover group relative overflow-hidden rounded-3xl aspect-[4/3] text-left glass p-4 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
           >
+
             {/* Ícono con degradado vívido tipo referencia */}
             <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${gradientMap[cover]} grid place-items-center shadow-[0_10px_24px_-6px_oklch(0_0_0/60%)] ring-1 ring-white/15`}>
               <Icon className="h-6 w-6 text-white drop-shadow" />

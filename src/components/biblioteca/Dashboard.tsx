@@ -5,7 +5,14 @@ import {
 } from "lucide-react";
 import banner from "@/assets/sunrise-banner.jpg";
 
-export function Dashboard({ onAskAI }: { onAskAI: () => void }) {
+export function Dashboard({
+  onAskAI,
+  onNavigate,
+}: {
+  onAskAI: () => void;
+  onNavigate?: (key: string) => void;
+}) {
+
   return (
     <div className="px-5 lg:px-8 py-6 grid grid-cols-1 xl:grid-cols-[1fr_340px] gap-6">
       {/* Main column */}
@@ -96,15 +103,16 @@ export function Dashboard({ onAskAI }: { onAskAI: () => void }) {
                 ))}
               </ul>
             </div>
-            <PanelFooter label="Ver detalles del grupo" />
+            <PanelFooter label="Ver detalles del grupo" onClick={() => onNavigate?.("aula")} />
           </Panel>
 
           <Panel
             title="Comparativo de promedios"
             right={
-              <button className="text-xs text-ink-soft glass rounded-full px-3 py-1 flex items-center gap-1">
-                Este ciclo <ChevronRight className="h-3 w-3 rotate-90" />
-              </button>
+              <span className="text-xs text-ink-soft glass rounded-full px-3 py-1 flex items-center gap-1">
+                Este ciclo
+              </span>
+
             }
           >
             <div className="flex items-center gap-4 text-[11px] text-ink-soft mb-2">
@@ -145,7 +153,7 @@ export function Dashboard({ onAskAI }: { onAskAI: () => void }) {
 
           <Panel title="Distribución de calificaciones">
             <BarChart />
-            <PanelFooter label="Ver matriz de evaluación" />
+            <PanelFooter label="Ver matriz de evaluación" onClick={() => onNavigate?.("evaluaciones")} />
           </Panel>
         </section>
 
@@ -154,25 +162,36 @@ export function Dashboard({ onAskAI }: { onAskAI: () => void }) {
           <h3 className="text-sm font-medium text-ink mb-3 px-1">Accesos rápidos</h3>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
             {[
-              { label: "Biblioteca\nPedagógica", icon: BookOpen, tint: "var(--neon-coral)" },
-              { label: "Centro\nJurídico", icon: Scale, tint: "var(--neon-cyan)" },
-              { label: "Planeador\nInteligente", icon: Calendar, tint: "var(--neon-coral)" },
-              { label: "Bitácoras\nInteligentes", icon: Notebook, tint: "var(--neon-amber)" },
-              { label: "Repositorio\nNacional", icon: Cloud, tint: "var(--neon-cyan)" },
-              { label: "Documentos\nInteligentes", icon: FileText, tint: "var(--neon-lime)" },
-              { label: "Comunidad\nDocente", icon: Users, tint: "var(--neon-violet)" },
-              { label: "Centro\nTIC", icon: MonitorPlay, tint: "var(--neon-cyan)" },
-            ].map(({ label, icon: Icon, tint }) => (
-              <button key={label} className="card-lift card-lift-hover glass rounded-2xl p-3 flex flex-col items-center gap-2 text-center">
-                <div
-                  className="h-11 w-11 rounded-xl grid place-items-center ring-1 ring-white/15"
-                  style={{ background: `color-mix(in oklab, ${tint} 22%, transparent)` }}
+              { label: "Biblioteca\nPedagógica", icon: BookOpen, tint: "var(--neon-coral)", to: "biblioteca" },
+              { label: "Centro\nJurídico", icon: Scale, tint: "var(--neon-cyan)", to: "juridico", soon: true },
+              { label: "Planeador\nInteligente", icon: Calendar, tint: "var(--neon-coral)", to: "planeaciones" },
+              { label: "Bitácoras\nInteligentes", icon: Notebook, tint: "var(--neon-amber)", to: "bitacoras", soon: true },
+              { label: "Repositorio\nNacional", icon: Cloud, tint: "var(--neon-cyan)", to: "recursos" },
+              { label: "Documentos\nInteligentes", icon: FileText, tint: "var(--neon-lime)", to: "documentos", soon: true },
+              { label: "Comunidad\nDocente", icon: Users, tint: "var(--neon-violet)", to: "comunidad", soon: true },
+              { label: "Centro\nTIC", icon: MonitorPlay, tint: "var(--neon-cyan)", to: "tic", soon: true },
+            ].map(({ label, icon: Icon, tint, to, soon }) => {
+              const plain = label.replace("\n", " ");
+              return (
+                <button
+                  key={label}
+                  onClick={() => onNavigate?.(to)}
+                  aria-label={soon ? `${plain} (próximamente)` : `Abrir ${plain}`}
+                  title={soon ? `${plain} — próximamente` : plain}
+                  className="card-lift card-lift-hover glass rounded-2xl p-3 flex flex-col items-center gap-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
                 >
-                  <Icon className="h-5 w-5" style={{ color: tint }} />
-                </div>
-                <div className="text-[10.5px] leading-tight text-ink whitespace-pre-line">{label}</div>
-              </button>
-            ))}
+                  <div
+                    className="h-11 w-11 rounded-xl grid place-items-center ring-1 ring-white/15"
+                    style={{ background: `color-mix(in oklab, ${tint} 22%, transparent)` }}
+                  >
+                    <Icon className="h-5 w-5" style={{ color: tint }} aria-hidden="true" />
+                  </div>
+                  <div className="text-[10.5px] leading-tight text-ink whitespace-pre-line">{label}</div>
+                  {soon && <span className="text-[8.5px] uppercase tracking-[0.12em] text-ink-soft/80">Pronto</span>}
+                </button>
+              );
+            })}
+
           </div>
         </section>
       </div>
@@ -226,23 +245,33 @@ export function Dashboard({ onAskAI }: { onAskAI: () => void }) {
               { title: "Rúbrica para proyecto", sub: "\"Mi comunidad\"", icon: ClipboardList, tint: "var(--neon-amber)" },
             ].map((r) => (
               <li key={r.title}>
-                <button className="w-full flex items-center gap-3 rounded-xl p-2 hover:bg-white/[0.04] transition text-left">
+                <button
+                  onClick={() => onNavigate?.("biblioteca")}
+                  aria-label={`Ver en Biblioteca: ${r.title}`}
+                  className="w-full flex items-center gap-3 rounded-xl p-2 hover:bg-white/[0.04] transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
+                >
                   <div
                     className="h-9 w-9 rounded-lg grid place-items-center shrink-0"
                     style={{ background: `color-mix(in oklab, ${r.tint} 22%, transparent)` }}
                   >
-                    <r.icon className="h-4 w-4" style={{ color: r.tint }} />
+                    <r.icon className="h-4 w-4" style={{ color: r.tint }} aria-hidden="true" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="text-[13px] text-ink truncate">{r.title}</div>
                     <div className="text-[11px] text-ink-soft truncate">{r.sub}</div>
                   </div>
-                  <ChevronRight className="h-4 w-4 text-ink-soft" />
+                  <ChevronRight className="h-4 w-4 text-ink-soft" aria-hidden="true" />
                 </button>
               </li>
             ))}
           </ul>
-          <button className="mt-2 w-full text-right text-[11px] text-[var(--neon-cyan)] hover:brightness-110">Ver todas</button>
+          <button
+            onClick={() => onNavigate?.("biblioteca")}
+            className="mt-2 w-full text-right text-[11px] text-[var(--neon-cyan)] hover:brightness-110"
+          >
+            Ver todas
+          </button>
+
         </div>
 
         {/* Próximos eventos */}
@@ -268,9 +297,13 @@ export function Dashboard({ onAskAI }: { onAskAI: () => void }) {
               </li>
             ))}
           </ul>
-          <button className="mt-3 w-full text-right text-[11px] text-[var(--neon-cyan)] hover:brightness-110">
+          <button
+            onClick={() => onNavigate?.("agenda")}
+            className="mt-3 w-full text-right text-[11px] text-[var(--neon-cyan)] hover:brightness-110"
+          >
             Ver calendario completo
           </button>
+
         </div>
 
         {/* Trophy card */}
@@ -356,15 +389,35 @@ function Panel({ title, right, children }: { title: string; right?: React.ReactN
   );
 }
 
-function PanelFooter({ label, icon: Icon = ArrowRight }: { label: string; icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }> }) {
+function PanelFooter({
+  label,
+  icon: Icon = ArrowRight,
+  onClick,
+}: {
+  label: string;
+  icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  onClick?: () => void;
+}) {
+  const soon = !onClick;
   return (
-    <button className="mt-4 w-full h-9 rounded-xl bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 text-[12px] text-ink flex items-center justify-center gap-1.5 transition">
+    <button
+      onClick={onClick}
+      disabled={soon}
+      title={soon ? `${label} — próximamente` : label}
+      aria-label={soon ? `${label} (próximamente)` : label}
+      className="mt-4 w-full h-9 rounded-xl bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 text-[12px] text-ink flex items-center justify-center gap-1.5 transition disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
+    >
       <Icon className="h-3.5 w-3.5 text-[var(--neon-coral)]" />
       {label}
-      <ArrowRight className="h-3 w-3 text-ink-soft" />
+      {soon ? (
+        <span className="text-[9px] uppercase tracking-[0.12em] text-ink-soft">Pronto</span>
+      ) : (
+        <ArrowRight className="h-3 w-3 text-ink-soft" />
+      )}
     </button>
   );
 }
+
 
 function Legend({ color, label }: { color: string; label: string }) {
   return (

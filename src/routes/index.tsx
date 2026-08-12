@@ -15,11 +15,24 @@ import { CommandPalette } from "@/components/biblioteca/CommandPalette";
 import { MiAula } from "@/components/aula/MiAula";
 import { CentroEvaluacion } from "@/components/evaluacion/CentroEvaluacion";
 import { Planeaciones } from "@/components/planeaciones/Planeaciones";
+import { ModuloPendiente } from "@/components/shared/ModuloPendiente";
 import { resources as seed, continueReading, recentlyAdded, aiRecommended, type Resource } from "@/components/biblioteca/data";
 
 export const Route = createFileRoute("/")({
   component: BibliotecaViva,
 });
+
+const pendingModules: Record<string, { title: string; description: string }> = {
+  agenda: { title: "Agenda escolar", description: "Calendario oficial del ciclo, efemérides, consejos técnicos y recordatorios del grupo." },
+  juridico: { title: "Centro Jurídico", description: "Normativa, actas, citatorios y formatos legales para el docente." },
+  bitacoras: { title: "Bitácoras", description: "Registro diario de la práctica docente con evidencias y seguimiento." },
+  evidencias: { title: "Evidencias", description: "Portafolio de fotos, videos y productos de los alumnos." },
+  documentos: { title: "Documentos", description: "Generación y resguardo de documentos oficiales del docente." },
+  comunidad: { title: "Comunidad", description: "Red de docentes para compartir recursos y experiencias." },
+  tic: { title: "Centro TIC", description: "Herramientas digitales y capacitación tecnológica." },
+  reportes: { title: "Reportes", description: "Informes automáticos de grupo, evaluación y planeación." },
+  config: { title: "Configuración", description: "Datos del docente, grupo, escuela y preferencias de la plataforma." },
+};
 
 const filterGroups = [
   { label: "Grado", options: ["1°", "2°", "3°", "4°", "5°", "6°"] },
@@ -27,6 +40,7 @@ const filterGroups = [
   { label: "Tipo", options: ["Libro SEP", "Planeación", "Formato", "Reglamento", "Video", "Audio"] },
   { label: "Fuente", options: ["SEP", "Propio", "Compartido", "Favorito"] },
 ];
+
 
 function BibliotecaViva() {
   const [active, setActive] = useState("escritorio");
@@ -63,18 +77,35 @@ function BibliotecaViva() {
   }, [query, resources]);
 
   const openAI = () => setAiOpen(true);
+
+  // "ia" no es una pantalla: abre el panel del IAsistente y mantiene la vista actual.
+  const handleSelect = (key: string) => {
+    if (key === "ia") {
+      setAiOpen(true);
+      return;
+    }
+    setQuery("");
+    setActive(key);
+  };
+
   const showDashboard = active === "escritorio" && !query.trim();
   const showAula = active === "aula";
   const showEvaluacion = active === "evaluaciones";
   const showPlaneaciones = active === "planeaciones";
   const showBiblioteca = active === "biblioteca" || active === "recursos";
+  const pendiente = pendingModules[active];
 
   return (
     <div className="min-h-screen flex bg-background text-foreground">
-      <Sidebar active={active} onSelect={setActive} />
+      <Sidebar active={active} onSelect={handleSelect} />
 
       <main className="flex-1 min-w-0">
-        <TopBar query={query} onQuery={setQuery} onCommand={() => setPaletteOpen(true)} />
+        <TopBar
+          query={query}
+          onQuery={setQuery}
+          onCommand={() => setPaletteOpen(true)}
+          onNavigate={handleSelect}
+        />
 
         {query.trim() ? (
           <SearchResults
@@ -86,7 +117,7 @@ function BibliotecaViva() {
             setFiltersOpen={setFiltersOpen}
           />
         ) : showDashboard ? (
-          <Dashboard onAskAI={openAI} />
+          <Dashboard onAskAI={openAI} onNavigate={handleSelect} />
         ) : showAula ? (
           <MiAula onAskAI={openAI} />
         ) : showEvaluacion ? (
@@ -94,6 +125,7 @@ function BibliotecaViva() {
         ) : showPlaneaciones ? (
           <Planeaciones onAskAI={openAI} />
         ) : showBiblioteca ? (
+
           <>
             <MomentoRibbon name="Profesor Israel" />
             <Hero query={query} onQuery={setQuery} onAskAI={openAI} />
@@ -110,7 +142,7 @@ function BibliotecaViva() {
             </div>
             {filtersOpen && <FiltersBar />}
 
-            <CategoryCards onSelect={() => { /* future: navigate to category */ }} />
+            <CategoryCards onSelect={(key) => setQuery(key)} />
 
             <ContinueReading items={continueReading} onOpen={setPreview} onToggleFav={toggleFav} />
 
@@ -140,11 +172,16 @@ function BibliotecaViva() {
             </footer>
           </>
         ) : (
-          <div className="p-10 text-ink-soft">
-            <div className="font-serif text-2xl text-ink mb-2">Próximamente</div>
-            Este módulo está en construcción. Vuelve al <button className="text-[var(--neon-coral)]" onClick={() => setActive("escritorio")}>Escritorio</button>.
-          </div>
+          <ModuloPendiente
+            title={pendiente?.title ?? "Módulo no disponible"}
+            description={
+              pendiente?.description ??
+              "Este destino aún no tiene una pantalla asignada dentro de SIED MX."
+            }
+            onBack={() => setActive("escritorio")}
+          />
         )}
+
       </main>
 
       <PreviewModal resource={preview} onClose={() => setPreview(null)} onToggleFav={toggleFav} />
