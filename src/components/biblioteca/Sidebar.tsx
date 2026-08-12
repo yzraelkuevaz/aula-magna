@@ -1,14 +1,14 @@
 import {
   Home, GraduationCap, ClipboardList, CheckSquare, Camera, BookOpen, Scale,
   FileText, Notebook, FolderOpen, Sparkles, Users, MonitorPlay, BarChart3,
-  Settings, ChevronDown,
+  Settings, CalendarDays,
 } from "lucide-react";
 
 interface NavItem {
   key: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
-  chevron?: boolean;
+  soon?: boolean;
 }
 
 const items: NavItem[] = [
@@ -16,18 +16,20 @@ const items: NavItem[] = [
   { key: "aula", label: "Mi Aula", icon: GraduationCap },
   { key: "planeaciones", label: "Planeaciones", icon: ClipboardList },
   { key: "evaluaciones", label: "Evaluaciones", icon: CheckSquare },
-  { key: "evidencias", label: "Evidencias", icon: Camera },
-  { key: "biblioteca", label: "Biblioteca", icon: BookOpen, chevron: true },
-  { key: "juridico", label: "Centro Jurídico", icon: Scale },
-  { key: "documentos", label: "Documentos", icon: FileText },
-  { key: "bitacoras", label: "Bitácoras", icon: Notebook },
-  { key: "recursos", label: "Recursos", icon: FolderOpen, chevron: true },
+  { key: "biblioteca", label: "Biblioteca", icon: BookOpen },
+  { key: "recursos", label: "Recursos", icon: FolderOpen },
   { key: "ia", label: "IAsistente", icon: Sparkles },
-  { key: "comunidad", label: "Comunidad", icon: Users },
-  { key: "tic", label: "Centro TIC", icon: MonitorPlay },
-  { key: "reportes", label: "Reportes", icon: BarChart3 },
-  { key: "config", label: "Configuración", icon: Settings },
+  { key: "agenda", label: "Agenda escolar", icon: CalendarDays, soon: true },
+  { key: "juridico", label: "Centro Jurídico", icon: Scale, soon: true },
+  { key: "bitacoras", label: "Bitácoras", icon: Notebook, soon: true },
+  { key: "evidencias", label: "Evidencias", icon: Camera, soon: true },
+  { key: "documentos", label: "Documentos", icon: FileText, soon: true },
+  { key: "comunidad", label: "Comunidad", icon: Users, soon: true },
+  { key: "tic", label: "Centro TIC", icon: MonitorPlay, soon: true },
+  { key: "reportes", label: "Reportes", icon: BarChart3, soon: true },
+  { key: "config", label: "Configuración", icon: Settings, soon: true },
 ];
+
 
 interface SidebarProps {
   active: string;
