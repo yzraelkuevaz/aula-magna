@@ -244,23 +244,33 @@ export function Dashboard({
               { title: "Rúbrica para proyecto", sub: "\"Mi comunidad\"", icon: ClipboardList, tint: "var(--neon-amber)" },
             ].map((r) => (
               <li key={r.title}>
-                <button className="w-full flex items-center gap-3 rounded-xl p-2 hover:bg-white/[0.04] transition text-left">
+                <button
+                  onClick={() => onNavigate?.("biblioteca")}
+                  aria-label={`Ver en Biblioteca: ${r.title}`}
+                  className="w-full flex items-center gap-3 rounded-xl p-2 hover:bg-white/[0.04] transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
+                >
                   <div
                     className="h-9 w-9 rounded-lg grid place-items-center shrink-0"
                     style={{ background: `color-mix(in oklab, ${r.tint} 22%, transparent)` }}
                   >
-                    <r.icon className="h-4 w-4" style={{ color: r.tint }} />
+                    <r.icon className="h-4 w-4" style={{ color: r.tint }} aria-hidden="true" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="text-[13px] text-ink truncate">{r.title}</div>
                     <div className="text-[11px] text-ink-soft truncate">{r.sub}</div>
                   </div>
-                  <ChevronRight className="h-4 w-4 text-ink-soft" />
+                  <ChevronRight className="h-4 w-4 text-ink-soft" aria-hidden="true" />
                 </button>
               </li>
             ))}
           </ul>
-          <button className="mt-2 w-full text-right text-[11px] text-[var(--neon-cyan)] hover:brightness-110">Ver todas</button>
+          <button
+            onClick={() => onNavigate?.("biblioteca")}
+            className="mt-2 w-full text-right text-[11px] text-[var(--neon-cyan)] hover:brightness-110"
+          >
+            Ver todas
+          </button>
+
         </div>
 
         {/* Próximos eventos */}
