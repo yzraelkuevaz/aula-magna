@@ -58,13 +58,14 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
       {/* Nav */}
       <div className="flex-1 overflow-y-auto py-3 px-2.5 scrollbar-hide">
         <nav className="flex flex-col gap-0.5">
-          {items.map(({ key, label, icon: Icon, chevron }) => {
+          {items.map(({ key, label, icon: Icon, soon }) => {
             const isActive = active === key;
             return (
               <button
                 key={key}
                 onClick={() => onSelect(key)}
-                className={`group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13.5px] transition-all duration-200 ${
+                aria-current={isActive ? "page" : undefined}
+                className={`group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13.5px] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60 ${
                   isActive
                     ? "bg-white/[0.07] text-ink font-medium"
                     : "text-ink-soft hover:bg-white/[0.04] hover:text-ink"
@@ -76,10 +77,17 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
                     style={{ background: "var(--gradient-neon)", boxShadow: "0 0 12px var(--neon-coral)" }}
                   />
                 )}
-                <Icon className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-[var(--neon-coral)]" : ""}`} />
+                <Icon className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-[var(--neon-coral)]" : ""}`} aria-hidden="true" />
                 <span className="truncate flex-1 text-left">{label}</span>
-                {chevron && <ChevronDown className="h-3.5 w-3.5 opacity-60" />}
+                {soon && (
+                  <span className="text-[9px] uppercase tracking-[0.12em] rounded-full px-1.5 py-0.5 border border-white/15 text-ink-soft/80">
+                    Pronto
+                  </span>
+                )}
               </button>
+            );
+          })}
+
             );
           })}
         </nav>
