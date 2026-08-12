@@ -153,7 +153,7 @@ export function Dashboard({
 
           <Panel title="Distribución de calificaciones">
             <BarChart />
-            <PanelFooter label="Ver matriz de evaluación" />
+            <PanelFooter label="Ver matriz de evaluación" onClick={() => onNavigate?.("evaluaciones")} />
           </Panel>
         </section>
 
