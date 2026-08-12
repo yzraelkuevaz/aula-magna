@@ -103,7 +103,7 @@ export function Dashboard({
                 ))}
               </ul>
             </div>
-            <PanelFooter label="Ver detalles del grupo" />
+            <PanelFooter label="Ver detalles del grupo" onClick={() => onNavigate?.("aula")} />
           </Panel>
 
           <Panel
