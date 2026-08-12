@@ -1,15 +1,16 @@
 import { BookOpen, GraduationCap, ClipboardList, FileType, Scale, Video, Music, FileText } from "lucide-react";
 
 const categories = [
-  { key: "libro-sep", label: "Libros SEP", icon: BookOpen, count: 214, cover: "ocean" },
-  { key: "libro-maestro", label: "Libros del Maestro", icon: GraduationCap, count: 96, cover: "lilac" },
-  { key: "planeacion", label: "Planeaciones", icon: ClipboardList, count: 148, cover: "clay" },
-  { key: "formato", label: "Formatos", icon: FileType, count: 72, cover: "sage" },
-  { key: "reglamento", label: "Reglamentos", icon: Scale, count: 24, cover: "rose" },
-  { key: "video", label: "Videos", icon: Video, count: 63, cover: "forest" },
-  { key: "audio", label: "Audios", icon: Music, count: 41, cover: "ochre" },
-  { key: "oficio", label: "Oficios", icon: FileText, count: 33, cover: "ink" },
+  { key: "libro-sep", label: "Libros SEP", term: "Libro SEP", icon: BookOpen, count: 214, cover: "ocean" },
+  { key: "libro-maestro", label: "Libros del Maestro", term: "Maestro", icon: GraduationCap, count: 96, cover: "lilac" },
+  { key: "planeacion", label: "Planeaciones", term: "Planeación", icon: ClipboardList, count: 148, cover: "clay" },
+  { key: "formato", label: "Formatos", term: "Formato", icon: FileType, count: 72, cover: "sage" },
+  { key: "reglamento", label: "Reglamentos", term: "Reglamento", icon: Scale, count: 24, cover: "rose" },
+  { key: "video", label: "Videos", term: "Video", icon: Video, count: 63, cover: "forest" },
+  { key: "audio", label: "Audios", term: "Audio", icon: Music, count: 41, cover: "ochre" },
+  { key: "oficio", label: "Oficios", term: "Oficio", icon: FileText, count: 33, cover: "ink" },
 ] as const;
+
 
 const gradientMap: Record<string, string> = {
   clay:   "from-[oklch(0.82_0.17_55)] to-[oklch(0.62_0.20_35)]",
