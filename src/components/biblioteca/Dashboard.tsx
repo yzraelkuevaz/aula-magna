@@ -297,9 +297,13 @@ export function Dashboard({
               </li>
             ))}
           </ul>
-          <button className="mt-3 w-full text-right text-[11px] text-[var(--neon-cyan)] hover:brightness-110">
+          <button
+            onClick={() => onNavigate?.("agenda")}
+            className="mt-3 w-full text-right text-[11px] text-[var(--neon-cyan)] hover:brightness-110"
+          >
             Ver calendario completo
           </button>
+
         </div>
 
         {/* Trophy card */}
