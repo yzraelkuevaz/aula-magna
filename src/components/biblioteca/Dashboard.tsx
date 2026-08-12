@@ -109,9 +109,10 @@ export function Dashboard({
           <Panel
             title="Comparativo de promedios"
             right={
-              <button className="text-xs text-ink-soft glass rounded-full px-3 py-1 flex items-center gap-1">
-                Este ciclo <ChevronRight className="h-3 w-3 rotate-90" />
-              </button>
+              <span className="text-xs text-ink-soft glass rounded-full px-3 py-1 flex items-center gap-1">
+                Este ciclo
+              </span>
+
             }
           >
             <div className="flex items-center gap-4 text-[11px] text-ink-soft mb-2">
