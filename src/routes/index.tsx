@@ -142,7 +142,7 @@ function BibliotecaViva() {
             </div>
             {filtersOpen && <FiltersBar />}
 
-            <CategoryCards onSelect={() => { /* future: navigate to category */ }} />
+            <CategoryCards onSelect={(key) => setQuery(key)} />
 
             <ContinueReading items={continueReading} onOpen={setPreview} onToggleFav={toggleFav} />
 
