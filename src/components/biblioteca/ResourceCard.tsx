@@ -23,9 +23,15 @@ export function ResourceCard({ resource, onOpen, onToggleFav }: Props) {
   const Icon = typeIcon[resource.type] ?? FileText;
   return (
     <article className="card-lift card-lift-hover group rounded-3xl glass overflow-hidden flex flex-col">
-      <button
+      <div
+        role="button"
+        tabIndex={0}
+        aria-label={`Vista previa de ${resource.title}`}
         onClick={() => onOpen(resource)}
-        className="relative aspect-[3/4] overflow-hidden"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onOpen(resource); }
+        }}
+        className="relative aspect-[3/4] overflow-hidden cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         style={{ background: covers[resource.cover] }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -54,7 +60,8 @@ export function ResourceCard({ resource, onOpen, onToggleFav }: Props) {
             Vista previa
           </div>
         </div>
-      </button>
+      </div>
+
 
       <div className="p-4 flex-1 flex flex-col gap-2">
         <h3 className="font-serif text-[15px] leading-snug text-ink line-clamp-2">{resource.title}</h3>
