@@ -15,11 +15,24 @@ import { CommandPalette } from "@/components/biblioteca/CommandPalette";
 import { MiAula } from "@/components/aula/MiAula";
 import { CentroEvaluacion } from "@/components/evaluacion/CentroEvaluacion";
 import { Planeaciones } from "@/components/planeaciones/Planeaciones";
+import { ModuloPendiente } from "@/components/shared/ModuloPendiente";
 import { resources as seed, continueReading, recentlyAdded, aiRecommended, type Resource } from "@/components/biblioteca/data";
 
 export const Route = createFileRoute("/")({
   component: BibliotecaViva,
 });
+
+const pendingModules: Record<string, { title: string; description: string }> = {
+  agenda: { title: "Agenda escolar", description: "Calendario oficial del ciclo, efemérides, consejos técnicos y recordatorios del grupo." },
+  juridico: { title: "Centro Jurídico", description: "Normativa, actas, citatorios y formatos legales para el docente." },
+  bitacoras: { title: "Bitácoras", description: "Registro diario de la práctica docente con evidencias y seguimiento." },
+  evidencias: { title: "Evidencias", description: "Portafolio de fotos, videos y productos de los alumnos." },
+  documentos: { title: "Documentos", description: "Generación y resguardo de documentos oficiales del docente." },
+  comunidad: { title: "Comunidad", description: "Red de docentes para compartir recursos y experiencias." },
+  tic: { title: "Centro TIC", description: "Herramientas digitales y capacitación tecnológica." },
+  reportes: { title: "Reportes", description: "Informes automáticos de grupo, evaluación y planeación." },
+  config: { title: "Configuración", description: "Datos del docente, grupo, escuela y preferencias de la plataforma." },
+};
 
 const filterGroups = [
   { label: "Grado", options: ["1°", "2°", "3°", "4°", "5°", "6°"] },
@@ -27,6 +40,7 @@ const filterGroups = [
   { label: "Tipo", options: ["Libro SEP", "Planeación", "Formato", "Reglamento", "Video", "Audio"] },
   { label: "Fuente", options: ["SEP", "Propio", "Compartido", "Favorito"] },
 ];
+
 
 function BibliotecaViva() {
   const [active, setActive] = useState("escritorio");
