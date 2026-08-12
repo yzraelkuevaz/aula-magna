@@ -158,11 +158,16 @@ function BibliotecaViva() {
             </footer>
           </>
         ) : (
-          <div className="p-10 text-ink-soft">
-            <div className="font-serif text-2xl text-ink mb-2">Próximamente</div>
-            Este módulo está en construcción. Vuelve al <button className="text-[var(--neon-coral)]" onClick={() => setActive("escritorio")}>Escritorio</button>.
-          </div>
+          <ModuloPendiente
+            title={pendiente?.title ?? "Módulo no disponible"}
+            description={
+              pendiente?.description ??
+              "Este destino aún no tiene una pantalla asignada dentro de SIED MX."
+            }
+            onBack={() => setActive("escritorio")}
+          />
         )}
+
       </main>
 
       <PreviewModal resource={preview} onClose={() => setPreview(null)} onToggleFav={toggleFav} />
