@@ -5,7 +5,14 @@ import {
 } from "lucide-react";
 import banner from "@/assets/sunrise-banner.jpg";
 
-export function Dashboard({ onAskAI }: { onAskAI: () => void }) {
+export function Dashboard({
+  onAskAI,
+  onNavigate,
+}: {
+  onAskAI: () => void;
+  onNavigate?: (key: string) => void;
+}) {
+
   return (
     <div className="px-5 lg:px-8 py-6 grid grid-cols-1 xl:grid-cols-[1fr_340px] gap-6">
       {/* Main column */}
