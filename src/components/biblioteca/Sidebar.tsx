@@ -87,9 +87,6 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
               </button>
             );
           })}
-
-            );
-          })}
         </nav>
       </div>
 
