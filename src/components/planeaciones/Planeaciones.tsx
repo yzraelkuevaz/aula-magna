@@ -5,7 +5,11 @@ import {
   distribucionCampos,
   type PlaneacionRegistro,
 } from "./planData";
-import { CompartirPlaneacion } from "./CompartirPlaneacion";
+import {
+  CompartirPlaneacion,
+  copiarAlPortapapeles,
+  enlaceDePlaneacion,
+} from "./CompartirPlaneacion";
 import {
   Sparkles, Plus, ClipboardList, Clock, Layers, BookOpen, Target, TrendingUp,
   Calendar as CalendarIcon, Search, Filter, FileText, Video, Music, Image as ImageIcon,
@@ -830,26 +834,44 @@ function Repositorio() {
               <div className="h-8 w-8 rounded-lg grid place-items-center shrink-0" style={{ background: "color-mix(in oklch, var(--neon-cyan) 20%, transparent)" }}>
                 <ClipboardList className="h-4 w-4 text-[var(--neon-cyan)]" />
               </div>
-              <span className="text-ink truncate">{r.t}</span>
+              <span className="text-ink truncate">{r.titulo}</span>
             </div>
             <div className="col-span-2 text-ink-soft truncate">{r.campo}</div>
-            <div className="col-span-2 text-ink-soft truncate">{r.proy}</div>
-            <div className="col-span-1 text-ink-soft">{r.sem}</div>
+            <div className="col-span-2 text-ink-soft truncate">{r.proyecto}</div>
+            <div className="col-span-1 text-ink-soft">{r.semana}</div>
             <div className="col-span-1">
               <div className="flex items-center gap-1.5">
                 <div className="h-1.5 flex-1 rounded-full bg-white/[0.06] overflow-hidden">
-                  <div className="h-full rounded-full" style={{ width: `${r.cumpl}%`, background: "var(--gradient-neon)" }} />
+                  <div className="h-full rounded-full" style={{ width: `${r.cumplimiento}%`, background: "var(--gradient-neon)" }} />
                 </div>
-                <span className="text-[10px] text-ink-soft">{r.cumpl}%</span>
+                <span className="text-[10px] text-ink-soft">{r.cumplimiento}%</span>
               </div>
             </div>
             <div className="col-span-1 flex justify-end gap-1">
-              <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]" title="Duplicar"><Copy className="h-3.5 w-3.5 text-ink-soft" /></button>
-              <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]" title="Compartir"><Share2 className="h-3.5 w-3.5 text-ink-soft" /></button>
-              <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]" title="QR"><QrCode className="h-3.5 w-3.5 text-ink-soft" /></button>
+              <button
+                onClick={() => copiarEnlace(r)}
+                className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]"
+                title="Copiar enlace"
+                aria-label={`Copiar enlace de ${r.titulo}`}
+              >
+                <LinkIcon className="h-3.5 w-3.5 text-ink-soft" aria-hidden="true" />
+              </button>
+              <button
+                onClick={() => setCompartir(r)}
+                className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]"
+                title="Compartir"
+                aria-label={`Compartir ${r.titulo}`}
+              >
+                <Share2 className="h-3.5 w-3.5 text-ink-soft" aria-hidden="true" />
+              </button>
             </div>
           </div>
         ))}
+        {rows.length === 0 && (
+          <div className="px-5 py-10 text-center text-[13px] text-ink-soft">
+            Ninguna planeación coincide con “{busqueda}”.
+          </div>
+        )}
       </div>
 
       <div className="glass rounded-2xl p-4 flex flex-wrap items-center gap-2">
@@ -863,6 +885,8 @@ function Repositorio() {
           </button>
         ))}
       </div>
+
+      <CompartirPlaneacion plan={compartir} onClose={() => setCompartir(null)} />
     </div>
   );
 }
