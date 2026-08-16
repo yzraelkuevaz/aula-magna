@@ -20,6 +20,8 @@ interface Props {
 export function AIPanel({ open, onClose }: Props) {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
+  const [thinking, setThinking] = useState(false);
+  const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -27,20 +29,21 @@ export function AIPanel({ open, onClose }: Props) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, thinking]);
+
   const send = (text: string) => {
     const t = text.trim();
     if (!t) return;
+    const respuesta = responderConsulta(t);
     setMessages((m) => [...m, { role: "user", text: t }]);
     setInput("");
+    setThinking(true);
     setTimeout(() => {
-      setMessages((m) => [
-        ...m,
-        {
-          role: "ai",
-          text: "Encontré varios recursos que podrían ayudarte. Aquí tienes una selección basada en tu grado y materia. ¿Te gustaría que prepare una versión imprimible?",
-        },
-      ]);
-    }, 700);
+      setThinking(false);
+      setMessages((m) => [...m, { role: "ai", text: respuesta }]);
+    }, 350);
   };
 
   return (
