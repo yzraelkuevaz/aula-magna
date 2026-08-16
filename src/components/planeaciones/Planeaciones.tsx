@@ -779,19 +779,34 @@ function Calendario() {
 
 /* ---------- Repositorio ---------- */
 function Repositorio() {
-  const rows = [
-    { t: "Fracciones equivalentes con material concreto", g: "4°", campo: "Saberes y P.C.", proy: "La tienda", sem: "S24", cumpl: 92 },
-    { t: "El diario del explorador", g: "4°", campo: "Lenguajes", proy: "Narrativa personal", sem: "S23", cumpl: 100 },
-    { t: "Convivencia sin violencia", g: "4°", campo: "Ética N. y S.", proy: "Comunidad segura", sem: "S22", cumpl: 88 },
-    { t: "Cuerpo, emociones y bienestar", g: "4°", campo: "De lo Humano", proy: "Yo me cuido", sem: "S21", cumpl: 75 },
-    { t: "Ecosistemas de mi entorno", g: "4°", campo: "Saberes y P.C.", proy: "Naturaleza viva", sem: "S20", cumpl: 100 },
-  ];
+  const [busqueda, setBusqueda] = useState("");
+  const [compartir, setCompartir] = useState<PlaneacionRegistro | null>(null);
+
+  const q = busqueda.trim().toLowerCase();
+  const rows = q
+    ? planeaciones.filter((p) =>
+        [p.titulo, p.campo, p.proyecto, p.grado, p.semana].join(" ").toLowerCase().includes(q),
+      )
+    : planeaciones;
+
+  const copiarEnlace = async (p: PlaneacionRegistro) => {
+    const ok = await copiarAlPortapapeles(enlaceDePlaneacion(p));
+    if (ok) toast.success("Enlace copiado al portapapeles");
+    else toast.error("No se pudo copiar el enlace en este navegador.");
+  };
+
   return (
     <div className="space-y-4">
       <div className="glass rounded-2xl p-4 flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-[240px]">
           <Search className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft" />
-          <input placeholder="Buscar planeación por título, PDA, proyecto…" className="w-full h-11 pl-10 pr-4 rounded-xl bg-white/[0.04] border border-white/10 text-sm text-ink placeholder:text-ink-soft/60 focus:outline-none" />
+          <input
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+            aria-label="Buscar planeación"
+            placeholder="Buscar planeación por título, PDA, proyecto…"
+            className="w-full h-11 pl-10 pr-4 rounded-xl bg-white/[0.04] border border-white/10 text-sm text-ink placeholder:text-ink-soft/60 focus:outline-none"
+          />
         </div>
         {["Año", "Campo", "Proyecto", "Grado", "Semana", "Materia", "Etiquetas"].map((f) => (
           <button key={f} className="h-11 px-3 rounded-xl glass border border-white/10 text-[12px] text-ink-soft inline-flex items-center gap-1.5">
