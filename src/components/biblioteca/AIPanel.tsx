@@ -97,7 +97,7 @@ export function AIPanel({ open, onClose }: Props) {
             messages.map((m, i) => (
               <div
                 key={i}
-                className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed animate-in fade-in slide-in-from-bottom-2 duration-300 ${
+                className={`max-w-[90%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap animate-in fade-in slide-in-from-bottom-2 duration-300 ${
                   m.role === "user"
                     ? "ml-auto bg-primary text-primary-foreground rounded-br-md"
                     : "bg-secondary text-ink rounded-bl-md"
@@ -107,6 +107,13 @@ export function AIPanel({ open, onClose }: Props) {
               </div>
             ))
           )}
+          {thinking && (
+            <div className="bg-secondary text-ink-soft text-sm px-4 py-2.5 rounded-2xl rounded-bl-md inline-flex items-center gap-2">
+              <Sparkles className="h-3.5 w-3.5 animate-pulse" aria-hidden="true" />
+              Analizando tu consulta…
+            </div>
+          )}
+          <div ref={endRef} />
         </div>
 
         <form
