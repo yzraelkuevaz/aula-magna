@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Sparkles, Send, X } from "lucide-react";
+import { responderConsulta } from "@/lib/asistente";
 
 interface Msg { role: "user" | "ai"; text: string; }
 
 const suggestions = [
-  "Dame un cuento para segundo grado sobre valores.",
-  "Genera una planeación semanal de matemáticas para 4°.",
-  "Busca un reglamento escolar actualizado.",
-  "Recomienda un libro SEP para trabajar comprensión lectora.",
+  "Propón una actividad para trabajar fracciones.",
+  "Necesito una actividad de comprensión lectora.",
+  "¿Cómo puedo evaluar esta planeación?",
+  "Adapta esta actividad para alumnos que requieren mayor apoyo.",
+  "Genera una actividad de cierre.",
 ];
 
 interface Props {
