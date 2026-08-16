@@ -138,23 +138,13 @@ const weeklyData = [
   { s: "S1", h: 12 }, { s: "S2", h: 14 }, { s: "S3", h: 11 }, { s: "S4", h: 15 },
   { s: "S5", h: 13 }, { s: "S6", h: 16 }, { s: "S7", h: 14 }, { s: "S8", h: 18 },
 ];
-const camposData = [
-  { name: "Lenguajes", value: 34, color: "oklch(0.72 0.19 25)" },
-  { name: "Saberes y P.C.", value: 28, color: "oklch(0.78 0.15 200)" },
-  { name: "Ética N. y S.", value: 20, color: "oklch(0.68 0.24 340)" },
-  { name: "De lo Humano", value: 18, color: "oklch(0.62 0.20 295)" },
-];
 const metodologias = [
   { m: "ABP", n: 42 }, { m: "STEAM", n: 28 }, { m: "Servicio", n: 19 },
   { m: "Indagación", n: 33 }, { m: "Diálogo", n: 20 },
 ];
 
-const ultimas = [
-  { t: "Fracciones equivalentes con material concreto", campo: "Saberes y Pensamiento Científico", fecha: "Hoy", estado: "Lista", color: "var(--neon-cyan)" },
-  { t: "El diario del explorador — narrativa personal", campo: "Lenguajes", fecha: "Ayer", estado: "En curso", color: "var(--neon-coral)" },
-  { t: "Convivencia sin violencia — asamblea de aula", campo: "Ética, Naturaleza y Sociedades", fecha: "Lun", estado: "Lista", color: "var(--neon-pink)" },
-  { t: "Cuerpo, emociones y bienestar", campo: "De lo Humano y lo Comunitario", fecha: "Vie", estado: "Borrador", color: "var(--neon-amber)" },
-];
+/* Últimas planeaciones y distribución de campos: derivadas del registro real. */
+const ultimas = planeaciones.slice(0, 4);
 
 function Dashboard({ onNew, onOpen }: { onNew: () => void; onOpen: (k: SectionKey) => void }) {
   return (
