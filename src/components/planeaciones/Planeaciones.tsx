@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import {
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
-  BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, RadarChart, Radar,
+  BarChart, Bar, Cell, LabelList, LineChart, Line, RadarChart, Radar,
   PolarGrid, PolarAngleAxis, PolarRadiusAxis,
 } from "recharts";
 
@@ -229,7 +229,7 @@ function Dashboard({ onNew, onOpen }: { onNew: () => void; onOpen: (k: SectionKe
                   <ClipboardList className="h-4 w-4" style={{ color: p.color }} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-sm text-ink truncate">{p.t}</div>
+                  <div className="text-sm text-ink truncate">{p.titulo}</div>
                   <div className="text-[11px] text-ink-soft truncate">{p.campo} · {p.fecha}</div>
                 </div>
                 <span className="text-[10px] px-2 py-0.5 rounded-full glass text-ink-soft">{p.estado}</span>
@@ -246,6 +246,71 @@ function Dashboard({ onNew, onOpen }: { onNew: () => void; onOpen: (k: SectionKe
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ---------- Campo formativo mÃ¡s trabajado ---------- */
+function CampoFormativoPanel() {
+  const datos = distribucionCampos();
+  const total = planeaciones.length;
+
+  return (
+    <div className="glass rounded-2xl p-5 flex flex-col">
+      <div className="font-serif text-xl text-ink">Campo formativo más trabajado</div>
+      <div className="text-xs text-ink-soft mt-0.5">
+        {total > 0
+          ? `Sobre ${total} planeaciones registradas del ciclo`
+          : "Distribución del ciclo"}
+      </div>
+
+      {datos.length === 0 ? (
+        <div className="flex-1 min-h-[190px] mt-4 rounded-xl border border-dashed border-white/10 grid place-items-center text-center px-4">
+          <div>
+            <div className="text-sm text-ink">Sin datos suficientes</div>
+            <p className="text-[12px] text-ink-soft mt-1.5 max-w-[240px]">
+              Aún no hay planeaciones registradas en el ciclo, por lo que no puede calcularse la
+              distribución por campo formativo. Crea tu primera planeación para ver esta gráfica.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="h-52 mt-3">
+            <ResponsiveContainer>
+              <BarChart data={datos} layout="vertical" margin={{ left: 0, right: 34, top: 4, bottom: 4 }}>
+                <CartesianGrid stroke="oklch(1 0 0 / 6%)" horizontal={false} />
+                <XAxis type="number" domain={[0, 100]} unit="%" stroke="oklch(1 0 0 / 40%)" fontSize={10} />
+                <YAxis type="category" dataKey="name" width={104} stroke="oklch(1 0 0 / 55%)" fontSize={10} tickFormatter={(v: string) => (v.length > 18 ? `${v.slice(0, 17)}…` : v)} />
+                <Tooltip
+                  cursor={{ fill: "oklch(1 0 0 / 4%)" }}
+                  contentStyle={{ background: "oklch(0.2 0.02 265)", border: "1px solid oklch(1 0 0 / 10%)", borderRadius: 12 }}
+                  formatter={(value: number, _n: string, item: { payload?: { count?: number } }) => [
+                    `${value}% · ${item?.payload?.count ?? 0} planeaciones`,
+                    "Participación",
+                  ]}
+                />
+                <Bar dataKey="value" radius={[0, 8, 8, 0]} barSize={18} isAnimationActive>
+                  {datos.map((d) => (
+                    <Cell key={d.name} fill={d.color} />
+                  ))}
+                  <LabelList dataKey="value" position="right" formatter={(v: number) => `${v}%`} fill="oklch(1 0 0 / 75%)" fontSize={11} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="grid grid-cols-1 gap-1.5 text-[11px] mt-2">
+            {datos.map((d) => (
+              <div key={d.name} className="flex items-center gap-1.5 text-ink-soft">
+                <span className="h-2 w-2 rounded-full shrink-0" style={{ background: d.color }} />
+                <span className="truncate flex-1">{d.name}</span>
+                <span className="text-ink">{d.value}%</span>
+                <span className="text-ink-soft/70">({d.count})</span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
