@@ -228,7 +228,11 @@ function Dashboard({ onNew, onOpen }: { onNew: () => void; onOpen: (k: SectionKe
           </div>
           <div className="mt-4 space-y-2">
             {ultimas.map((p, i) => (
-              <button key={i} className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.04] transition text-left group">
+              <button
+                key={i}
+                onClick={() => onOpen("repositorio")}
+                className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.04] transition text-left group"
+              >
                 <div className="h-10 w-10 rounded-xl grid place-items-center shrink-0" style={{ background: `color-mix(in oklch, ${p.color} 22%, transparent)` }}>
                   <ClipboardList className="h-4 w-4" style={{ color: p.color }} />
                 </div>
