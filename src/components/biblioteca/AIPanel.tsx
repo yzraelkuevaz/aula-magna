@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Sparkles, Send, X } from "lucide-react";
+import { responderConsulta } from "@/lib/asistente";
 
 interface Msg { role: "user" | "ai"; text: string; }
 
 const suggestions = [
-  "Dame un cuento para segundo grado sobre valores.",
-  "Genera una planeación semanal de matemáticas para 4°.",
-  "Busca un reglamento escolar actualizado.",
-  "Recomienda un libro SEP para trabajar comprensión lectora.",
+  "Propón una actividad para trabajar fracciones.",
+  "Necesito una actividad de comprensión lectora.",
+  "¿Cómo puedo evaluar esta planeación?",
+  "Adapta esta actividad para alumnos que requieren mayor apoyo.",
+  "Genera una actividad de cierre.",
 ];
 
 interface Props {
@@ -18,6 +20,8 @@ interface Props {
 export function AIPanel({ open, onClose }: Props) {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
+  const [thinking, setThinking] = useState(false);
+  const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -25,20 +29,21 @@ export function AIPanel({ open, onClose }: Props) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, thinking]);
+
   const send = (text: string) => {
     const t = text.trim();
     if (!t) return;
+    const respuesta = responderConsulta(t);
     setMessages((m) => [...m, { role: "user", text: t }]);
     setInput("");
+    setThinking(true);
     setTimeout(() => {
-      setMessages((m) => [
-        ...m,
-        {
-          role: "ai",
-          text: "Encontré varios recursos que podrían ayudarte. Aquí tienes una selección basada en tu grado y materia. ¿Te gustaría que prepare una versión imprimible?",
-        },
-      ]);
-    }, 700);
+      setThinking(false);
+      setMessages((m) => [...m, { role: "ai", text: respuesta }]);
+    }, 350);
   };
 
   return (
@@ -92,7 +97,7 @@ export function AIPanel({ open, onClose }: Props) {
             messages.map((m, i) => (
               <div
                 key={i}
-                className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed animate-in fade-in slide-in-from-bottom-2 duration-300 ${
+                className={`max-w-[90%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap animate-in fade-in slide-in-from-bottom-2 duration-300 ${
                   m.role === "user"
                     ? "ml-auto bg-primary text-primary-foreground rounded-br-md"
                     : "bg-secondary text-ink rounded-bl-md"
@@ -102,6 +107,13 @@ export function AIPanel({ open, onClose }: Props) {
               </div>
             ))
           )}
+          {thinking && (
+            <div className="bg-secondary text-ink-soft text-sm px-4 py-2.5 rounded-2xl rounded-bl-md inline-flex items-center gap-2">
+              <Sparkles className="h-3.5 w-3.5 animate-pulse" aria-hidden="true" />
+              Analizando tu consulta…
+            </div>
+          )}
+          <div ref={endRef} />
         </div>
 
         <form

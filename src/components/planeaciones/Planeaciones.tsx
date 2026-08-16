@@ -1,4 +1,15 @@
 import { useState } from "react";
+import { toast } from "sonner";
+import {
+  planeaciones,
+  distribucionCampos,
+  type PlaneacionRegistro,
+} from "./planData";
+import {
+  CompartirPlaneacion,
+  copiarAlPortapapeles,
+  enlaceDePlaneacion,
+} from "./CompartirPlaneacion";
 import {
   Sparkles, Plus, ClipboardList, Clock, Layers, BookOpen, Target, TrendingUp,
   Calendar as CalendarIcon, Search, Filter, FileText, Video, Music, Image as ImageIcon,
@@ -9,7 +20,7 @@ import {
 } from "lucide-react";
 import {
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
-  BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, RadarChart, Radar,
+  BarChart, Bar, Cell, LabelList, LineChart, Line, RadarChart, Radar,
   PolarGrid, PolarAngleAxis, PolarRadiusAxis,
 } from "recharts";
 
@@ -131,23 +142,13 @@ const weeklyData = [
   { s: "S1", h: 12 }, { s: "S2", h: 14 }, { s: "S3", h: 11 }, { s: "S4", h: 15 },
   { s: "S5", h: 13 }, { s: "S6", h: 16 }, { s: "S7", h: 14 }, { s: "S8", h: 18 },
 ];
-const camposData = [
-  { name: "Lenguajes", value: 34, color: "oklch(0.72 0.19 25)" },
-  { name: "Saberes y P.C.", value: 28, color: "oklch(0.78 0.15 200)" },
-  { name: "Ética N. y S.", value: 20, color: "oklch(0.68 0.24 340)" },
-  { name: "De lo Humano", value: 18, color: "oklch(0.62 0.20 295)" },
-];
 const metodologias = [
   { m: "ABP", n: 42 }, { m: "STEAM", n: 28 }, { m: "Servicio", n: 19 },
   { m: "Indagación", n: 33 }, { m: "Diálogo", n: 20 },
 ];
 
-const ultimas = [
-  { t: "Fracciones equivalentes con material concreto", campo: "Saberes y Pensamiento Científico", fecha: "Hoy", estado: "Lista", color: "var(--neon-cyan)" },
-  { t: "El diario del explorador — narrativa personal", campo: "Lenguajes", fecha: "Ayer", estado: "En curso", color: "var(--neon-coral)" },
-  { t: "Convivencia sin violencia — asamblea de aula", campo: "Ética, Naturaleza y Sociedades", fecha: "Lun", estado: "Lista", color: "var(--neon-pink)" },
-  { t: "Cuerpo, emociones y bienestar", campo: "De lo Humano y lo Comunitario", fecha: "Vie", estado: "Borrador", color: "var(--neon-amber)" },
-];
+/* Últimas planeaciones y distribución de campos: derivadas del registro real. */
+const ultimas = planeaciones.slice(0, 4);
 
 function Dashboard({ onNew, onOpen }: { onNew: () => void; onOpen: (k: SectionKey) => void }) {
   return (
@@ -195,28 +196,7 @@ function Dashboard({ onNew, onOpen }: { onNew: () => void; onOpen: (k: SectionKe
           </div>
         </div>
 
-        <div className="glass rounded-2xl p-5">
-          <div className="font-serif text-xl text-ink">Campo formativo más trabajado</div>
-          <div className="text-xs text-ink-soft mt-0.5">Distribución del ciclo</div>
-          <div className="h-56 mt-2">
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie data={camposData} innerRadius={45} outerRadius={72} dataKey="value" paddingAngle={3}>
-                  {camposData.map((c, i) => <Cell key={i} fill={c.color} />)}
-                </Pie>
-                <Tooltip contentStyle={{ background: "oklch(0.2 0.02 265)", border: "1px solid oklch(1 0 0 / 10%)", borderRadius: 12 }} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="grid grid-cols-2 gap-1.5 text-[11px]">
-            {camposData.map((c) => (
-              <div key={c.name} className="flex items-center gap-1.5 text-ink-soft">
-                <span className="h-2 w-2 rounded-full" style={{ background: c.color }} />
-                <span className="truncate">{c.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <CampoFormativoPanel />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -248,12 +228,16 @@ function Dashboard({ onNew, onOpen }: { onNew: () => void; onOpen: (k: SectionKe
           </div>
           <div className="mt-4 space-y-2">
             {ultimas.map((p, i) => (
-              <button key={i} className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.04] transition text-left group">
+              <button
+                key={i}
+                onClick={() => onOpen("repositorio")}
+                className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.04] transition text-left group"
+              >
                 <div className="h-10 w-10 rounded-xl grid place-items-center shrink-0" style={{ background: `color-mix(in oklch, ${p.color} 22%, transparent)` }}>
                   <ClipboardList className="h-4 w-4" style={{ color: p.color }} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-sm text-ink truncate">{p.t}</div>
+                  <div className="text-sm text-ink truncate">{p.titulo}</div>
                   <div className="text-[11px] text-ink-soft truncate">{p.campo} · {p.fecha}</div>
                 </div>
                 <span className="text-[10px] px-2 py-0.5 rounded-full glass text-ink-soft">{p.estado}</span>
@@ -270,6 +254,71 @@ function Dashboard({ onNew, onOpen }: { onNew: () => void; onOpen: (k: SectionKe
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ---------- Campo formativo mÃ¡s trabajado ---------- */
+function CampoFormativoPanel() {
+  const datos = distribucionCampos();
+  const total = planeaciones.length;
+
+  return (
+    <div className="glass rounded-2xl p-5 flex flex-col">
+      <div className="font-serif text-xl text-ink">Campo formativo más trabajado</div>
+      <div className="text-xs text-ink-soft mt-0.5">
+        {total > 0
+          ? `Sobre ${total} planeaciones registradas del ciclo`
+          : "Distribución del ciclo"}
+      </div>
+
+      {datos.length === 0 ? (
+        <div className="flex-1 min-h-[190px] mt-4 rounded-xl border border-dashed border-white/10 grid place-items-center text-center px-4">
+          <div>
+            <div className="text-sm text-ink">Sin datos suficientes</div>
+            <p className="text-[12px] text-ink-soft mt-1.5 max-w-[240px]">
+              Aún no hay planeaciones registradas en el ciclo, por lo que no puede calcularse la
+              distribución por campo formativo. Crea tu primera planeación para ver esta gráfica.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="h-52 mt-3">
+            <ResponsiveContainer>
+              <BarChart data={datos} layout="vertical" margin={{ left: 0, right: 34, top: 4, bottom: 4 }}>
+                <CartesianGrid stroke="oklch(1 0 0 / 6%)" horizontal={false} />
+                <XAxis type="number" domain={[0, 100]} unit="%" stroke="oklch(1 0 0 / 40%)" fontSize={10} />
+                <YAxis type="category" dataKey="name" width={104} stroke="oklch(1 0 0 / 55%)" fontSize={10} tickFormatter={(v: string) => (v.length > 18 ? `${v.slice(0, 17)}…` : v)} />
+                <Tooltip
+                  cursor={{ fill: "oklch(1 0 0 / 4%)" }}
+                  contentStyle={{ background: "oklch(0.2 0.02 265)", border: "1px solid oklch(1 0 0 / 10%)", borderRadius: 12 }}
+                  formatter={(value: number, _n: string, item: { payload?: { count?: number } }) => [
+                    `${value}% · ${item?.payload?.count ?? 0} planeaciones`,
+                    "Participación",
+                  ]}
+                />
+                <Bar dataKey="value" radius={[0, 8, 8, 0]} barSize={18} isAnimationActive>
+                  {datos.map((d) => (
+                    <Cell key={d.name} fill={d.color} />
+                  ))}
+                  <LabelList dataKey="value" position="right" formatter={(v: number) => `${v}%`} fill="oklch(1 0 0 / 75%)" fontSize={11} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="grid grid-cols-1 gap-1.5 text-[11px] mt-2">
+            {datos.map((d) => (
+              <div key={d.name} className="flex items-center gap-1.5 text-ink-soft">
+                <span className="h-2 w-2 rounded-full shrink-0" style={{ background: d.color }} />
+                <span className="truncate flex-1">{d.name}</span>
+                <span className="text-ink">{d.value}%</span>
+                <span className="text-ink-soft/70">({d.count})</span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -738,19 +787,34 @@ function Calendario() {
 
 /* ---------- Repositorio ---------- */
 function Repositorio() {
-  const rows = [
-    { t: "Fracciones equivalentes con material concreto", g: "4°", campo: "Saberes y P.C.", proy: "La tienda", sem: "S24", cumpl: 92 },
-    { t: "El diario del explorador", g: "4°", campo: "Lenguajes", proy: "Narrativa personal", sem: "S23", cumpl: 100 },
-    { t: "Convivencia sin violencia", g: "4°", campo: "Ética N. y S.", proy: "Comunidad segura", sem: "S22", cumpl: 88 },
-    { t: "Cuerpo, emociones y bienestar", g: "4°", campo: "De lo Humano", proy: "Yo me cuido", sem: "S21", cumpl: 75 },
-    { t: "Ecosistemas de mi entorno", g: "4°", campo: "Saberes y P.C.", proy: "Naturaleza viva", sem: "S20", cumpl: 100 },
-  ];
+  const [busqueda, setBusqueda] = useState("");
+  const [compartir, setCompartir] = useState<PlaneacionRegistro | null>(null);
+
+  const q = busqueda.trim().toLowerCase();
+  const rows = q
+    ? planeaciones.filter((p) =>
+        [p.titulo, p.campo, p.proyecto, p.grado, p.semana].join(" ").toLowerCase().includes(q),
+      )
+    : planeaciones;
+
+  const copiarEnlace = async (p: PlaneacionRegistro) => {
+    const ok = await copiarAlPortapapeles(enlaceDePlaneacion(p));
+    if (ok) toast.success("Enlace copiado al portapapeles");
+    else toast.error("No se pudo copiar el enlace en este navegador.");
+  };
+
   return (
     <div className="space-y-4">
       <div className="glass rounded-2xl p-4 flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-[240px]">
           <Search className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft" />
-          <input placeholder="Buscar planeación por título, PDA, proyecto…" className="w-full h-11 pl-10 pr-4 rounded-xl bg-white/[0.04] border border-white/10 text-sm text-ink placeholder:text-ink-soft/60 focus:outline-none" />
+          <input
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+            aria-label="Buscar planeación"
+            placeholder="Buscar planeación por título, PDA, proyecto…"
+            className="w-full h-11 pl-10 pr-4 rounded-xl bg-white/[0.04] border border-white/10 text-sm text-ink placeholder:text-ink-soft/60 focus:outline-none"
+          />
         </div>
         {["Año", "Campo", "Proyecto", "Grado", "Semana", "Materia", "Etiquetas"].map((f) => (
           <button key={f} className="h-11 px-3 rounded-xl glass border border-white/10 text-[12px] text-ink-soft inline-flex items-center gap-1.5">
@@ -774,26 +838,44 @@ function Repositorio() {
               <div className="h-8 w-8 rounded-lg grid place-items-center shrink-0" style={{ background: "color-mix(in oklch, var(--neon-cyan) 20%, transparent)" }}>
                 <ClipboardList className="h-4 w-4 text-[var(--neon-cyan)]" />
               </div>
-              <span className="text-ink truncate">{r.t}</span>
+              <span className="text-ink truncate">{r.titulo}</span>
             </div>
             <div className="col-span-2 text-ink-soft truncate">{r.campo}</div>
-            <div className="col-span-2 text-ink-soft truncate">{r.proy}</div>
-            <div className="col-span-1 text-ink-soft">{r.sem}</div>
+            <div className="col-span-2 text-ink-soft truncate">{r.proyecto}</div>
+            <div className="col-span-1 text-ink-soft">{r.semana}</div>
             <div className="col-span-1">
               <div className="flex items-center gap-1.5">
                 <div className="h-1.5 flex-1 rounded-full bg-white/[0.06] overflow-hidden">
-                  <div className="h-full rounded-full" style={{ width: `${r.cumpl}%`, background: "var(--gradient-neon)" }} />
+                  <div className="h-full rounded-full" style={{ width: `${r.cumplimiento}%`, background: "var(--gradient-neon)" }} />
                 </div>
-                <span className="text-[10px] text-ink-soft">{r.cumpl}%</span>
+                <span className="text-[10px] text-ink-soft">{r.cumplimiento}%</span>
               </div>
             </div>
             <div className="col-span-1 flex justify-end gap-1">
-              <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]" title="Duplicar"><Copy className="h-3.5 w-3.5 text-ink-soft" /></button>
-              <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]" title="Compartir"><Share2 className="h-3.5 w-3.5 text-ink-soft" /></button>
-              <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]" title="QR"><QrCode className="h-3.5 w-3.5 text-ink-soft" /></button>
+              <button
+                onClick={() => copiarEnlace(r)}
+                className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]"
+                title="Copiar enlace"
+                aria-label={`Copiar enlace de ${r.titulo}`}
+              >
+                <LinkIcon className="h-3.5 w-3.5 text-ink-soft" aria-hidden="true" />
+              </button>
+              <button
+                onClick={() => setCompartir(r)}
+                className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/[0.06]"
+                title="Compartir"
+                aria-label={`Compartir ${r.titulo}`}
+              >
+                <Share2 className="h-3.5 w-3.5 text-ink-soft" aria-hidden="true" />
+              </button>
             </div>
           </div>
         ))}
+        {rows.length === 0 && (
+          <div className="px-5 py-10 text-center text-[13px] text-ink-soft">
+            Ninguna planeación coincide con “{busqueda}”.
+          </div>
+        )}
       </div>
 
       <div className="glass rounded-2xl p-4 flex flex-wrap items-center gap-2">
@@ -807,6 +889,8 @@ function Repositorio() {
           </button>
         ))}
       </div>
+
+      <CompartirPlaneacion plan={compartir} onClose={() => setCompartir(null)} />
     </div>
   );
 }
