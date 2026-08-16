@@ -192,28 +192,7 @@ function Dashboard({ onNew, onOpen }: { onNew: () => void; onOpen: (k: SectionKe
           </div>
         </div>
 
-        <div className="glass rounded-2xl p-5">
-          <div className="font-serif text-xl text-ink">Campo formativo más trabajado</div>
-          <div className="text-xs text-ink-soft mt-0.5">Distribución del ciclo</div>
-          <div className="h-56 mt-2">
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie data={camposData} innerRadius={45} outerRadius={72} dataKey="value" paddingAngle={3}>
-                  {camposData.map((c, i) => <Cell key={i} fill={c.color} />)}
-                </Pie>
-                <Tooltip contentStyle={{ background: "oklch(0.2 0.02 265)", border: "1px solid oklch(1 0 0 / 10%)", borderRadius: 12 }} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="grid grid-cols-2 gap-1.5 text-[11px]">
-            {camposData.map((c) => (
-              <div key={c.name} className="flex items-center gap-1.5 text-ink-soft">
-                <span className="h-2 w-2 rounded-full" style={{ background: c.color }} />
-                <span className="truncate">{c.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <CampoFormativoPanel />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
