@@ -1,4 +1,11 @@
 import { useState } from "react";
+import { toast } from "sonner";
+import {
+  planeaciones,
+  distribucionCampos,
+  type PlaneacionRegistro,
+} from "./planData";
+import { CompartirPlaneacion } from "./CompartirPlaneacion";
 import {
   Sparkles, Plus, ClipboardList, Clock, Layers, BookOpen, Target, TrendingUp,
   Calendar as CalendarIcon, Search, Filter, FileText, Video, Music, Image as ImageIcon,
