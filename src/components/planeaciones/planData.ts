@@ -26,7 +26,7 @@ export const planActual: PlanContext = {
   ciclo: "2025 – 2026",
   grado: "4°",
   grupo: "B",
-  docente: "Israel Hernández",
+  docente: "Docente (demo)",
   campoFormativo: "Saberes y Pensamiento Científico",
   contenido: "Fracciones equivalentes y comparación",
   pda: "Compara fracciones usando representaciones concretas y gráficas.",

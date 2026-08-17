@@ -375,7 +375,7 @@ function Reglamento() {
           <div className="text-[11px] uppercase tracking-[0.15em] text-ink-soft mb-3">Firma digital</div>
           <div className="rounded-2xl bg-white/[0.03] border border-dashed border-white/15 p-6 text-center">
             <Signature className="h-8 w-8 mx-auto text-ink-soft" />
-            <div className="text-sm text-ink mt-2">Prof. Israel Rivera</div>
+            <div className="text-sm text-ink mt-2">Docente (demo)</div>
             <div className="text-[11px] text-ink-soft">Firmado el 12 sep 2025</div>
           </div>
         </GlassCard>
