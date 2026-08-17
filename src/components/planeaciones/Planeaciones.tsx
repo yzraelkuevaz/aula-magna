@@ -330,7 +330,7 @@ const contextFields = [
   ["CCT", "21DPR1234K"],
   ["Zona escolar", "045"],
   ["Sector", "12"],
-  ["Docente", "Israel Hernández"],
+  ["Docente", "Docente (demo)"],
   ["Grado", "4°"],
   ["Grupo", "B"],
   ["Turno", "Matutino"],

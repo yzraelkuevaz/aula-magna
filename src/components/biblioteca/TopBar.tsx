@@ -5,9 +5,14 @@ interface TopBarProps {
   onQuery: (q: string) => void;
   onCommand?: () => void;
   onNavigate?: (key: string) => void;
+  /** Identidad del docente autenticado (nunca valores por defecto). */
+  nombre: string;
+  detalle: string;
+  iniciales: string;
 }
 
-export function TopBar({ query, onQuery, onCommand, onNavigate }: TopBarProps) {
+export function TopBar({ query, onQuery, onCommand, onNavigate, nombre, detalle, iniciales }: TopBarProps) {
+
   return (
     <header className="sticky top-0 z-30 glass border-b border-white/10">
       <div className="flex items-center gap-4 h-[84px] px-5 lg:px-8">
@@ -27,7 +32,7 @@ export function TopBar({ query, onQuery, onCommand, onNavigate }: TopBarProps) {
             value={query}
             onChange={(e) => onQuery(e.target.value)}
             aria-label="Buscar en SIED MX"
-            placeholder="¿Qué necesitas hoy, Profesor?"
+            placeholder="¿Qué necesitas hoy?"
             className="w-full h-12 pl-12 pr-20 rounded-full bg-white/[0.06] border border-white/10 focus:border-[var(--neon-coral)]/40 focus:bg-white/[0.10] focus:outline-none focus:ring-4 focus:ring-[var(--neon-coral)]/15 transition text-sm placeholder:text-ink-soft/70 text-ink"
           />
           <button
@@ -66,11 +71,11 @@ export function TopBar({ query, onQuery, onCommand, onNavigate }: TopBarProps) {
               className="h-9 w-9 rounded-full grid place-items-center text-white font-semibold text-xs ring-1 ring-white/20"
               style={{ background: "linear-gradient(135deg, var(--neon-violet), var(--neon-pink))" }}
             >
-              PI
+              {iniciales}
             </div>
             <div className="hidden md:block text-left leading-tight">
-              <div className="text-[13px] font-medium text-ink">Profesor Israel</div>
-              <div className="text-[10px] text-ink-soft">2°C · Primaria</div>
+              <div className="text-[13px] font-medium text-ink">{nombre}</div>
+              <div className="text-[10px] text-ink-soft">{detalle}</div>
             </div>
             <ChevronDown className="hidden md:block h-3.5 w-3.5 text-ink-soft" aria-hidden="true" />
           </button>
