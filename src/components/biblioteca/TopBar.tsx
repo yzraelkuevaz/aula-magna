@@ -5,9 +5,14 @@ interface TopBarProps {
   onQuery: (q: string) => void;
   onCommand?: () => void;
   onNavigate?: (key: string) => void;
+  /** Identidad del docente autenticado (nunca valores por defecto). */
+  nombre: string;
+  detalle: string;
+  iniciales: string;
 }
 
-export function TopBar({ query, onQuery, onCommand, onNavigate }: TopBarProps) {
+export function TopBar({ query, onQuery, onCommand, onNavigate, nombre, detalle, iniciales }: TopBarProps) {
+
   return (
     <header className="sticky top-0 z-30 glass border-b border-white/10">
       <div className="flex items-center gap-4 h-[84px] px-5 lg:px-8">
