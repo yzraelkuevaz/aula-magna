@@ -8,9 +8,14 @@ import banner from "@/assets/sunrise-banner.jpg";
 export function Dashboard({
   onAskAI,
   onNavigate,
+  nombre,
+  totalAlumnos,
 }: {
   onAskAI: () => void;
   onNavigate?: (key: string) => void;
+  /** Identidad y datos reales del docente autenticado. */
+  nombre: string;
+  totalAlumnos: number;
 }) {
 
   return (
@@ -35,7 +40,7 @@ export function Dashboard({
                 className="italic font-normal bg-clip-text text-transparent"
                 style={{ backgroundImage: "var(--gradient-neon)" }}
               >
-                Profesor Israel!
+                {nombre}!
               </span> <span className="not-italic">👋</span>
             </h1>
             <p className="text-ink-soft text-sm mt-1.5">Hoy tienes una oportunidad más para cambiar vidas.</p>
@@ -45,15 +50,13 @@ export function Dashboard({
         {/* KPI row */}
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <KpiCard
-            label="Asistencia hoy"
-            value="19"
-            suffix=" / 20"
-            trailing="95%"
+            label="Alumnos en mi grupo"
+            value={String(totalAlumnos)}
+            trailing={totalAlumnos === 0 ? "Sin registrar" : "Tu grupo"}
             trailingTint="var(--neon-violet)"
             icon={Users}
             iconTint="var(--neon-cyan)"
-            footer="1 falta"
-            progress={0.95}
+            footer={totalAlumnos === 0 ? "Agrégalos en Configuración" : "Registrados en tu cuenta"}
           />
           <KpiCard
             label="Promedio general"
