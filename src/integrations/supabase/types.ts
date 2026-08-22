@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      agenda_eventos: {
+        Row: {
+          created_at: string
+          descripcion: string | null
+          fecha: string
+          hora: string | null
+          id: string
+          tipo: string
+          titulo: string
+          todo_el_dia: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          descripcion?: string | null
+          fecha: string
+          hora?: string | null
+          id?: string
+          tipo?: string
+          titulo: string
+          todo_el_dia?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          descripcion?: string | null
+          fecha?: string
+          hora?: string | null
+          id?: string
+          tipo?: string
+          titulo?: string
+          todo_el_dia?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       alumnos: {
         Row: {
           created_at: string
@@ -41,46 +80,215 @@ export type Database = {
         }
         Relationships: []
       }
+      asistencia: {
+        Row: {
+          alumno_id: string
+          created_at: string
+          estado: string
+          fecha: string
+          id: string
+          nota: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          alumno_id: string
+          created_at?: string
+          estado?: string
+          fecha?: string
+          id?: string
+          nota?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          alumno_id?: string
+          created_at?: string
+          estado?: string
+          fecha?: string
+          id?: string
+          nota?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asistencia_alumno_id_fkey"
+            columns: ["alumno_id"]
+            isOneToOne: false
+            referencedRelation: "alumnos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bitacoras: {
+        Row: {
+          alumno_id: string | null
+          alumno_nombre: string | null
+          categoria: string
+          created_at: string
+          descripcion: string
+          estado: string
+          fecha: string
+          id: string
+          importancia: string
+          observaciones: string | null
+          seguimiento: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          alumno_id?: string | null
+          alumno_nombre?: string | null
+          categoria?: string
+          created_at?: string
+          descripcion: string
+          estado?: string
+          fecha?: string
+          id?: string
+          importancia?: string
+          observaciones?: string | null
+          seguimiento?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          alumno_id?: string | null
+          alumno_nombre?: string | null
+          categoria?: string
+          created_at?: string
+          descripcion?: string
+          estado?: string
+          fecha?: string
+          id?: string
+          importancia?: string
+          observaciones?: string | null
+          seguimiento?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bitacoras_alumno_id_fkey"
+            columns: ["alumno_id"]
+            isOneToOne: false
+            referencedRelation: "alumnos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
+          avatar_url: string | null
           ciclo: string | null
           created_at: string
           escuela: string | null
           grado: string | null
           grupo: string | null
+          hora_entrada: string | null
+          hora_recreo: string | null
+          hora_salida: string | null
           id: string
           is_demo: boolean
           nivel: string | null
           nombre: string
+          nombre_grupo: string | null
+          notificaciones: boolean
           onboarding_completed: boolean
+          sonidos: boolean
+          tema: string
+          turno: string | null
+          tutorial_completed: boolean
           updated_at: string
           user_id: string
         }
         Insert: {
+          avatar_url?: string | null
           ciclo?: string | null
           created_at?: string
           escuela?: string | null
           grado?: string | null
           grupo?: string | null
+          hora_entrada?: string | null
+          hora_recreo?: string | null
+          hora_salida?: string | null
           id?: string
           is_demo?: boolean
           nivel?: string | null
           nombre?: string
+          nombre_grupo?: string | null
+          notificaciones?: boolean
           onboarding_completed?: boolean
+          sonidos?: boolean
+          tema?: string
+          turno?: string | null
+          tutorial_completed?: boolean
           updated_at?: string
           user_id: string
         }
         Update: {
+          avatar_url?: string | null
           ciclo?: string | null
           created_at?: string
           escuela?: string | null
           grado?: string | null
           grupo?: string | null
+          hora_entrada?: string | null
+          hora_recreo?: string | null
+          hora_salida?: string | null
           id?: string
           is_demo?: boolean
           nivel?: string | null
           nombre?: string
+          nombre_grupo?: string | null
+          notificaciones?: boolean
           onboarding_completed?: boolean
+          sonidos?: boolean
+          tema?: string
+          turno?: string | null
+          tutorial_completed?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      recordatorios: {
+        Row: {
+          activo: boolean
+          created_at: string
+          dias: number[]
+          hora: string
+          id: string
+          mensaje: string | null
+          nombre: string
+          repetir: boolean
+          tipo: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          activo?: boolean
+          created_at?: string
+          dias?: number[]
+          hora?: string
+          id?: string
+          mensaje?: string | null
+          nombre: string
+          repetir?: boolean
+          tipo?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          activo?: boolean
+          created_at?: string
+          dias?: number[]
+          hora?: string
+          id?: string
+          mensaje?: string | null
+          nombre?: string
+          repetir?: boolean
+          tipo?: string
           updated_at?: string
           user_id?: string
         }
