@@ -6,7 +6,12 @@ import { hoyISO } from "@/lib/rutina";
 
 type Estado = "presente" | "falta" | "retardo" | "justificado";
 
-const estados: { key: Estado; label: string; icon: React.ComponentType<{ className?: string }>; color: string }[] = [
+const estados: {
+  key: Estado;
+  label: string;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties; "aria-hidden"?: boolean | "true" | "false" }>;
+  color: string;
+}[] = [
   { key: "presente", label: "Presente", icon: Check, color: "var(--neon-cyan)" },
   { key: "falta", label: "Falta", icon: X, color: "var(--neon-coral)" },
   { key: "retardo", label: "Retardo", icon: Clock, color: "var(--neon-amber, oklch(0.8 0.16 80))" },
