@@ -1,0 +1,1 @@
+ALTER TABLE public.asistencia ADD CONSTRAINT asistencia_alumno_fecha_unico UNIQUE (alumno_id, fecha);
