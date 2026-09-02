@@ -100,7 +100,9 @@ function Card({
 }) {
   return (
     <div className="rounded-2xl glass p-5">
-      <Icon className="h-5 w-5 text-[var(--neon-cyan)]" aria-hidden="true" />
+      <span className="icon-3d h-11 w-11">
+        <Icon className="h-5 w-5" aria-hidden="true" />
+      </span>
       <div className="font-serif text-lg text-ink mt-3">{title}</div>
       <p className="text-sm text-ink-soft mt-1.5 leading-relaxed">{text}</p>
     </div>
