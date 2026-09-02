@@ -63,7 +63,7 @@ type SectionKey = typeof sections[number]["key"];
 function GlassCard({ children, className = "", glow = false }: { children: React.ReactNode; className?: string; glow?: boolean }) {
   return (
     <div
-      className={`glass rounded-3xl border border-white/10 p-5 transition-all duration-300 hover:border-white/20 ${
+      className={`glass rounded-3xl border border-border p-5 transition-all duration-300 hover:border-border ${
         glow ? "hover:shadow-[0_0_40px_-10px_var(--neon-coral)]" : ""
       } ${className}`}
     >
@@ -78,8 +78,8 @@ function Btn3D({ children, variant = "default", onClick, className = "" }: {
   const base = "inline-flex items-center gap-2 h-10 px-4 rounded-xl text-[13px] font-medium transition-all duration-200 active:scale-[0.97]";
   const styles = {
     primary: "text-white shadow-[0_6px_20px_-6px_var(--neon-coral),inset_0_1px_0_rgba(255,255,255,0.25)] hover:brightness-110",
-    default: "glass-strong text-ink hover:border-white/20 shadow-[0_4px_12px_-4px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)]",
-    ghost: "text-ink-soft hover:text-ink hover:bg-white/5",
+    default: "glass-strong text-ink hover:border-border shadow-[0_4px_12px_-4px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)]",
+    ghost: "text-ink-soft hover:text-ink hover:bg-primary/8",
   }[variant];
   const bg = variant === "primary" ? { background: "var(--gradient-neon)" } : undefined;
   return (
@@ -93,7 +93,7 @@ function Btn3D({ children, variant = "default", onClick, className = "" }: {
 
 function AulaHeader({ onAskAI }: { onAskAI: () => void }) {
   return (
-    <div className="relative overflow-hidden rounded-3xl glass-strong border border-white/10 p-6 lg:p-8 mb-6">
+    <div className="relative overflow-hidden rounded-3xl glass-strong border border-border p-6 lg:p-8 mb-6">
       <div
         className="absolute -top-24 -right-24 h-64 w-64 rounded-full opacity-40 blur-3xl"
         style={{ background: "var(--gradient-neon)" }}
@@ -123,7 +123,7 @@ function AulaHeader({ onAskAI }: { onAskAI: () => void }) {
 
 function SectionNav({ current, onChange }: { current: SectionKey; onChange: (k: SectionKey) => void }) {
   return (
-    <div className="glass rounded-2xl border border-white/10 p-1.5 mb-6 flex gap-1 overflow-x-auto scrollbar-hide">
+    <div className="glass rounded-2xl border border-border p-1.5 mb-6 flex gap-1 overflow-x-auto scrollbar-hide">
       {sections.map(({ key, label, icon: Icon }) => {
         const active = current === key;
         return (
@@ -131,7 +131,7 @@ function SectionNav({ current, onChange }: { current: SectionKey; onChange: (k: 
             key={key}
             onClick={() => onChange(key)}
             className={`shrink-0 inline-flex items-center gap-2 h-10 px-4 rounded-xl text-[13px] transition-all ${
-              active ? "text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]" : "text-ink-soft hover:text-ink hover:bg-white/5"
+              active ? "text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]" : "text-ink-soft hover:text-ink hover:bg-primary/8"
             }`}
             style={active ? { background: "var(--gradient-neon)", color: "#fff" } : undefined}
           >
@@ -157,7 +157,7 @@ function KPI({ icon: Icon, label, value, sub, color }: {
           {sub && <div className="text-xs text-ink-soft mt-1">{sub}</div>}
         </div>
         <div
-          className="h-11 w-11 rounded-2xl grid place-items-center ring-1 ring-white/15"
+          className="h-11 w-11 rounded-2xl grid place-items-center ring-1 ring-border"
           style={{ background: color }}
         >
           <Icon className="h-5 w-5 text-white" />
@@ -273,7 +273,7 @@ function Resumen() {
           </div>
           <div className="mt-3 space-y-2">
             {alerts.map((a, i) => (
-              <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition">
+              <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-primary/5 border border-border hover:bg-primary/5 transition">
                 <div
                   className="h-2 w-2 rounded-full mt-1.5 shrink-0"
                   style={{
@@ -316,9 +316,9 @@ function Resumen() {
           </div>
           <div className="mt-3 space-y-2">
             {birthdays.map((b) => (
-              <div key={b.n} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+              <div key={b.n} className="flex items-center gap-3 p-2.5 rounded-xl bg-primary/5 border border-border">
                 <div
-                  className="h-10 w-10 rounded-full grid place-items-center text-white text-xs font-semibold ring-1 ring-white/15"
+                  className="h-10 w-10 rounded-full grid place-items-center text-white text-xs font-semibold ring-1 ring-border"
                   style={{ background: "linear-gradient(135deg, var(--neon-pink), var(--neon-violet))" }}
                 >
                   {b.n.split(" ").map((p) => p[0]).join("")}
@@ -354,7 +354,7 @@ function Reglamento() {
             <Btn3D variant="primary"><Sparkles className="h-4 w-4" /> Regenerar</Btn3D>
           </div>
         </div>
-        <div className="rounded-2xl bg-white/[0.02] border border-white/5 p-6 space-y-4 max-h-[500px] overflow-y-auto text-[13.5px] leading-relaxed text-ink/90">
+        <div className="rounded-2xl bg-primary/5 border border-border p-6 space-y-4 max-h-[500px] overflow-y-auto text-[13.5px] leading-relaxed text-ink/90">
           {[
             ["I. De la puntualidad", "El horario de entrada es a las 8:00 a.m. Después de 8:10 se registrará retardo. Tres retardos equivalen a una falta."],
             ["II. Del uniforme", "Uso obligatorio y completo. Los viernes se permite ropa deportiva reglamentaria."],
@@ -373,7 +373,7 @@ function Reglamento() {
       <div className="space-y-4">
         <GlassCard>
           <div className="text-[11px] uppercase tracking-[0.15em] text-ink-soft mb-3">Firma digital</div>
-          <div className="rounded-2xl bg-white/[0.03] border border-dashed border-white/15 p-6 text-center">
+          <div className="rounded-2xl bg-primary/5 border border-dashed border-border p-6 text-center">
             <Signature className="h-8 w-8 mx-auto text-ink-soft" />
             <div className="text-sm text-ink mt-2">Docente (demo)</div>
             <div className="text-[11px] text-ink-soft">Firmado el 12 sep 2025</div>
@@ -422,15 +422,15 @@ function Padres() {
           <div className="flex gap-2">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-soft" />
-              <input placeholder="Buscar…" className="h-10 pl-9 pr-3 rounded-xl bg-white/[0.06] border border-white/10 text-sm text-ink placeholder:text-ink-soft/70 focus:outline-none focus:border-white/20" />
+              <input placeholder="Buscar…" className="h-10 pl-9 pr-3 rounded-xl bg-primary/5 border border-border text-sm text-ink placeholder:text-ink-soft/70 focus:outline-none focus:border-border" />
             </div>
             <Btn3D variant="primary"><Plus className="h-4 w-4" /> Agregar</Btn3D>
           </div>
         </div>
         <div className="space-y-2">
           {parents.map((p) => (
-            <div key={p.n} className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition">
-              <div className="h-11 w-11 rounded-full grid place-items-center text-white text-xs font-semibold ring-1 ring-white/15"
+            <div key={p.n} className="flex items-center gap-3 p-3 rounded-2xl bg-primary/5 border border-border hover:bg-primary/5 transition">
+              <div className="h-11 w-11 rounded-full grid place-items-center text-white text-xs font-semibold ring-1 ring-border"
                 style={{ background: "linear-gradient(135deg, var(--neon-violet), var(--neon-cyan))" }}>
                 {p.n.split(" ").map((x) => x[0]).join("")}
               </div>
@@ -442,9 +442,9 @@ function Padres() {
                 <div className="text-[11px] text-ink-soft">Padre/tutor de {p.h}</div>
               </div>
               <div className="hidden md:flex items-center gap-1.5">
-                <button className="h-9 w-9 rounded-full glass grid place-items-center hover:border-white/20"><Phone className="h-4 w-4 text-ink-soft" /></button>
-                <button className="h-9 w-9 rounded-full glass grid place-items-center hover:border-white/20"><Mail className="h-4 w-4 text-ink-soft" /></button>
-                <button className="h-9 w-9 rounded-full glass grid place-items-center hover:border-white/20"><MessageSquare className="h-4 w-4 text-ink-soft" /></button>
+                <button className="h-9 w-9 rounded-full glass grid place-items-center hover:border-border"><Phone className="h-4 w-4 text-ink-soft" /></button>
+                <button className="h-9 w-9 rounded-full glass grid place-items-center hover:border-border"><Mail className="h-4 w-4 text-ink-soft" /></button>
+                <button className="h-9 w-9 rounded-full glass grid place-items-center hover:border-border"><MessageSquare className="h-4 w-4 text-ink-soft" /></button>
               </div>
             </div>
           ))}
@@ -477,7 +477,7 @@ function Padres() {
             { f: "28 feb", p: "Fam. López", t: "Conducta" },
             { f: "14 feb", p: "Fam. Silva", t: "Material pendiente" },
           ].map((e) => (
-            <div key={e.f} className="py-2 border-b border-white/5 last:border-0">
+            <div key={e.f} className="py-2 border-b border-border last:border-0">
               <div className="text-[13px] text-ink">{e.p}</div>
               <div className="text-[11px] text-ink-soft">{e.f} · {e.t}</div>
             </div>
@@ -520,8 +520,8 @@ function Calendario() {
                   today
                     ? "text-white font-semibold"
                     : has
-                    ? "text-ink bg-white/[0.06] hover:bg-white/[0.10]"
-                    : day > 0 && day < 32 ? "text-ink-soft hover:bg-white/[0.04]" : "text-ink-soft/30"
+                    ? "text-ink bg-primary/5 hover:bg-primary/10"
+                    : day > 0 && day < 32 ? "text-ink-soft hover:bg-primary/5" : "text-ink-soft/30"
                 }`}
                 style={today ? { background: "var(--gradient-neon)", boxShadow: "0 0 20px -6px var(--neon-coral)" } : undefined}
               >
@@ -537,7 +537,7 @@ function Calendario() {
         <div className="text-[11px] uppercase tracking-[0.15em] text-ink-soft mb-3">Próximos eventos</div>
         <div className="space-y-2">
           {events.map((e) => (
-            <div key={e.t} className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/5">
+            <div key={e.t} className="flex items-center gap-3 p-3 rounded-2xl bg-primary/5 border border-border">
               <div className="text-center shrink-0 w-12">
                 <div className="font-serif text-2xl text-ink leading-none">{e.d}</div>
                 <div className="text-[10px] uppercase tracking-wider text-ink-soft mt-0.5">{e.m}</div>
@@ -574,7 +574,7 @@ function Bitacora() {
           </div>
         </div>
         <div className="relative pl-6">
-          <div className="absolute left-2 top-2 bottom-2 w-px bg-white/10" />
+          <div className="absolute left-2 top-2 bottom-2 w-px bg-primary/8" />
           {entries.map((e, i) => (
             <div key={i} className="relative mb-3">
               <div
@@ -588,7 +588,7 @@ function Bitacora() {
                     <div className="font-serif text-lg text-ink mt-0.5">{e.t}</div>
                     <p className="text-[13px] text-ink-soft mt-1.5 leading-relaxed">{e.d}</p>
                     <div className="flex items-center gap-3 mt-3">
-                      <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-full bg-white/[0.06] text-ink">{e.tag}</span>
+                      <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-full bg-primary/5 text-ink">{e.tag}</span>
                       {e.photos > 0 && (
                         <span className="text-[11px] text-ink-soft inline-flex items-center gap-1">
                           <Camera className="h-3 w-3" /> {e.photos} evidencias
@@ -606,7 +606,7 @@ function Bitacora() {
         <div className="text-[11px] uppercase tracking-[0.15em] text-ink-soft mb-2">Este mes</div>
         <div className="font-serif text-4xl text-ink">18</div>
         <div className="text-xs text-ink-soft mt-1">entradas registradas</div>
-        <div className="h-px bg-white/10 my-4" />
+        <div className="h-px bg-primary/8 my-4" />
         <div className="text-[11px] uppercase tracking-[0.15em] text-ink-soft mb-2">Con evidencia</div>
         <div className="font-serif text-4xl text-ink">12</div>
         <div className="text-xs text-ink-soft mt-1">con fotografías</div>
@@ -639,7 +639,7 @@ function Incidentes() {
         </div>
         <div className="space-y-2">
           {items.map((i) => (
-            <div key={i.t} className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition">
+            <div key={i.t} className="flex items-center gap-4 p-4 rounded-2xl bg-primary/5 border border-border hover:bg-primary/5 transition">
               <div className="h-11 w-11 rounded-xl grid place-items-center shrink-0" style={{ background: i.color }}>
                 <ShieldAlert className="h-5 w-5 text-white" />
               </div>
@@ -678,7 +678,7 @@ function Juridico() {
         {docs.map((d) => (
           <GlassCard key={d.t} glow>
             <div className="flex items-start gap-4">
-              <div className="h-12 w-12 rounded-2xl grid place-items-center shrink-0 ring-1 ring-white/15" style={{ background: d.color }}>
+              <div className="h-12 w-12 rounded-2xl grid place-items-center shrink-0 ring-1 ring-border" style={{ background: d.color }}>
                 <d.icon className="h-6 w-6 text-white" />
               </div>
               <div className="flex-1">
@@ -741,7 +741,7 @@ function Materiales() {
         </div>
         <div className="space-y-2">
           {list.map((m) => (
-            <div key={m.m} className="flex items-center gap-4 p-3 rounded-2xl bg-white/[0.03] border border-white/5">
+            <div key={m.m} className="flex items-center gap-4 p-3 rounded-2xl bg-primary/5 border border-border">
               <div className="h-10 w-10 rounded-xl grid place-items-center" style={{ background: "linear-gradient(135deg, var(--neon-cyan), var(--neon-violet))" }}>
                 <Backpack className="h-5 w-5 text-white" />
               </div>
@@ -750,7 +750,7 @@ function Materiales() {
                 <div className="text-[11px] text-ink-soft">{m.c}/27 alumnos</div>
               </div>
               <div className="w-40 hidden md:block">
-                <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
+                <div className="h-2 rounded-full bg-primary/5 overflow-hidden">
                   <div
                     className="h-full rounded-full"
                     style={{
@@ -800,7 +800,7 @@ function Repositorio() {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-64">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-soft" />
-          <input placeholder="Buscar en el repositorio…" className="w-full h-12 pl-11 pr-4 rounded-2xl glass border border-white/10 text-sm text-ink placeholder:text-ink-soft/70 focus:outline-none focus:border-white/20 focus:ring-4 focus:ring-white/5" />
+          <input placeholder="Buscar en el repositorio…" className="w-full h-12 pl-11 pr-4 rounded-2xl glass border border-border text-sm text-ink placeholder:text-ink-soft/70 focus:outline-none focus:border-border focus:ring-4 focus:ring-border" />
         </div>
         <Btn3D><Filter className="h-4 w-4" /> Filtros</Btn3D>
         <Btn3D variant="primary"><Plus className="h-4 w-4" /> Subir recurso</Btn3D>
@@ -810,7 +810,7 @@ function Repositorio() {
         {repoCategories.map((c) => (
           <button
             key={c.t}
-            className="group relative overflow-hidden rounded-3xl glass border border-white/10 p-5 text-left transition-all duration-300 hover:border-white/25 hover:-translate-y-1 hover:shadow-[0_15px_40px_-15px_rgba(0,0,0,0.6)]"
+            className="group relative overflow-hidden rounded-3xl glass border border-border p-5 text-left transition-all duration-300 hover:border-border hover:-translate-y-1 hover:shadow-[0_15px_40px_-15px_rgba(0,0,0,0.6)]"
           >
             <div
               className="absolute -top-10 -right-10 h-32 w-32 rounded-full opacity-30 blur-2xl group-hover:opacity-60 transition"
@@ -818,7 +818,7 @@ function Repositorio() {
             />
             <div className="relative">
               <div
-                className="h-12 w-12 rounded-2xl grid place-items-center text-2xl ring-1 ring-white/15"
+                className="h-12 w-12 rounded-2xl grid place-items-center text-2xl ring-1 ring-border"
                 style={{ background: c.g }}
               >
                 <span>{c.icon}</span>
@@ -846,7 +846,7 @@ function Repositorio() {
             { t: "Rúbrica de exposición", tag: "Rúbrica", i: "🎯" },
             { t: "Video: fracciones", tag: "Video", i: "📹" },
           ].map((r) => (
-            <div key={r.t} className="rounded-2xl bg-white/[0.03] border border-white/5 p-3 hover:bg-white/[0.06] transition">
+            <div key={r.t} className="rounded-2xl bg-primary/5 border border-border p-3 hover:bg-primary/5 transition">
               <div className="h-24 rounded-xl grid place-items-center text-4xl mb-2" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))" }}>
                 {r.i}
               </div>
@@ -854,8 +854,8 @@ function Repositorio() {
               <div className="flex items-center justify-between mt-1">
                 <div className="text-[10px] uppercase tracking-wider text-ink-soft">{r.tag}</div>
                 <div className="flex gap-1">
-                  <button className="h-7 w-7 rounded-lg hover:bg-white/[0.06] grid place-items-center"><Star className="h-3.5 w-3.5 text-ink-soft" /></button>
-                  <button className="h-7 w-7 rounded-lg hover:bg-white/[0.06] grid place-items-center"><Share2 className="h-3.5 w-3.5 text-ink-soft" /></button>
+                  <button className="h-7 w-7 rounded-lg hover:bg-primary/5 grid place-items-center"><Star className="h-3.5 w-3.5 text-ink-soft" /></button>
+                  <button className="h-7 w-7 rounded-lg hover:bg-primary/5 grid place-items-center"><Share2 className="h-3.5 w-3.5 text-ink-soft" /></button>
                 </div>
               </div>
             </div>

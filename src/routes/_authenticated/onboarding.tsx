@@ -137,7 +137,7 @@ function Onboarding() {
               onChange={(e) => setListaAlumnos(e.target.value)}
               rows={6}
               placeholder={"Ana Beltrán\nLuis Ramírez\n..."}
-              className="mt-1.5 w-full px-4 py-3 rounded-xl bg-white/[0.06] border border-white/10 focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink placeholder:text-ink-soft/60"
+              className="mt-1.5 w-full px-4 py-3 rounded-xl bg-primary/5 border border-border focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink placeholder:text-ink-soft/60"
             />
           </label>
 
@@ -170,7 +170,7 @@ function Text({
         value={value}
         required={required}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1.5 w-full h-11 px-4 rounded-xl bg-white/[0.06] border border-white/10 focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink"
+        className="mt-1.5 w-full h-11 px-4 rounded-xl bg-primary/5 border border-border focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink"
       />
     </label>
   );
@@ -192,7 +192,7 @@ function Select({
         value={value}
         required={required}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1.5 w-full h-11 px-3 rounded-xl bg-white/[0.06] border border-white/10 focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink"
+        className="mt-1.5 w-full h-11 px-3 rounded-xl bg-primary/5 border border-border focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink"
       >
         <option value="">—</option>
         {options.map((o) => (

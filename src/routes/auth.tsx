@@ -82,7 +82,7 @@ function AuthPage() {
       <div className="w-full max-w-md">
         <div className="flex items-center gap-3 justify-center mb-8">
           <div
-            className="h-11 w-11 rounded-2xl grid place-items-center ring-1 ring-white/20"
+            className="h-11 w-11 rounded-2xl grid place-items-center ring-1 ring-border"
             style={{ background: "var(--gradient-neon)" }}
           >
             <BookOpen className="h-5 w-5 text-white" aria-hidden="true" />
@@ -105,13 +105,13 @@ function AuthPage() {
             type="button"
             onClick={google}
             disabled={busy}
-            className="mt-6 w-full h-12 rounded-xl glass hover:border-white/25 text-sm font-medium text-ink transition disabled:opacity-60"
+            className="mt-6 w-full h-12 rounded-xl glass hover:border-border text-sm font-medium text-ink transition disabled:opacity-60"
           >
             Continuar con Google
           </button>
 
           <div className="my-5 flex items-center gap-3 text-[10px] uppercase tracking-[0.15em] text-ink-soft">
-            <span className="h-px flex-1 bg-white/10" /> o con tu correo <span className="h-px flex-1 bg-white/10" />
+            <span className="h-px flex-1 bg-primary/8" /> o con tu correo <span className="h-px flex-1 bg-primary/8" />
           </div>
 
           <form onSubmit={submit} className="space-y-3">
@@ -169,7 +169,7 @@ function Field({
         required={required}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="mt-1.5 w-full h-12 px-4 rounded-xl bg-white/[0.06] border border-white/10 focus:border-[var(--neon-coral)]/40 focus:outline-none focus:ring-4 focus:ring-[var(--neon-coral)]/15 text-sm text-ink placeholder:text-ink-soft/60 transition"
+        className="mt-1.5 w-full h-12 px-4 rounded-xl bg-primary/5 border border-border focus:border-[var(--neon-coral)]/40 focus:outline-none focus:ring-4 focus:ring-[var(--neon-coral)]/15 text-sm text-ink placeholder:text-ink-soft/60 transition"
       />
     </label>
   );

@@ -21,7 +21,7 @@ function Landing() {
       <header className="flex items-center justify-between px-5 lg:px-10 h-20">
         <div className="flex items-center gap-3">
           <div
-            className="h-10 w-10 rounded-2xl grid place-items-center ring-1 ring-white/20"
+            className="h-10 w-10 rounded-2xl grid place-items-center ring-1 ring-border"
             style={{ background: "var(--gradient-neon)" }}
           >
             <BookOpen className="h-5 w-5 text-white" aria-hidden="true" />
@@ -84,7 +84,7 @@ function Landing() {
         </div>
       </section>
 
-      <footer className="px-5 lg:px-10 py-10 border-t border-white/10 text-center text-xs text-ink-soft">
+      <footer className="px-5 lg:px-10 py-10 border-t border-border text-center text-xs text-ink-soft">
         SIED MX · Sistema Integral Educativo Docente
       </footer>
     </main>

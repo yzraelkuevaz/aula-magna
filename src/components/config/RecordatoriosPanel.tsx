@@ -174,7 +174,7 @@ export function RecordatoriosPanel({
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-semibold text-ink uppercase tracking-wide">{r.nombre}</span>
                     {!r.activo && (
-                      <span className="text-[10px] uppercase tracking-[0.12em] rounded-full px-2 py-0.5 border border-white/15 text-ink-soft">
+                      <span className="text-[10px] uppercase tracking-[0.12em] rounded-full px-2 py-0.5 border border-border text-ink-soft">
                         Apagado
                       </span>
                     )}
@@ -190,7 +190,7 @@ export function RecordatoriosPanel({
                   role="switch"
                   aria-checked={r.activo}
                   aria-label={`${r.activo ? "Desactivar" : "Activar"} recordatorio ${r.nombre}`}
-                  className={`h-7 w-12 rounded-full transition-all relative ${r.activo ? "" : "bg-white/10"}`}
+                  className={`h-7 w-12 rounded-full transition-all relative ${r.activo ? "" : "bg-primary/8"}`}
                   style={r.activo ? { background: "var(--gradient-neon)" } : undefined}
                 >
                   <span
@@ -250,7 +250,7 @@ export function RecordatoriosPanel({
                 value={draft.nombre}
                 onChange={(e) => setDraft({ ...draft, nombre: e.target.value })}
                 placeholder={draft.tipo}
-                className="mt-1.5 w-full h-11 px-4 rounded-xl bg-white/[0.06] border border-white/10 text-sm text-ink focus:outline-none focus:border-[var(--neon-coral)]/40"
+                className="mt-1.5 w-full h-11 px-4 rounded-xl bg-primary/5 border border-border text-sm text-ink focus:outline-none focus:border-[var(--neon-coral)]/40"
               />
             </label>
             <label className="block">
@@ -259,7 +259,7 @@ export function RecordatoriosPanel({
                 type="time"
                 value={draft.hora}
                 onChange={(e) => setDraft({ ...draft, hora: e.target.value })}
-                className="mt-1.5 w-full h-11 px-4 rounded-xl bg-white/[0.06] border border-white/10 text-sm text-ink"
+                className="mt-1.5 w-full h-11 px-4 rounded-xl bg-primary/5 border border-border text-sm text-ink"
               />
             </label>
             <label className="block sm:col-span-3">
@@ -267,7 +267,7 @@ export function RecordatoriosPanel({
               <select
                 value={draft.tipo}
                 onChange={(e) => setDraft({ ...draft, tipo: e.target.value })}
-                className="mt-1.5 w-full h-11 px-3 rounded-xl bg-white/[0.06] border border-white/10 text-sm text-ink"
+                className="mt-1.5 w-full h-11 px-3 rounded-xl bg-primary/5 border border-border text-sm text-ink"
               >
                 {tiposRecordatorio.map((t) => (
                   <option key={t} value={t} className="bg-[oklch(0.16_0.015_265)]">
@@ -311,7 +311,7 @@ export function RecordatoriosPanel({
               onChange={(e) => setDraft({ ...draft, mensaje: e.target.value })}
               rows={2}
               placeholder="Ej. Profesor, es momento de tomar lista de 2°C."
-              className="mt-1.5 w-full px-4 py-3 rounded-xl bg-white/[0.06] border border-white/10 text-sm text-ink focus:outline-none focus:border-[var(--neon-coral)]/40"
+              className="mt-1.5 w-full px-4 py-3 rounded-xl bg-primary/5 border border-border text-sm text-ink focus:outline-none focus:border-[var(--neon-coral)]/40"
             />
           </label>
 

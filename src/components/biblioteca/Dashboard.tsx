@@ -142,7 +142,7 @@ export function Dashboard({
                     <span className="text-ink">{r.label}</span>
                     <span className="text-ink-soft">{r.pct}%</span>
                   </div>
-                  <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                  <div className="h-1.5 rounded-full bg-primary/5 overflow-hidden">
                     <div
                       className="h-full rounded-full"
                       style={{ width: `${r.pct}%`, background: r.color, boxShadow: `0 0 8px ${r.color}` }}
@@ -184,7 +184,7 @@ export function Dashboard({
                   className="card-lift card-lift-hover glass rounded-2xl p-3 flex flex-col items-center gap-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
                 >
                   <div
-                    className="h-11 w-11 rounded-xl grid place-items-center ring-1 ring-white/15"
+                    className="h-11 w-11 rounded-xl grid place-items-center ring-1 ring-border"
                     style={{ background: `color-mix(in oklab, ${tint} 22%, transparent)` }}
                   >
                     <Icon className="h-5 w-5" style={{ color: tint }} aria-hidden="true" />
@@ -251,7 +251,7 @@ export function Dashboard({
                 <button
                   onClick={() => onNavigate?.("biblioteca")}
                   aria-label={`Ver en Biblioteca: ${r.title}`}
-                  className="w-full flex items-center gap-3 rounded-xl p-2 hover:bg-white/[0.04] transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
+                  className="w-full flex items-center gap-3 rounded-xl p-2 hover:bg-primary/5 transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
                 >
                   <div
                     className="h-9 w-9 rounded-lg grid place-items-center shrink-0"
@@ -357,7 +357,7 @@ function KpiCard({
         )}
       </div>
       {progress != null && (
-        <div className="mt-3 h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+        <div className="mt-3 h-1.5 rounded-full bg-primary/5 overflow-hidden">
           <div
             className="h-full rounded-full"
             style={{ width: `${progress * 100}%`, background: "var(--gradient-neon)" }}
@@ -408,7 +408,7 @@ function PanelFooter({
       disabled={soon}
       title={soon ? `${label} — próximamente` : label}
       aria-label={soon ? `${label} (próximamente)` : label}
-      className="mt-4 w-full h-9 rounded-xl bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 text-[12px] text-ink flex items-center justify-center gap-1.5 transition disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
+      className="mt-4 w-full h-9 rounded-xl bg-primary/5 hover:bg-primary/5 border border-border text-[12px] text-ink flex items-center justify-center gap-1.5 transition disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60"
     >
       <Icon className="h-3.5 w-3.5 text-[var(--neon-coral)]" />
       {label}

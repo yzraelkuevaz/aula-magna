@@ -89,7 +89,7 @@ export function AlarmEngine({
                     toast.dismiss(t);
                   }}
                   aria-label={`Posponer ${min} minutos`}
-                  className="text-[11px] px-2.5 h-8 rounded-lg glass hover:border-white/25 text-ink"
+                  className="text-[11px] px-2.5 h-8 rounded-lg glass hover:border-border text-ink"
                 >
                   +{min} min
                 </button>
@@ -109,7 +109,7 @@ export function AlarmEngine({
               <button
                 onClick={() => toast.dismiss(t)}
                 aria-label="Callar recordatorio"
-                className="text-[11px] px-2.5 h-8 rounded-lg glass hover:border-white/25 text-ink ml-auto"
+                className="text-[11px] px-2.5 h-8 rounded-lg glass hover:border-border text-ink ml-auto"
               >
                 Callar
               </button>

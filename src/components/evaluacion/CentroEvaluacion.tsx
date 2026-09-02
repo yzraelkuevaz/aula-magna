@@ -101,7 +101,7 @@ function Header({ onAskAI }: { onAskAI: () => void }) {
               <Sparkles className="h-4 w-4" /> Crear con IA
             </button>
             <button
-              className="btn-3d flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-medium glass border border-white/10 text-ink"
+              className="btn-3d flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-medium glass border border-border text-ink"
             >
               <Plus className="h-4 w-4" /> Nueva evaluación
             </button>
@@ -119,7 +119,7 @@ function Chip({ icon: Icon, label, tone = "default" }: {
 }) {
   const color = tone === "cyan" ? "var(--neon-cyan)" : tone === "coral" ? "var(--neon-coral)" : "var(--ink-soft)";
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full glass border border-white/10 px-3 py-1.5 text-xs text-ink">
+    <span className="inline-flex items-center gap-1.5 rounded-full glass border border-border px-3 py-1.5 text-xs text-ink">
       <Icon className="h-3.5 w-3.5" style={{ color }} />
       {label}
     </span>
@@ -130,7 +130,7 @@ function Chip({ icon: Icon, label, tone = "default" }: {
 function SectionNav({ active, onChange }: { active: SectionKey; onChange: (k: SectionKey) => void }) {
   return (
     <div className="px-5 lg:px-10 mt-6 overflow-x-auto scrollbar-hide">
-      <div className="inline-flex gap-1 rounded-2xl glass border border-white/10 p-1">
+      <div className="inline-flex gap-1 rounded-2xl glass border border-border p-1">
         {sections.map(({ key, label, icon: Icon }) => {
           const isActive = active === key;
           return (
@@ -255,7 +255,7 @@ function Dashboard({ onAskAI, onNav }: { onAskAI: () => void; onNav: (s: Section
         <Panel title="Top alumnos" icon={Star} subtitle="Mayor aprovechamiento">
           <ul className="space-y-2.5 mt-1">
             {topAlumnos.map((a, i) => (
-              <li key={a.n} className="flex items-center gap-3 rounded-xl px-2 py-1.5 hover:bg-white/[0.04]">
+              <li key={a.n} className="flex items-center gap-3 rounded-xl px-2 py-1.5 hover:bg-primary/5">
                 <span className="h-7 w-7 grid place-items-center rounded-full text-[11px] font-semibold"
                       style={{ background: "var(--gradient-neon)", color: "white" }}>{i + 1}</span>
                 <Avatar name={a.n} />
@@ -269,7 +269,7 @@ function Dashboard({ onAskAI, onNav }: { onAskAI: () => void; onNav: (s: Section
         <Panel title="Alumnos en riesgo" icon={AlertTriangle} tone="coral">
           <ul className="space-y-2.5 mt-1">
             {riesgo.map((a) => (
-              <li key={a.n} className="rounded-xl px-2 py-2 hover:bg-white/[0.04]">
+              <li key={a.n} className="rounded-xl px-2 py-2 hover:bg-primary/5">
                 <div className="flex items-center gap-3">
                   <Avatar name={a.n} />
                   <div className="flex-1 min-w-0">
@@ -281,7 +281,7 @@ function Dashboard({ onAskAI, onNav }: { onAskAI: () => void; onNav: (s: Section
               </li>
             ))}
           </ul>
-          <button onClick={onAskAI} className="mt-3 w-full text-xs inline-flex items-center justify-center gap-1.5 rounded-lg glass border border-white/10 py-2 text-ink hover:text-[var(--neon-coral)]">
+          <button onClick={onAskAI} className="mt-3 w-full text-xs inline-flex items-center justify-center gap-1.5 rounded-lg glass border border-border py-2 text-ink hover:text-[var(--neon-coral)]">
             <Sparkles className="h-3.5 w-3.5" /> Sugerir intervención con IA
           </button>
         </Panel>
@@ -291,7 +291,7 @@ function Dashboard({ onAskAI, onNav }: { onAskAI: () => void; onNav: (s: Section
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <Panel title="Últimas evaluaciones" icon={ClipboardCheck} className="lg:col-span-2"
                action={<button onClick={() => onNav("evaluaciones")} className="text-xs text-ink-soft hover:text-ink inline-flex items-center gap-1">Ver todas <ChevronRight className="h-3.5 w-3.5" /></button>}>
-          <div className="divide-y divide-white/5">
+          <div className="divide-y divide-border">
             {mockEvaluaciones.slice(0, 5).map((e) => (
               <EvalRow key={e.id} e={e} onOpen={() => onNav("captura")} />
             ))}
@@ -307,7 +307,7 @@ function Dashboard({ onAskAI, onNav }: { onAskAI: () => void; onNav: (s: Section
             <QuickAction icon={BarChart3} label="Comparativos" onClick={() => onNav("comparativos")} />
             <QuickAction icon={FileText} label="Reporte grupal" onClick={() => onNav("reportes")} />
           </div>
-          <div className="mt-4 rounded-xl glass border border-white/10 p-3">
+          <div className="mt-4 rounded-xl glass border border-border p-3">
             <div className="flex items-center gap-2 text-[11px] text-ink-soft"><Bell className="h-3.5 w-3.5" /> Notificaciones</div>
             <ul className="mt-2 space-y-1.5 text-[12px] text-ink">
               <li>· 4 alumnos sin capturar en <b>Fracciones</b></li>
@@ -332,10 +332,10 @@ function KPI({ icon: Icon, label, value, delta, hint, tone }: {
   };
   const color = map[tone];
   return (
-    <div className="glass rounded-2xl p-4 border border-white/10 card-lift card-lift-hover relative overflow-hidden">
+    <div className="glass rounded-2xl p-4 border border-border card-lift card-lift-hover relative overflow-hidden">
       <div className="absolute -top-8 -right-8 h-24 w-24 rounded-full opacity-25 blur-2xl" style={{ background: color }} />
       <div className="flex items-start justify-between relative">
-        <div className="h-9 w-9 rounded-xl grid place-items-center ring-1 ring-white/15"
+        <div className="h-9 w-9 rounded-xl grid place-items-center ring-1 ring-border"
              style={{ background: `color-mix(in oklch, ${color} 20%, transparent)` }}>
           <Icon className="h-4.5 w-4.5" style={{ color }} />
         </div>
@@ -360,11 +360,11 @@ function Panel({ title, subtitle, icon: Icon, children, className = "", action, 
   children: React.ReactNode; className?: string; action?: React.ReactNode; tone?: "coral";
 }) {
   return (
-    <div className={`glass rounded-2xl p-5 border border-white/10 ${className}`}>
+    <div className={`glass rounded-2xl p-5 border border-border ${className}`}>
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2.5 min-w-0">
           {Icon && (
-            <div className="h-8 w-8 rounded-lg grid place-items-center ring-1 ring-white/10"
+            <div className="h-8 w-8 rounded-lg grid place-items-center ring-1 ring-border"
                  style={{ background: tone === "coral" ? "color-mix(in oklch, var(--neon-coral) 18%, transparent)" : "oklch(1 0 0 / 5%)" }}>
               <Icon className="h-4 w-4" style={{ color: tone === "coral" ? "var(--neon-coral)" : "var(--ink)" }} />
             </div>
@@ -383,7 +383,7 @@ function Panel({ title, subtitle, icon: Icon, children, className = "", action, 
 
 function QuickAction({ icon: Icon, label, onClick }: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>; label: string; onClick?: () => void }) {
   return (
-    <button onClick={onClick} className="btn-3d group rounded-xl glass border border-white/10 p-3 text-left hover:border-[var(--neon-coral)]/40 transition">
+    <button onClick={onClick} className="btn-3d group rounded-xl glass border border-border p-3 text-left hover:border-[var(--neon-coral)]/40 transition">
       <Icon className="h-4 w-4 text-ink group-hover:text-[var(--neon-coral)] transition" />
       <div className="text-[12px] text-ink mt-2 leading-tight">{label}</div>
     </button>
@@ -396,7 +396,7 @@ function Avatar({ name }: { name: string }) {
   const hue = (name.charCodeAt(0) * 13) % 360;
   return (
     <div
-      className="h-8 w-8 rounded-full grid place-items-center text-[11px] font-semibold text-white ring-1 ring-white/15 shrink-0"
+      className="h-8 w-8 rounded-full grid place-items-center text-[11px] font-semibold text-white ring-1 ring-border shrink-0"
       style={{ background: `linear-gradient(135deg, oklch(0.65 0.15 ${hue}), oklch(0.55 0.18 ${(hue + 60) % 360}))` }}
     >{initials}</div>
   );
@@ -447,12 +447,12 @@ function EvaluacionesList({ onNav }: { onNav: (s: SectionKey) => void }) {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-3 items-center justify-between">
-        <div className="flex items-center gap-2 glass rounded-xl border border-white/10 px-3 py-2 flex-1 max-w-md">
+        <div className="flex items-center gap-2 glass rounded-xl border border-border px-3 py-2 flex-1 max-w-md">
           <Search className="h-4 w-4 text-ink-soft" />
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar evaluación, tipo, campo…"
                  className="bg-transparent outline-none text-sm flex-1 text-ink placeholder:text-ink-soft/70" />
         </div>
-        <div className="flex items-center gap-1 glass rounded-xl border border-white/10 p-1">
+        <div className="flex items-center gap-1 glass rounded-xl border border-border p-1">
           {["todas", "diagnóstica", "formativa", "sumativa", "final"].map((m) => (
             <button key={m} onClick={() => setFiltro(m)}
                     className={`text-xs px-3 py-1.5 rounded-lg capitalize transition ${filtro === m ? "pill-active" : "text-ink-soft hover:text-ink"}`}>
@@ -467,7 +467,7 @@ function EvaluacionesList({ onNav }: { onNav: (s: SectionKey) => void }) {
       </div>
 
       <Panel title="Evaluaciones del ciclo" icon={ClipboardCheck}>
-        <div className="divide-y divide-white/5">
+        <div className="divide-y divide-border">
           {filtered.map((e) => <EvalRow key={e.id} e={e} onOpen={() => onNav("captura")} />)}
         </div>
       </Panel>
@@ -481,13 +481,13 @@ function EvalRow({ e, onOpen }: { e: EvaluacionMock; onOpen: () => void }) {
                    e.momento === "Sumativa" ? "oklch(0.68 0.24 340)" :
                    e.momento === "Final" ? "oklch(0.62 0.20 295)" : "oklch(0.78 0.17 65)";
   return (
-    <button onClick={onOpen} className="w-full grid grid-cols-12 items-center gap-3 py-3 px-1 hover:bg-white/[0.03] rounded-lg text-left">
+    <button onClick={onOpen} className="w-full grid grid-cols-12 items-center gap-3 py-3 px-1 hover:bg-primary/5 rounded-lg text-left">
       <div className="col-span-12 md:col-span-5 min-w-0">
         <div className="text-sm text-ink truncate">{e.nombre}</div>
         <div className="text-[11px] text-ink-soft truncate">{e.campo}</div>
       </div>
       <div className="col-span-4 md:col-span-2">
-        <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-full ring-1 ring-white/10"
+        <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-full ring-1 ring-border"
               style={{ color: momColor, background: `color-mix(in oklch, ${momColor} 12%, transparent)` }}>
           {e.momento}
         </span>
@@ -495,7 +495,7 @@ function EvalRow({ e, onOpen }: { e: EvaluacionMock; onOpen: () => void }) {
       <div className="col-span-4 md:col-span-2 text-[12px] text-ink-soft">{e.tipo}</div>
       <div className="col-span-4 md:col-span-1 text-[12px] text-ink-soft">{e.fecha}</div>
       <div className="col-span-8 md:col-span-1">
-        <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+        <div className="h-1.5 w-full bg-primary/8 rounded-full overflow-hidden">
           <div className="h-full rounded-full" style={{ width: `${pct}%`, background: "var(--gradient-neon)" }} />
         </div>
         <div className="text-[10px] text-ink-soft mt-1">{e.capturado}/{e.total}</div>
@@ -554,7 +554,7 @@ function NuevaEvaluacion({ onAskAI, onCreated }: { onAskAI: () => void; onCreate
                 <button key={t} onClick={() => setTipo(t)}
                         className={`btn-3d rounded-xl px-3 py-3 text-[12.5px] text-left border transition ${
                           active ? "border-[var(--neon-coral)]/60 text-ink"
-                                 : "border-white/10 text-ink-soft hover:text-ink hover:border-white/20"
+                                 : "border-border text-ink-soft hover:text-ink hover:border-border"
                         }`}
                         style={active ? { background: "color-mix(in oklch, var(--neon-coral) 12%, transparent)" } : {}}>
                   {t}
@@ -569,7 +569,7 @@ function NuevaEvaluacion({ onAskAI, onCreated }: { onAskAI: () => void; onCreate
             {["Excelente", "Satisfactorio", "En proceso", "Requiere apoyo"].map((n, i) => {
               const colors = ["oklch(0.82 0.18 145)", "oklch(0.78 0.17 65)", "oklch(0.68 0.24 340)", "oklch(0.72 0.19 25)"];
               return (
-                <div key={n} className="rounded-xl glass border border-white/10 p-3">
+                <div key={n} className="rounded-xl glass border border-border p-3">
                   <span className="h-2 w-8 rounded-full block" style={{ background: colors[i] }} />
                   <div className="text-sm text-ink mt-2">{n}</div>
                   <div className="text-[11px] text-ink-soft">Nivel {4 - i}</div>
@@ -579,7 +579,7 @@ function NuevaEvaluacion({ onAskAI, onCreated }: { onAskAI: () => void; onCreate
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-ink-soft">
             <span>o usar escala numérica</span>
-            <span className="inline-flex items-center gap-1 rounded-full glass border border-white/10 px-2.5 py-1 text-ink">5 – 10</span>
+            <span className="inline-flex items-center gap-1 rounded-full glass border border-border px-2.5 py-1 text-ink">5 – 10</span>
             <button className="text-[var(--neon-coral)] hover:underline">Configurar…</button>
           </div>
         </Panel>
@@ -605,7 +605,7 @@ function NuevaEvaluacion({ onAskAI, onCreated }: { onAskAI: () => void; onCreate
         <Panel title="Vista previa" icon={Eye}>
           <div className="text-sm text-ink">{nombre || "Sin título aún"}</div>
           <div className="text-[11px] text-ink-soft mt-0.5">{tipo} · {mom} · {campo}</div>
-          <button onClick={onCreated} className="btn-3d mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium glass border border-white/10 text-ink">
+          <button onClick={onCreated} className="btn-3d mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium glass border border-border text-ink">
             <Save className="h-4 w-4" /> Guardar y capturar
           </button>
         </Panel>
@@ -618,7 +618,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   return (
     <label className="block">
       <div className="text-[10px] uppercase tracking-[0.15em] text-ink-soft mb-1.5">{label}</div>
-      <div className="rounded-xl glass border border-white/10 px-3 py-2.5">{children}</div>
+      <div className="rounded-xl glass border border-border px-3 py-2.5">{children}</div>
     </label>
   );
 }
@@ -626,7 +626,7 @@ function Select({ label, value, onChange, options }: { label: string; value: str
   return (
     <label className="block">
       <div className="text-[10px] uppercase tracking-[0.15em] text-ink-soft mb-1.5">{label}</div>
-      <div className="rounded-xl glass border border-white/10 px-3 py-2.5">
+      <div className="rounded-xl glass border border-border px-3 py-2.5">
         <select value={value} onChange={(e) => onChange(e.target.value)}
                 className="w-full bg-transparent outline-none text-sm text-ink appearance-none">
           {options.map((o) => <option key={o} value={o} className="bg-[oklch(0.20_0.018_265)]">{o}</option>)}
@@ -670,11 +670,11 @@ function Captura() {
                 <th className="py-2 font-normal w-16 text-center">Evid.</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-border">
               {mockAlumnos.map((n) => {
                 const v = values[n] ?? {};
                 return (
-                  <tr key={n} className="hover:bg-white/[0.03]">
+                  <tr key={n} className="hover:bg-primary/5">
                     <td className="py-2.5">
                       <div className="flex items-center gap-2.5">
                         <Avatar name={n} />
@@ -686,7 +686,7 @@ function Captura() {
                         type="number" min={5} max={10} step={0.1}
                         value={v.n ?? ""} onChange={(e) => set(n, { n: parseFloat(e.target.value) })}
                         placeholder="—"
-                        className="w-20 bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-ink outline-none focus:border-[var(--neon-coral)]/50"
+                        className="w-20 bg-primary/8 border border-border rounded-lg px-2.5 py-1.5 text-ink outline-none focus:border-[var(--neon-coral)]/50"
                       />
                     </td>
                     <td className="py-2.5">
@@ -696,7 +696,7 @@ function Captura() {
                           const colors = ["oklch(0.82 0.18 145)", "oklch(0.78 0.17 65)", "oklch(0.68 0.24 340)", "oklch(0.72 0.19 25)"];
                           return (
                             <button key={nl} onClick={() => set(n, { nivel: nl })}
-                                    className={`text-[11px] px-2 py-1 rounded-full border transition ${active ? "text-ink" : "text-ink-soft hover:text-ink border-white/10"}`}
+                                    className={`text-[11px] px-2 py-1 rounded-full border transition ${active ? "text-ink" : "text-ink-soft hover:text-ink border-border"}`}
                                     style={active ? { background: `color-mix(in oklch, ${colors[i]} 18%, transparent)`, borderColor: `color-mix(in oklch, ${colors[i]} 50%, transparent)` } : {}}>
                               {nl}
                             </button>
@@ -707,12 +707,12 @@ function Captura() {
                     <td className="py-2.5">
                       <input value={v.obs ?? ""} onChange={(e) => set(n, { obs: e.target.value })}
                              placeholder="Comentario breve…"
-                             className="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-ink outline-none focus:border-[var(--neon-coral)]/50 text-[13px]" />
+                             className="w-full bg-primary/8 border border-border rounded-lg px-2.5 py-1.5 text-ink outline-none focus:border-[var(--neon-coral)]/50 text-[13px]" />
                     </td>
                     <td className="py-2.5">
                       <div className="flex items-center justify-center gap-1 text-ink-soft">
-                        <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/10 hover:text-[var(--neon-cyan)]"><Camera className="h-3.5 w-3.5" /></button>
-                        <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-white/10 hover:text-[var(--neon-pink)]"><Paperclip className="h-3.5 w-3.5" /></button>
+                        <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-primary/8 hover:text-[var(--neon-cyan)]"><Camera className="h-3.5 w-3.5" /></button>
+                        <button className="h-7 w-7 grid place-items-center rounded-md hover:bg-primary/8 hover:text-[var(--neon-pink)]"><Paperclip className="h-3.5 w-3.5" /></button>
                       </div>
                     </td>
                   </tr>
@@ -754,9 +754,9 @@ function Rubricas({ onAskAI }: { onAskAI: () => void }) {
                   style={{ background: "linear-gradient(135deg, oklch(0.72 0.19 25), oklch(0.68 0.24 340))" }}>
             <Sparkles className="h-4 w-4" /> Generar con IA
           </button>
-          <button className="btn-3d inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm glass border border-white/10 text-ink"><Copy className="h-4 w-4" /> Duplicar</button>
-          <button className="btn-3d inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm glass border border-white/10 text-ink"><Share2 className="h-4 w-4" /> Compartir</button>
-          <button className="btn-3d inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm glass border border-white/10 text-ink"><Save className="h-4 w-4" /> Guardar plantilla</button>
+          <button className="btn-3d inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm glass border border-border text-ink"><Copy className="h-4 w-4" /> Duplicar</button>
+          <button className="btn-3d inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm glass border border-border text-ink"><Share2 className="h-4 w-4" /> Compartir</button>
+          <button className="btn-3d inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm glass border border-border text-ink"><Save className="h-4 w-4" /> Guardar plantilla</button>
         </div>
       </div>
 
@@ -775,21 +775,21 @@ function Rubricas({ onAskAI }: { onAskAI: () => void }) {
                 <th className="py-2 w-10"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-border">
               {criterios.map((c) => (
                 <tr key={c.id} className="align-top">
                   <td className="py-3 pr-3">
                     <input value={c.nombre} onChange={(e) => setNombre(c.id, e.target.value)}
-                           className="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-2 text-ink outline-none focus:border-[var(--neon-coral)]/50" />
+                           className="w-full bg-primary/8 border border-border rounded-lg px-2.5 py-2 text-ink outline-none focus:border-[var(--neon-coral)]/50" />
                   </td>
                   {c.niveles.map((n, i) => (
                     <td key={i} className="py-3 pr-3">
                       <textarea value={n} onChange={(e) => setNivel(c.id, i, e.target.value)} rows={2}
-                                className="w-full min-w-40 bg-white/5 border border-white/10 rounded-lg px-2.5 py-2 text-ink outline-none focus:border-[var(--neon-coral)]/50 text-[12.5px] resize-none" />
+                                className="w-full min-w-40 bg-primary/8 border border-border rounded-lg px-2.5 py-2 text-ink outline-none focus:border-[var(--neon-coral)]/50 text-[12.5px] resize-none" />
                     </td>
                   ))}
                   <td className="py-3">
-                    <button onClick={() => removeCriterio(c.id)} className="h-7 w-7 grid place-items-center rounded-md text-ink-soft hover:text-[var(--neon-coral)] hover:bg-white/10">
+                    <button onClick={() => removeCriterio(c.id)} className="h-7 w-7 grid place-items-center rounded-md text-ink-soft hover:text-[var(--neon-coral)] hover:bg-primary/8">
                       <X className="h-3.5 w-3.5" />
                     </button>
                   </td>
@@ -834,7 +834,7 @@ function ListasCotejo({ onAskAI }: { onAskAI: () => void }) {
             <Sparkles className="h-4 w-4" /> Generar con IA
           </button>
           <button onClick={() => setIndicadores((is) => [...is, "Nuevo indicador"])}
-                  className="btn-3d inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm glass border border-white/10 text-ink">
+                  className="btn-3d inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm glass border border-border text-ink">
             <Plus className="h-4 w-4" /> Indicador
           </button>
         </div>
@@ -854,9 +854,9 @@ function ListasCotejo({ onAskAI }: { onAskAI: () => void }) {
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-border">
               {mockAlumnos.slice(0, 12).map((a) => (
-                <tr key={a} className="hover:bg-white/[0.03]">
+                <tr key={a} className="hover:bg-primary/5">
                   <td className="py-2.5">
                     <div className="flex items-center gap-2.5">
                       <Avatar name={a} /> <span className="text-ink">{a}</span>
@@ -866,7 +866,7 @@ function ListasCotejo({ onAskAI }: { onAskAI: () => void }) {
                     const v = datos[a]?.[i];
                     return (
                       <td key={i} className="py-2.5">
-                        <div className="inline-flex items-center gap-1 rounded-lg glass border border-white/10 p-0.5">
+                        <div className="inline-flex items-center gap-1 rounded-lg glass border border-border p-0.5">
                           <TriBtn active={v === "cumple"} onClick={() => set(a, i, "cumple")} color="oklch(0.82 0.18 145)" icon={Check} />
                           <TriBtn active={v === "parcial"} onClick={() => set(a, i, "parcial")} color="oklch(0.78 0.17 65)" icon={Minus} />
                           <TriBtn active={v === "no"} onClick={() => set(a, i, "no")} color="oklch(0.72 0.19 25)" icon={X} />
@@ -926,7 +926,7 @@ function AnalisisIA({ onAskAI }: { onAskAI: () => void }) {
       <Panel title="Alumnos en riesgo" icon={Users}>
         <ul className="space-y-2 text-[13px]">
           {["Iván Torres · Matemáticas", "Renata López · Ausentismo", "Julián Vega · Entregas"].map((r) => (
-            <li key={r} className="flex items-center gap-2 rounded-lg px-2 py-1.5 bg-white/[0.03]">
+            <li key={r} className="flex items-center gap-2 rounded-lg px-2 py-1.5 bg-primary/5">
               <span className="h-2 w-2 rounded-full bg-[var(--neon-coral)]" />
               <span className="text-ink">{r}</span>
             </li>
@@ -1034,7 +1034,7 @@ function Expediente() {
         <div className="max-h-[520px] overflow-y-auto scrollbar-hide pr-1 -mr-1 space-y-0.5">
           {mockAlumnos.map((n) => (
             <button key={n} onClick={() => setSelected(n)}
-                    className={`w-full flex items-center gap-2.5 rounded-lg px-2 py-2 text-left transition ${selected === n ? "bg-white/[0.06] text-ink" : "text-ink-soft hover:text-ink hover:bg-white/[0.03]"}`}>
+                    className={`w-full flex items-center gap-2.5 rounded-lg px-2 py-2 text-left transition ${selected === n ? "bg-primary/5 text-ink" : "text-ink-soft hover:text-ink hover:bg-primary/5"}`}>
               <Avatar name={n} /> <span className="text-sm truncate flex-1">{n}</span>
             </button>
           ))}
@@ -1074,7 +1074,7 @@ function Expediente() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Panel title="Historial de evaluaciones" icon={ClipboardCheck}>
-            <ul className="divide-y divide-white/5 text-sm">
+            <ul className="divide-y divide-border text-sm">
               {mockEvaluaciones.map((e) => (
                 <li key={e.id} className="py-2 flex items-center justify-between gap-3">
                   <div className="min-w-0">
@@ -1090,7 +1090,7 @@ function Expediente() {
           <Panel title="Evidencias" icon={Camera}>
             <div className="grid grid-cols-3 gap-2">
               {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="aspect-square rounded-xl relative overflow-hidden ring-1 ring-white/10"
+                <div key={i} className="aspect-square rounded-xl relative overflow-hidden ring-1 ring-border"
                      style={{ background: `linear-gradient(135deg, oklch(0.5 0.15 ${i * 55}), oklch(0.35 0.12 ${(i * 55 + 40) % 360}))` }}>
                   <div className="absolute bottom-1 left-1 flex items-center gap-1 text-[10px] text-white/90">
                     {i % 3 === 0 ? <Camera className="h-3 w-3" /> : i % 3 === 1 ? <Video className="h-3 w-3" /> : <Mic className="h-3 w-3" />}
@@ -1098,7 +1098,7 @@ function Expediente() {
                 </div>
               ))}
             </div>
-            <button className="mt-3 w-full text-xs inline-flex items-center justify-center gap-1.5 rounded-lg glass border border-white/10 py-2 text-ink">
+            <button className="mt-3 w-full text-xs inline-flex items-center justify-center gap-1.5 rounded-lg glass border border-border py-2 text-ink">
               <Paperclip className="h-3.5 w-3.5" /> Adjuntar evidencia
             </button>
           </Panel>
@@ -1116,7 +1116,7 @@ function Expediente() {
 }
 function MiniStat({ label, value, small }: { label: string; value: string; small?: boolean }) {
   return (
-    <div className="glass border border-white/10 rounded-2xl p-3">
+    <div className="glass border border-border rounded-2xl p-3">
       <div className={`font-serif text-ink leading-none ${small ? "text-lg" : "text-2xl"}`}>{value}</div>
       <div className="text-[11px] text-ink-soft mt-1.5">{label}</div>
     </div>
@@ -1140,9 +1140,9 @@ function Reportes() {
       <Panel title="Generar reportes" icon={FileText} subtitle="PDF · Excel · Word · Imprimir">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {items.map((it) => (
-            <div key={it.title} className="rounded-2xl glass border border-white/10 p-4 card-lift card-lift-hover">
+            <div key={it.title} className="rounded-2xl glass border border-border p-4 card-lift card-lift-hover">
               <div className="flex items-start gap-3">
-                <div className="h-10 w-10 rounded-xl grid place-items-center ring-1 ring-white/10"
+                <div className="h-10 w-10 rounded-xl grid place-items-center ring-1 ring-border"
                      style={{ background: "color-mix(in oklch, var(--neon-cyan) 15%, transparent)" }}>
                   <it.icon className="h-5 w-5 text-[var(--neon-cyan)]" />
                 </div>
@@ -1166,7 +1166,7 @@ function Reportes() {
 }
 function BtnMini({ icon: Icon, label }: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>; label: string }) {
   return (
-    <button className="inline-flex items-center gap-1.5 text-[11px] rounded-lg glass border border-white/10 px-2.5 py-1.5 text-ink hover:text-[var(--neon-coral)] hover:border-[var(--neon-coral)]/40 transition">
+    <button className="inline-flex items-center gap-1.5 text-[11px] rounded-lg glass border border-border px-2.5 py-1.5 text-ink hover:text-[var(--neon-coral)] hover:border-[var(--neon-coral)]/40 transition">
       <Icon className="h-3.5 w-3.5" /> {label}
     </button>
   );

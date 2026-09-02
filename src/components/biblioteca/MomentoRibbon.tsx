@@ -42,7 +42,7 @@ export function MomentoRibbon({ name = "Maestra Alicia" }: { name?: string }) {
         >
           <div className="flex items-center gap-4">
             <div
-              className="h-11 w-11 rounded-2xl grid place-items-center shrink-0 ring-1 ring-white/20"
+              className="h-11 w-11 rounded-2xl grid place-items-center shrink-0 ring-1 ring-border"
               style={{ background: "var(--gradient-neon)" }}
             >
               <Icon className="h-[18px] w-[18px] text-white drop-shadow" />
@@ -51,7 +51,7 @@ export function MomentoRibbon({ name = "Maestra Alicia" }: { name?: string }) {
               <div className="font-serif text-[17px] text-ink leading-tight">{m.hi}</div>
               <div className="text-[13px] text-ink-soft mt-0.5 truncate">{m.line}</div>
             </div>
-            <button className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/[0.06] border border-white/10 text-xs font-medium text-ink hover:border-[var(--neon-coral)]/40 transition">
+            <button className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-primary/5 border border-border text-xs font-medium text-ink hover:border-[var(--neon-coral)]/40 transition">
               <Sparkles className="h-3.5 w-3.5 text-[var(--neon-pink)]" />
               Ver sugerencia
             </button>
