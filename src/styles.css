@@ -49,86 +49,83 @@
 }
 
 /* ============================================================
-   Dark neon glass — default theme
-   Inspiración: glassmorphism 3D con halo rosa/coral/cyan.
+   Futuristic Glass — tema claro 3D
+   Paneles de cristal, azules/violetas vivos, iconos 3D.
    ============================================================ */
 :root {
   --radius: 1.25rem;
 
-  --background: oklch(0.16 0.015 265);
-  --surface: oklch(0.20 0.018 265);
-  --surface-elevated: oklch(0.24 0.020 265 / 70%);
+  --background: oklch(0.975 0.008 265);
+  --surface: oklch(0.995 0.004 265);
+  --surface-elevated: oklch(1 0 0 / 72%);
 
-  --foreground: oklch(0.97 0.005 260);
-  --ink: oklch(0.97 0.005 260);
-  --ink-soft: oklch(0.72 0.015 260);
+  --foreground: oklch(0.26 0.035 268);
+  --ink: oklch(0.26 0.035 268);
+  --ink-soft: oklch(0.52 0.030 268);
 
-  --card: oklch(0.22 0.018 265 / 75%);
-  --card-foreground: oklch(0.97 0.005 260);
-  --popover: oklch(0.20 0.018 265);
-  --popover-foreground: oklch(0.97 0.005 260);
+  --card: oklch(1 0 0 / 78%);
+  --card-foreground: oklch(0.26 0.035 268);
+  --popover: oklch(0.995 0.004 265);
+  --popover-foreground: oklch(0.26 0.035 268);
 
-  /* Coral neón como en la referencia */
-  --primary: oklch(0.72 0.19 25);
-  --primary-foreground: oklch(0.15 0.01 265);
+  /* Azul-violeta eléctrico de la referencia */
+  --primary: oklch(0.58 0.20 272);
+  --primary-foreground: oklch(0.99 0.005 265);
 
-  --secondary: oklch(0.28 0.018 265);
-  --secondary-foreground: oklch(0.97 0.005 260);
-  --muted: oklch(0.26 0.018 265);
-  --muted-foreground: oklch(0.70 0.012 260);
-  --accent: oklch(0.30 0.03 300);
-  --accent-foreground: oklch(0.97 0.005 260);
-  --destructive: oklch(0.66 0.20 25);
-  --destructive-foreground: oklch(0.98 0.003 247);
+  --secondary: oklch(0.94 0.015 268);
+  --secondary-foreground: oklch(0.30 0.035 268);
+  --muted: oklch(0.95 0.012 268);
+  --muted-foreground: oklch(0.52 0.028 268);
+  --accent: oklch(0.92 0.045 285);
+  --accent-foreground: oklch(0.28 0.04 275);
+  --destructive: oklch(0.62 0.20 22);
+  --destructive-foreground: oklch(0.99 0.003 247);
 
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.72 0.19 25 / 55%);
+  --border: oklch(0.28 0.04 270 / 12%);
+  --input: oklch(0.28 0.04 270 / 16%);
+  --ring: oklch(0.58 0.20 272 / 45%);
 
-  /* Paleta neón para íconos y halos */
-  --neon-coral: oklch(0.72 0.19 25);
-  --neon-pink: oklch(0.68 0.24 340);
-  --neon-cyan: oklch(0.78 0.15 200);
-  --neon-violet: oklch(0.62 0.20 295);
-  --neon-lime: oklch(0.82 0.18 145);
-  --neon-amber: oklch(0.78 0.17 65);
+  /* Paleta futurista para íconos 3D y halos */
+  --neon-coral: oklch(0.70 0.17 35);
+  --neon-pink: oklch(0.68 0.20 340);
+  --neon-cyan: oklch(0.72 0.13 205);
+  --neon-violet: oklch(0.58 0.20 285);
+  --neon-lime: oklch(0.76 0.16 150);
+  --neon-amber: oklch(0.78 0.15 70);
 
-  --clay: oklch(0.72 0.14 40);
-  --sage: oklch(0.72 0.11 155);
-  --ochre: oklch(0.78 0.15 75);
-  --lilac: oklch(0.72 0.13 300);
+  --clay: oklch(0.70 0.14 40);
+  --sage: oklch(0.70 0.11 158);
+  --ochre: oklch(0.78 0.14 78);
+  --lilac: oklch(0.66 0.15 300);
 
   --shadow-soft:
-    0 1px 2px oklch(0 0 0 / 40%),
-    0 12px 32px -12px oklch(0 0 0 / 55%);
+    0 1px 2px oklch(0.30 0.06 270 / 8%),
+    0 14px 34px -16px oklch(0.30 0.08 270 / 22%);
   --shadow-lift:
-    0 2px 6px oklch(0 0 0 / 45%),
-    0 30px 60px -20px oklch(0 0 0 / 65%);
+    0 2px 6px oklch(0.30 0.06 270 / 10%),
+    0 34px 64px -24px oklch(0.30 0.10 270 / 30%);
 
-  /* Halo neón — se aplica como box-shadow externo */
+  /* Halos suaves de cristal */
   --glow-coral:
-    0 0 0 1px oklch(0.72 0.19 25 / 30%),
-    0 0 24px -2px oklch(0.72 0.19 25 / 45%),
-    0 0 60px -10px oklch(0.68 0.24 340 / 40%);
+    0 0 0 1px oklch(0.58 0.20 272 / 14%),
+    0 18px 40px -18px oklch(0.58 0.20 272 / 35%);
 
   --glow-rainbow:
-    0 0 0 1px oklch(1 0 0 / 8%),
-    0 -10px 40px -10px oklch(0.68 0.24 340 / 35%),
-    0 10px 40px -10px oklch(0.78 0.15 200 / 30%),
-    0 0 60px -20px oklch(0.78 0.17 65 / 35%);
+    0 0 0 1px oklch(1 0 0 / 70%),
+    0 -14px 44px -18px oklch(0.68 0.20 340 / 28%),
+    0 18px 48px -18px oklch(0.58 0.20 272 / 30%),
+    0 0 60px -24px oklch(0.72 0.13 205 / 30%);
 
   --gradient-neon: linear-gradient(
-    90deg,
-    oklch(0.78 0.17 65) 0%,
-    oklch(0.72 0.19 25) 35%,
-    oklch(0.68 0.24 340) 70%,
-    oklch(0.78 0.15 200) 100%
+    135deg,
+    oklch(0.72 0.13 205) 0%,
+    oklch(0.58 0.20 272) 45%,
+    oklch(0.66 0.19 315) 100%
   );
 }
 
 .dark {
-  /* dark = default; alias explícito por si algo lo requiere */
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 @layer base {
@@ -140,22 +137,27 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    letter-spacing: -0.01em;
   }
 
-  /* Fondo global con ambient orbs sutiles */
+  /* Fondo global de aire luminoso */
   body {
     background-image:
-      radial-gradient(45% 35% at 12% 8%, oklch(0.68 0.24 340 / 12%) 0%, transparent 60%),
-      radial-gradient(40% 30% at 92% 12%, oklch(0.78 0.15 200 / 10%) 0%, transparent 60%),
-      radial-gradient(50% 40% at 80% 95%, oklch(0.72 0.19 25 / 10%) 0%, transparent 60%);
+      radial-gradient(48% 38% at 10% 6%, oklch(0.66 0.19 315 / 12%) 0%, transparent 62%),
+      radial-gradient(42% 32% at 94% 10%, oklch(0.72 0.13 205 / 14%) 0%, transparent 62%),
+      radial-gradient(54% 42% at 82% 96%, oklch(0.58 0.20 272 / 12%) 0%, transparent 62%);
     background-attachment: fixed;
   }
 
-  .font-serif { font-family: var(--font-serif); font-feature-settings: "ss01", "ss02"; }
+  .font-serif {
+    font-family: var(--font-serif);
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
 
   ::selection {
-    background: oklch(0.72 0.19 25 / 35%);
-    color: oklch(0.98 0 0);
+    background: oklch(0.58 0.20 272 / 22%);
+    color: oklch(0.22 0.04 270);
   }
 }
 
@@ -175,30 +177,30 @@
   &::-webkit-scrollbar { display: none; }
 }
 
-/* Glass panel — superficie translúcida con borde luminoso */
+/* Glass panel — cristal claro con borde luminoso */
 @utility glass {
-  background: color-mix(in oklch, var(--surface) 60%, transparent);
-  backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid oklch(1 0 0 / 10%);
+  background: color-mix(in oklch, white 62%, transparent);
+  backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid oklch(1 0 0 / 70%);
+  box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 80%), var(--shadow-soft);
 }
 
 @utility glass-strong {
-  background: color-mix(in oklch, var(--surface-elevated) 82%, transparent);
-  backdrop-filter: blur(32px) saturate(180%);
-  border: 1px solid oklch(1 0 0 / 12%);
+  background: color-mix(in oklch, white 84%, transparent);
+  backdrop-filter: blur(32px) saturate(170%);
+  border: 1px solid oklch(1 0 0 / 85%);
+  box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 90%), var(--shadow-soft);
 }
 
-/* Halo neón coral+rosa alrededor del panel */
 @utility glow-coral {
   box-shadow: var(--glow-coral);
 }
 
-/* Halo multicolor (naranja→coral→rosa→cyan) — para paneles hero */
 @utility glow-rainbow {
   box-shadow: var(--glow-rainbow);
 }
 
-/* Borde con degradado neón — usa mask trick */
+/* Borde con degradado futurista — usa mask trick */
 @utility neon-border {
   position: relative;
   &::before {
@@ -212,11 +214,11 @@
     -webkit-mask-composite: xor;
             mask-composite: exclude;
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.55;
   }
 }
 
-/* Barra lateral luminosa (como los LEDs del monitor de la referencia) */
+/* Barra lateral luminosa */
 @utility led-strip {
   position: relative;
   &::before {
@@ -227,7 +229,7 @@
     border-radius: 999px;
     background: var(--gradient-neon);
     filter: blur(1px);
-    opacity: 0.9;
+    opacity: 0.95;
   }
   &::after {
     content: "";
@@ -236,16 +238,16 @@
     width: 24px;
     background: var(--gradient-neon);
     filter: blur(18px);
-    opacity: 0.55;
+    opacity: 0.35;
     pointer-events: none;
   }
 }
 
-/* Pill tab activo con subrayado neón */
+/* Pill tab activo */
 @utility pill-active {
-  background: color-mix(in oklch, var(--surface-elevated) 90%, transparent);
+  background: color-mix(in oklch, white 92%, transparent);
   color: var(--ink);
-  box-shadow: inset 0 -2px 0 0 transparent, 0 6px 18px -8px oklch(0.68 0.24 340 / 50%);
+  box-shadow: 0 8px 20px -10px oklch(0.58 0.20 272 / 45%);
   position: relative;
   &::after {
     content: "";
@@ -259,6 +261,35 @@
 
 @utility btn-3d {
   transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 200ms, filter 200ms;
-  &:hover { transform: translateY(-1px); filter: brightness(1.06); }
+  &:hover { transform: translateY(-1px); filter: brightness(1.04); }
   &:active { transform: translateY(0); filter: brightness(0.98); }
 }
+
+/* Ícono 3D futurista: cubo de cristal con degradado y brillo superior */
+@utility icon-3d {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 0.85rem;
+  color: white;
+  background-image: var(--gradient-neon);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 55%),
+    inset 0 -3px 8px -2px oklch(0.25 0.08 270 / 35%),
+    0 10px 20px -8px oklch(0.45 0.15 275 / 45%);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 1px 1px 55% 1px;
+    border-radius: inherit;
+    background: linear-gradient(180deg, oklch(1 0 0 / 45%), transparent);
+    pointer-events: none;
+  }
+  & > svg { filter: drop-shadow(0 1px 2px oklch(0.25 0.08 270 / 45%)); }
+}
+
+@utility icon-3d-violet { background-image: linear-gradient(135deg, oklch(0.68 0.16 288), oklch(0.52 0.22 280)); }
+@utility icon-3d-cyan   { background-image: linear-gradient(135deg, oklch(0.80 0.11 200), oklch(0.62 0.15 220)); }
+@utility icon-3d-pink   { background-image: linear-gradient(135deg, oklch(0.76 0.15 350), oklch(0.62 0.21 330)); }
+@utility icon-3d-amber  { background-image: linear-gradient(135deg, oklch(0.84 0.13 78), oklch(0.70 0.17 52)); }
+@utility icon-3d-lime   { background-image: linear-gradient(135deg, oklch(0.82 0.14 158), oklch(0.66 0.15 175)); }
