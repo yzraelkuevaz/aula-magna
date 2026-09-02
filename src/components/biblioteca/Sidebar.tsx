@@ -42,8 +42,7 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
       {/* Brand */}
       <div className="flex items-center gap-3 px-5 h-[84px] border-b border-border">
         <div
-          className="h-11 w-11 rounded-2xl grid place-items-center shrink-0 ring-1 ring-border"
-          style={{ background: "var(--gradient-neon)" }}
+          className="icon-3d h-11 w-11 rounded-2xl shrink-0"
         >
           <BookOpen className="h-5 w-5 text-white drop-shadow" />
         </div>
@@ -77,7 +76,15 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
                     style={{ background: "var(--gradient-neon)", boxShadow: "0 0 12px var(--neon-coral)" }}
                   />
                 )}
-                <Icon className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-[var(--neon-coral)]" : ""}`} aria-hidden="true" />
+                <span
+                  className={`grid h-7 w-7 shrink-0 place-items-center rounded-[0.6rem] transition-all duration-200 ${
+                    isActive
+                      ? "icon-3d"
+                      : "bg-secondary text-ink-soft group-hover:bg-primary/10 group-hover:text-primary"
+                  }`}
+                >
+                  <Icon className="h-[15px] w-[15px]" aria-hidden="true" />
+                </span>
                 <span className="truncate flex-1 text-left">{label}</span>
                 {soon && (
                   <span className="text-[9px] uppercase tracking-[0.12em] rounded-full px-1.5 py-0.5 border border-border text-ink-soft/80">
