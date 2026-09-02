@@ -40,7 +40,7 @@ export function CategoryCards({ onSelect }: Props) {
           >
 
             {/* Ícono con degradado vívido tipo referencia */}
-            <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${gradientMap[cover]} grid place-items-center shadow-[0_10px_24px_-6px_oklch(0_0_0/60%)] ring-1 ring-white/15`}>
+            <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${gradientMap[cover]} grid place-items-center shadow-[0_10px_24px_-6px_oklch(0_0_0/60%)] ring-1 ring-border`}>
               <Icon className="h-6 w-6 text-white drop-shadow" />
             </div>
 

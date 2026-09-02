@@ -14,11 +14,11 @@ interface TopBarProps {
 export function TopBar({ query, onQuery, onCommand, onNavigate, nombre, detalle, iniciales }: TopBarProps) {
 
   return (
-    <header className="sticky top-0 z-30 glass border-b border-white/10">
+    <header className="sticky top-0 z-30 glass border-b border-border">
       <div className="flex items-center gap-4 h-[84px] px-5 lg:px-8">
         <div className="lg:hidden flex items-center gap-2">
           <div
-            className="h-9 w-9 rounded-xl grid place-items-center ring-1 ring-white/20"
+            className="h-9 w-9 rounded-xl grid place-items-center ring-1 ring-border"
             style={{ background: "var(--gradient-neon)" }}
           >
             <BookOpen className="h-4 w-4 text-white" aria-hidden="true" />
@@ -33,13 +33,13 @@ export function TopBar({ query, onQuery, onCommand, onNavigate, nombre, detalle,
             onChange={(e) => onQuery(e.target.value)}
             aria-label="Buscar en SIED MX"
             placeholder="¿Qué necesitas hoy?"
-            className="w-full h-12 pl-12 pr-20 rounded-full bg-white/[0.06] border border-white/10 focus:border-[var(--neon-coral)]/40 focus:bg-white/[0.10] focus:outline-none focus:ring-4 focus:ring-[var(--neon-coral)]/15 transition text-sm placeholder:text-ink-soft/70 text-ink"
+            className="w-full h-12 pl-12 pr-20 rounded-full bg-primary/5 border border-border focus:border-[var(--neon-coral)]/40 focus:bg-primary/10 focus:outline-none focus:ring-4 focus:ring-[var(--neon-coral)]/15 transition text-sm placeholder:text-ink-soft/70 text-ink"
           />
           <button
             type="button"
             onClick={onCommand}
             aria-label="Abrir paleta de comandos (Ctrl o Cmd + K)"
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-ink-soft border border-white/15 rounded-md px-1.5 py-1 bg-white/5 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60 transition"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-ink-soft border border-border rounded-md px-1.5 py-1 bg-primary/8 hover:bg-primary/8 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60 transition"
           >
             ⌘ K
           </button>
@@ -65,10 +65,10 @@ export function TopBar({ query, onQuery, onCommand, onNavigate, nombre, detalle,
           <button
             onClick={() => onNavigate?.("config")}
             aria-label="Abrir Configuración de la cuenta"
-            className="ml-2 flex items-center gap-2.5 h-12 pl-1.5 pr-3 rounded-full glass-strong hover:border-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60 transition"
+            className="ml-2 flex items-center gap-2.5 h-12 pl-1.5 pr-3 rounded-full glass-strong hover:border-border focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60 transition"
           >
             <div
-              className="h-9 w-9 rounded-full grid place-items-center text-white font-semibold text-xs ring-1 ring-white/20"
+              className="h-9 w-9 rounded-full grid place-items-center text-white font-semibold text-xs ring-1 ring-border"
               style={{ background: "linear-gradient(135deg, var(--neon-violet), var(--neon-pink))" }}
             >
               {iniciales}
@@ -101,7 +101,7 @@ function IconBtn({
       disabled={disabled}
       aria-label={label}
       title={label}
-      className="relative h-11 w-11 rounded-full grid place-items-center glass hover:border-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60 transition disabled:opacity-50 disabled:cursor-not-allowed"
+      className="relative h-11 w-11 rounded-full grid place-items-center glass hover:border-border focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60 transition disabled:opacity-50 disabled:cursor-not-allowed"
     >
       <Icon className="h-[18px] w-[18px] text-ink-soft" aria-hidden="true" />
       {badge != null && (

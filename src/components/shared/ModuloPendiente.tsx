@@ -12,14 +12,14 @@ export function ModuloPendiente({ title, description, onBack }: ModuloPendienteP
       <div className="max-w-2xl rounded-3xl glass p-8">
         <div className="flex items-center gap-3">
           <div
-            className="h-11 w-11 rounded-2xl grid place-items-center ring-1 ring-white/15"
+            className="h-11 w-11 rounded-2xl grid place-items-center ring-1 ring-border"
             style={{ background: "color-mix(in oklab, var(--neon-amber) 22%, transparent)" }}
           >
             <Construction className="h-5 w-5" style={{ color: "var(--neon-amber)" }} aria-hidden="true" />
           </div>
           <div>
             <h1 className="font-serif text-2xl text-ink leading-tight">{title}</h1>
-            <span className="inline-block mt-1 text-[10px] uppercase tracking-[0.15em] rounded-full px-2 py-0.5 text-ink-soft border border-white/15">
+            <span className="inline-block mt-1 text-[10px] uppercase tracking-[0.15em] rounded-full px-2 py-0.5 text-ink-soft border border-border">
               Próximamente
             </span>
           </div>

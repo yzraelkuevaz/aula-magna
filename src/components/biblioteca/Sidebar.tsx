@@ -38,12 +38,11 @@ interface SidebarProps {
 
 export function Sidebar({ active, onSelect }: SidebarProps) {
   return (
-    <aside className="hidden lg:flex flex-col shrink-0 h-screen sticky top-0 w-[248px] glass border-r border-white/10">
+    <aside className="hidden lg:flex flex-col shrink-0 h-screen sticky top-0 w-[248px] glass border-r border-border">
       {/* Brand */}
-      <div className="flex items-center gap-3 px-5 h-[84px] border-b border-white/10">
+      <div className="flex items-center gap-3 px-5 h-[84px] border-b border-border">
         <div
-          className="h-11 w-11 rounded-2xl grid place-items-center shrink-0 ring-1 ring-white/20"
-          style={{ background: "var(--gradient-neon)" }}
+          className="icon-3d h-11 w-11 rounded-2xl shrink-0"
         >
           <BookOpen className="h-5 w-5 text-white drop-shadow" />
         </div>
@@ -67,8 +66,8 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
                 aria-current={isActive ? "page" : undefined}
                 className={`group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13.5px] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon-coral)]/60 ${
                   isActive
-                    ? "bg-white/[0.07] text-ink font-medium"
-                    : "text-ink-soft hover:bg-white/[0.04] hover:text-ink"
+                    ? "bg-primary/5 text-ink font-medium"
+                    : "text-ink-soft hover:bg-primary/5 hover:text-ink"
                 }`}
               >
                 {isActive && (
@@ -77,10 +76,18 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
                     style={{ background: "var(--gradient-neon)", boxShadow: "0 0 12px var(--neon-coral)" }}
                   />
                 )}
-                <Icon className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-[var(--neon-coral)]" : ""}`} aria-hidden="true" />
+                <span
+                  className={`grid h-7 w-7 shrink-0 place-items-center rounded-[0.6rem] transition-all duration-200 ${
+                    isActive
+                      ? "icon-3d"
+                      : "bg-secondary text-ink-soft group-hover:bg-primary/10 group-hover:text-primary"
+                  }`}
+                >
+                  <Icon className="h-[15px] w-[15px]" aria-hidden="true" />
+                </span>
                 <span className="truncate flex-1 text-left">{label}</span>
                 {soon && (
-                  <span className="text-[9px] uppercase tracking-[0.12em] rounded-full px-1.5 py-0.5 border border-white/15 text-ink-soft/80">
+                  <span className="text-[9px] uppercase tracking-[0.12em] rounded-full px-1.5 py-0.5 border border-border text-ink-soft/80">
                     Pronto
                   </span>
                 )}
@@ -91,7 +98,7 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
       </div>
 
       {/* Tiempo recuperado ring */}
-      <div className="p-4 border-t border-white/10">
+      <div className="p-4 border-t border-border">
         <div className="rounded-2xl glass-strong p-4">
           <div className="text-[11px] text-ink-soft mb-3 leading-tight">Tiempo recuperado este ciclo</div>
           <div className="flex justify-center">

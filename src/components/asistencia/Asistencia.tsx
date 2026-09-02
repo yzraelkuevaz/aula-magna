@@ -89,7 +89,7 @@ export function Asistencia({
               value={fecha}
               onChange={(e) => setFecha(e.target.value)}
               aria-label="Fecha de la asistencia"
-              className="mt-1.5 h-11 px-4 rounded-xl bg-white/[0.06] border border-white/10 text-sm text-ink"
+              className="mt-1.5 h-11 px-4 rounded-xl bg-primary/5 border border-border text-sm text-ink"
             />
           </label>
         </div>
@@ -156,7 +156,7 @@ export function Asistencia({
                       aria-label={`${e.label}: ${a.nombre}`}
                       aria-pressed={on}
                       className={`h-9 w-9 grid place-items-center rounded-xl border transition ${
-                        on ? "border-white/40" : "border-white/10 hover:border-white/25"
+                        on ? "border-border" : "border-border hover:border-border"
                       }`}
                       style={on ? { background: `color-mix(in oklch, ${e.color} 26%, transparent)` } : undefined}
                     >

@@ -104,7 +104,7 @@ export function CompartirPlaneacion({ plan, onClose }: Props) {
           <button
             onClick={onClose}
             aria-label="Cerrar"
-            className="h-9 w-9 grid place-items-center rounded-full hover:bg-white/[0.08]"
+            className="h-9 w-9 grid place-items-center rounded-full hover:bg-primary/5"
           >
             <X className="h-4 w-4 text-ink-soft" aria-hidden="true" />
           </button>
@@ -122,7 +122,7 @@ export function CompartirPlaneacion({ plan, onClose }: Props) {
             readOnly
             value={enlace}
             onFocus={(e) => e.currentTarget.select()}
-            className="flex-1 h-11 px-3 rounded-xl bg-white/[0.05] border border-white/10 text-[12px] text-ink focus:outline-none focus:ring-2 focus:ring-white/20"
+            className="flex-1 h-11 px-3 rounded-xl bg-primary/5 border border-border text-[12px] text-ink focus:outline-none focus:ring-2 focus:ring-border"
           />
           <button
             onClick={copiar}
@@ -141,19 +141,19 @@ export function CompartirPlaneacion({ plan, onClose }: Props) {
         <div className="mt-3 flex flex-wrap gap-2">
           <button
             onClick={compartirNativo}
-            className="btn-3d h-10 px-3.5 rounded-xl glass border border-white/10 text-[12px] text-ink inline-flex items-center gap-1.5"
+            className="btn-3d h-10 px-3.5 rounded-xl glass border border-border text-[12px] text-ink inline-flex items-center gap-1.5"
           >
             <Share2 className="h-3.5 w-3.5 text-ink-soft" aria-hidden="true" /> Compartir…
           </button>
           <button
             onClick={() => window.print()}
-            className="btn-3d h-10 px-3.5 rounded-xl glass border border-white/10 text-[12px] text-ink inline-flex items-center gap-1.5"
+            className="btn-3d h-10 px-3.5 rounded-xl glass border border-border text-[12px] text-ink inline-flex items-center gap-1.5"
           >
             <Printer className="h-3.5 w-3.5 text-ink-soft" aria-hidden="true" /> Imprimir vista
           </button>
         </div>
 
-        <div className="mt-5 rounded-2xl bg-white/[0.03] border border-white/[0.07] p-4 flex gap-3">
+        <div className="mt-5 rounded-2xl bg-primary/5 border border-border p-4 flex gap-3">
           <Info
             className="h-4 w-4 shrink-0 mt-0.5"
             style={{ color: "var(--neon-amber)" }}

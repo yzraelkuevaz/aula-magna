@@ -21,7 +21,7 @@ function Landing() {
       <header className="flex items-center justify-between px-5 lg:px-10 h-20">
         <div className="flex items-center gap-3">
           <div
-            className="h-10 w-10 rounded-2xl grid place-items-center ring-1 ring-white/20"
+            className="h-10 w-10 rounded-2xl grid place-items-center ring-1 ring-border"
             style={{ background: "var(--gradient-neon)" }}
           >
             <BookOpen className="h-5 w-5 text-white" aria-hidden="true" />
@@ -84,7 +84,7 @@ function Landing() {
         </div>
       </section>
 
-      <footer className="px-5 lg:px-10 py-10 border-t border-white/10 text-center text-xs text-ink-soft">
+      <footer className="px-5 lg:px-10 py-10 border-t border-border text-center text-xs text-ink-soft">
         SIED MX · Sistema Integral Educativo Docente
       </footer>
     </main>
@@ -100,7 +100,9 @@ function Card({
 }) {
   return (
     <div className="rounded-2xl glass p-5">
-      <Icon className="h-5 w-5 text-[var(--neon-cyan)]" aria-hidden="true" />
+      <span className="icon-3d h-11 w-11">
+        <Icon className="h-5 w-5" aria-hidden="true" />
+      </span>
       <div className="font-serif text-lg text-ink mt-3">{title}</div>
       <p className="text-sm text-ink-soft mt-1.5 leading-relaxed">{text}</p>
     </div>

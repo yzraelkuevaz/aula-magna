@@ -106,17 +106,17 @@ export function Configuracion({
             onKeyDown={(e) => e.key === "Enter" && agregarAlumno()}
             aria-label="Nombre del nuevo alumno"
             placeholder="Nombre del alumno"
-            className="flex-1 h-11 px-4 rounded-xl bg-white/[0.06] border border-white/10 focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink placeholder:text-ink-soft/60"
+            className="flex-1 h-11 px-4 rounded-xl bg-primary/5 border border-border focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink placeholder:text-ink-soft/60"
           />
           <button
             onClick={agregarAlumno}
             aria-label="Agregar alumno"
-            className="inline-flex items-center gap-2 h-11 px-4 rounded-xl glass hover:border-white/25 text-sm text-ink"
+            className="inline-flex items-center gap-2 h-11 px-4 rounded-xl glass hover:border-border text-sm text-ink"
           >
             <UserPlus className="h-4 w-4" aria-hidden="true" /> Agregar
           </button>
         </div>
-        <ul className="divide-y divide-white/5">
+        <ul className="divide-y divide-border">
           {alumnos.length === 0 && (
             <li className="py-4 text-sm text-ink-soft">Aún no has registrado alumnos en tu grupo.</li>
           )}
@@ -126,7 +126,7 @@ export function Configuracion({
               <button
                 onClick={() => borrarAlumno(a.id)}
                 aria-label={`Eliminar a ${a.nombre}`}
-                className="h-8 w-8 grid place-items-center rounded-lg hover:bg-white/10 text-ink-soft"
+                className="h-8 w-8 grid place-items-center rounded-lg hover:bg-primary/8 text-ink-soft"
               >
                 <Trash2 className="h-4 w-4" aria-hidden="true" />
               </button>
@@ -143,7 +143,7 @@ export function Configuracion({
         <button
           onClick={salir}
           aria-label="Cerrar sesión"
-          className="inline-flex items-center gap-2 h-11 px-4 rounded-xl glass hover:border-white/25 text-sm text-ink"
+          className="inline-flex items-center gap-2 h-11 px-4 rounded-xl glass hover:border-border text-sm text-ink"
         >
           <LogOut className="h-4 w-4" aria-hidden="true" /> Salir
         </button>
@@ -159,7 +159,7 @@ function Text({ label, value, onChange }: { label: string; value: string; onChan
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1.5 w-full h-11 px-4 rounded-xl bg-white/[0.06] border border-white/10 focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink"
+        className="mt-1.5 w-full h-11 px-4 rounded-xl bg-primary/5 border border-border focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink"
       />
     </label>
   );
@@ -179,7 +179,7 @@ function Select({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1.5 w-full h-11 px-3 rounded-xl bg-white/[0.06] border border-white/10 focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink"
+        className="mt-1.5 w-full h-11 px-3 rounded-xl bg-primary/5 border border-border focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink"
       >
         <option value="">—</option>
         {options.map((o) => (

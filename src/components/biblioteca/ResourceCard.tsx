@@ -36,20 +36,20 @@ export function ResourceCard({ resource, onOpen, onToggleFav }: Props) {
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         <div className="absolute top-3 left-3 flex gap-1.5">
-          <span className="text-[10px] uppercase tracking-wider bg-black/40 backdrop-blur text-white px-2 py-0.5 rounded-full font-medium ring-1 ring-white/20">
+          <span className="text-[10px] uppercase tracking-wider bg-black/40 backdrop-blur text-white px-2 py-0.5 rounded-full font-medium ring-1 ring-border">
             {resource.category}
           </span>
         </div>
         <button
           onClick={(e) => { e.stopPropagation(); onToggleFav(resource.id); }}
-          className="absolute top-3 right-3 h-8 w-8 rounded-full bg-black/40 backdrop-blur grid place-items-center hover:bg-black/60 transition ring-1 ring-white/20"
+          className="absolute top-3 right-3 h-8 w-8 rounded-full bg-black/40 backdrop-blur grid place-items-center hover:bg-black/60 transition ring-1 ring-border"
         >
           <Star className={`h-4 w-4 ${resource.favorite ? "fill-[var(--neon-coral)] text-[var(--neon-coral)]" : "text-white"}`} />
         </button>
         <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between text-white">
           <Icon className="h-8 w-8 opacity-90 drop-shadow" />
           {resource.grade && (
-            <span className="text-[10px] font-semibold bg-black/40 backdrop-blur px-2 py-0.5 rounded-full ring-1 ring-white/20">
+            <span className="text-[10px] font-semibold bg-black/40 backdrop-blur px-2 py-0.5 rounded-full ring-1 ring-border">
               {resource.grade}
             </span>
           )}
@@ -71,10 +71,10 @@ export function ResourceCard({ resource, onOpen, onToggleFav }: Props) {
             {new Date(resource.date).toLocaleDateString("es-MX", { day: "numeric", month: "short", year: "numeric" })} · {resource.size}
           </div>
           <div className="flex items-center gap-0.5 text-ink-soft">
-            <button className="h-7 w-7 rounded-lg grid place-items-center hover:bg-white/[0.06] hover:text-ink transition" title="Compartir">
+            <button className="h-7 w-7 rounded-lg grid place-items-center hover:bg-primary/5 hover:text-ink transition" title="Compartir">
               <Share2 className="h-3.5 w-3.5" />
             </button>
-            <button className="h-7 w-7 rounded-lg grid place-items-center hover:bg-white/[0.06] hover:text-ink transition" title="Descargar">
+            <button className="h-7 w-7 rounded-lg grid place-items-center hover:bg-primary/5 hover:text-ink transition" title="Descargar">
               <Download className="h-3.5 w-3.5" />
             </button>
           </div>
