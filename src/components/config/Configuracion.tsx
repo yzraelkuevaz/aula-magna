@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { LogOut, Save, UserPlus, Trash2, Loader2 } from "lucide-react";
+import { LogOut, Save, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import type { PerfilDocente } from "@/lib/perfil";
+import { MisAlumnos } from "@/components/config/MisAlumnos";
+import type { AlumnoBasico, PerfilDocente } from "@/lib/perfil";
 
 const niveles = ["Preescolar", "Primaria", "Secundaria"];
 const grados = ["1°", "2°", "3°", "4°", "5°", "6°"];
