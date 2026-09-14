@@ -14,6 +14,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedLicenciaRouteImport } from './routes/_authenticated/licencia'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 
 const EstadoRoute = EstadoRouteImport.update({
@@ -40,6 +41,11 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedLicenciaRoute = AuthenticatedLicenciaRouteImport.update({
+  id: '/licencia',
+  path: '/licencia',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   id: '/app',
   path: '/app',
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/estado': typeof EstadoRoute
   '/app': typeof AuthenticatedAppRoute
+  '/licencia': typeof AuthenticatedLicenciaRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
 }
 export interface FileRoutesByTo {
@@ -58,6 +65,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/estado': typeof EstadoRoute
   '/app': typeof AuthenticatedAppRoute
+  '/licencia': typeof AuthenticatedLicenciaRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
 }
 export interface FileRoutesById {
@@ -67,13 +75,14 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/estado': typeof EstadoRoute
   '/_authenticated/app': typeof AuthenticatedAppRoute
+  '/_authenticated/licencia': typeof AuthenticatedLicenciaRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/estado' | '/app' | '/onboarding'
+  fullPaths: '/' | '/auth' | '/estado' | '/app' | '/licencia' | '/onboarding'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/estado' | '/app' | '/onboarding'
+  to: '/' | '/auth' | '/estado' | '/app' | '/licencia' | '/onboarding'
   id:
     | '__root__'
     | '/'
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/estado'
     | '/_authenticated/app'
+    | '/_authenticated/licencia'
     | '/_authenticated/onboarding'
   fileRoutesById: FileRoutesById
 }
@@ -128,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/licencia': {
+      id: '/_authenticated/licencia'
+      path: '/licencia'
+      fullPath: '/licencia'
+      preLoaderRoute: typeof AuthenticatedLicenciaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/app': {
       id: '/_authenticated/app'
       path: '/app'
@@ -140,11 +157,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAppRoute: typeof AuthenticatedAppRoute
+  AuthenticatedLicenciaRoute: typeof AuthenticatedLicenciaRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAppRoute: AuthenticatedAppRoute,
+  AuthenticatedLicenciaRoute: AuthenticatedLicenciaRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
 }
 
