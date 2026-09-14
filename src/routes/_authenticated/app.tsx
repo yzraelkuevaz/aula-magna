@@ -18,6 +18,9 @@ import { Planeaciones } from "@/components/planeaciones/Planeaciones";
 import { ModuloPendiente } from "@/components/shared/ModuloPendiente";
 import { Configuracion } from "@/components/config/Configuracion";
 import { DemoBanner } from "@/components/shared/DemoBanner";
+import { GuiaPasoAPaso } from "@/components/shared/GuiaPasoAPaso";
+import { BackendErrorState } from "@/components/shared/BackendErrorState";
+import { useLicencia } from "@/lib/licencia";
 import { usePerfil, grupoLabel, inicialesDe } from "@/lib/perfil";
 import { resources as seed, continueReading, recentlyAdded, aiRecommended, type Resource } from "@/components/biblioteca/data";
 
@@ -56,7 +59,9 @@ const filterGroups = [
 
 function AppShell() {
   const navigate = useNavigate();
-  const { loading, perfil, alumnos, email, recargar } = usePerfil();
+  const { loading, perfil, alumnos, email, error, recargar } = usePerfil();
+  const { loading: licLoading, licencia } = useLicencia();
+  const [guiaVista, setGuiaVista] = useState(false);
   const [active, setActive] = useState("escritorio");
   const [query, setQuery] = useState("");
   const [preview, setPreview] = useState<Resource | null>(null);
@@ -76,12 +81,17 @@ function AppShell() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Sin licencia activa no se accede a los datos.
+  useEffect(() => {
+    if (!licLoading && !licencia) navigate({ to: "/licencia", replace: true });
+  }, [licLoading, licencia, navigate]);
+
   // Un docente sin configuración inicial va a su onboarding antes de ver datos.
   useEffect(() => {
-    if (!loading && (!perfil || !perfil.onboarding_completed)) {
+    if (!loading && !error && licencia && (!perfil || !perfil.onboarding_completed)) {
       navigate({ to: "/onboarding", replace: true });
     }
-  }, [loading, perfil, navigate]);
+  }, [loading, error, licencia, perfil, navigate]);
 
   const toggleFav = (id: string) =>
     setResources((rs) => rs.map((r) => (r.id === id ? { ...r, favorite: !r.favorite } : r)));
@@ -109,7 +119,11 @@ function AppShell() {
     setActive(key);
   };
 
-  if (loading || !perfil || !perfil.onboarding_completed) {
+  if (error) {
+    return <BackendErrorState message={error} onRetry={recargar} />;
+  }
+
+  if (loading || licLoading || !perfil || !perfil.onboarding_completed) {
     return (
       <div className="min-h-screen grid place-items-center bg-background text-ink-soft">
         <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
@@ -235,6 +249,16 @@ function AppShell() {
       <PreviewModal resource={preview} onClose={() => setPreview(null)} onToggleFav={toggleFav} />
       <AIPanel open={aiOpen} onClose={() => setAiOpen(false)} />
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} onOpenResource={setPreview} />
+
+      {!perfil.tutorial_completed && !guiaVista && (
+        <GuiaPasoAPaso
+          userId={perfil.user_id}
+          onDone={() => {
+            setGuiaVista(true);
+            recargar();
+          }}
+        />
+      )}
     </div>
   );
 }
