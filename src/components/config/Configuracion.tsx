@@ -16,7 +16,7 @@ export function Configuracion({
 }: {
   perfil: PerfilDocente;
   email: string | null;
-  alumnos: { id: string; nombre: string }[];
+  alumnos: AlumnoBasico[];
   onSaved: () => void;
 }) {
   const navigate = useNavigate();
@@ -29,7 +29,6 @@ export function Configuracion({
     grupo: perfil.grupo ?? "",
     ciclo: perfil.ciclo ?? "2025 – 2026",
   });
-  const [nuevoAlumno, setNuevoAlumno] = useState("");
   const [busy, setBusy] = useState(false);
 
   const guardar = async () => {
