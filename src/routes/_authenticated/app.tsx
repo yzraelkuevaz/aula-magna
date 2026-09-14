@@ -81,12 +81,17 @@ function AppShell() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Sin licencia activa no se accede a los datos.
+  useEffect(() => {
+    if (!licLoading && !licencia) navigate({ to: "/licencia", replace: true });
+  }, [licLoading, licencia, navigate]);
+
   // Un docente sin configuración inicial va a su onboarding antes de ver datos.
   useEffect(() => {
-    if (!loading && (!perfil || !perfil.onboarding_completed)) {
+    if (!loading && !error && licencia && (!perfil || !perfil.onboarding_completed)) {
       navigate({ to: "/onboarding", replace: true });
     }
-  }, [loading, perfil, navigate]);
+  }, [loading, error, licencia, perfil, navigate]);
 
   const toggleFav = (id: string) =>
     setResources((rs) => rs.map((r) => (r.id === id ? { ...r, favorite: !r.favorite } : r)));
