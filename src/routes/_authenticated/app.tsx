@@ -249,6 +249,16 @@ function AppShell() {
       <PreviewModal resource={preview} onClose={() => setPreview(null)} onToggleFav={toggleFav} />
       <AIPanel open={aiOpen} onClose={() => setAiOpen(false)} />
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} onOpenResource={setPreview} />
+
+      {!perfil.tutorial_completed && !guiaVista && (
+        <GuiaPasoAPaso
+          userId={perfil.user_id}
+          onDone={() => {
+            setGuiaVista(true);
+            recargar();
+          }}
+        />
+      )}
     </div>
   );
 }
