@@ -59,7 +59,9 @@ const filterGroups = [
 
 function AppShell() {
   const navigate = useNavigate();
-  const { loading, perfil, alumnos, email, recargar } = usePerfil();
+  const { loading, perfil, alumnos, email, error, recargar } = usePerfil();
+  const { loading: licLoading, licencia } = useLicencia();
+  const [guiaVista, setGuiaVista] = useState(false);
   const [active, setActive] = useState("escritorio");
   const [query, setQuery] = useState("");
   const [preview, setPreview] = useState<Resource | null>(null);
