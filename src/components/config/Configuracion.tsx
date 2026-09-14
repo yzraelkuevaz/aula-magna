@@ -81,43 +81,7 @@ export function Configuracion({
         </button>
       </section>
 
-      <section className="rounded-3xl glass-strong p-6 space-y-4">
-        <h2 className="font-serif text-xl text-ink">Mi grupo · {alumnos.length} alumnos</h2>
-        <div className="flex gap-2">
-          <input
-            value={nuevoAlumno}
-            onChange={(e) => setNuevoAlumno(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && agregarAlumno()}
-            aria-label="Nombre del nuevo alumno"
-            placeholder="Nombre del alumno"
-            className="flex-1 h-11 px-4 rounded-xl bg-primary/5 border border-border focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm text-ink placeholder:text-ink-soft/60"
-          />
-          <button
-            onClick={agregarAlumno}
-            aria-label="Agregar alumno"
-            className="inline-flex items-center gap-2 h-11 px-4 rounded-xl glass hover:border-border text-sm text-ink"
-          >
-            <UserPlus className="h-4 w-4" aria-hidden="true" /> Agregar
-          </button>
-        </div>
-        <ul className="divide-y divide-border">
-          {alumnos.length === 0 && (
-            <li className="py-4 text-sm text-ink-soft">Aún no has registrado alumnos en tu grupo.</li>
-          )}
-          {alumnos.map((a) => (
-            <li key={a.id} className="py-2.5 flex items-center justify-between">
-              <span className="text-sm text-ink">{a.nombre}</span>
-              <button
-                onClick={() => borrarAlumno(a.id)}
-                aria-label={`Eliminar a ${a.nombre}`}
-                className="h-8 w-8 grid place-items-center rounded-lg hover:bg-primary/8 text-ink-soft"
-              >
-                <Trash2 className="h-4 w-4" aria-hidden="true" />
-              </button>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <MisAlumnos userId={perfil.user_id} alumnos={alumnos} onChanged={onSaved} />
 
       <section className="rounded-3xl glass p-6 flex items-center justify-between">
         <div>
