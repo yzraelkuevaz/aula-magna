@@ -49,14 +49,25 @@ function AuthPage() {
           },
         });
         if (error) throw error;
-        toast.success("Cuenta creada. Continúa con tu configuración inicial.");
+        toast.success("Cuenta creada. Ahora validaremos tu licencia.");
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
       }
       const { data } = await supabase.auth.getUser();
-      if (data.user) navigate({ to: "/app", replace: true });
-      else toast.info("Revisa tu correo para confirmar la cuenta y luego inicia sesión.");
+      if (!data.user) {
+        toast.info("Revisa tu correo para confirmar la cuenta y luego inicia sesión.");
+        return;
+      }
+      if (codigo.trim()) {
+        const licError = await redimirLicencia(codigo);
+        if (licError) {
+          toast.error(licError);
+          navigate({ to: "/licencia", replace: true });
+          return;
+        }
+      }
+      navigate({ to: "/app", replace: true });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "No fue posible completar el acceso");
     } finally {
