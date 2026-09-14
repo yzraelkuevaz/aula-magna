@@ -18,6 +18,9 @@ import { Planeaciones } from "@/components/planeaciones/Planeaciones";
 import { ModuloPendiente } from "@/components/shared/ModuloPendiente";
 import { Configuracion } from "@/components/config/Configuracion";
 import { DemoBanner } from "@/components/shared/DemoBanner";
+import { GuiaPasoAPaso } from "@/components/shared/GuiaPasoAPaso";
+import { BackendErrorState } from "@/components/shared/BackendErrorState";
+import { useLicencia } from "@/lib/licencia";
 import { usePerfil, grupoLabel, inicialesDe } from "@/lib/perfil";
 import { resources as seed, continueReading, recentlyAdded, aiRecommended, type Resource } from "@/components/biblioteca/data";
 
