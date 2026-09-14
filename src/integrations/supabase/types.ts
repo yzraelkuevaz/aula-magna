@@ -56,6 +56,7 @@ export type Database = {
       alumnos: {
         Row: {
           created_at: string
+          foto_path: string | null
           id: string
           nombre: string
           notas: string | null
@@ -64,6 +65,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          foto_path?: string | null
           id?: string
           nombre: string
           notas?: string | null
@@ -72,6 +74,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          foto_path?: string | null
           id?: string
           nombre?: string
           notas?: string | null
@@ -176,6 +179,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      licencias: {
+        Row: {
+          activa: boolean
+          codigo: string
+          created_at: string
+          expira_at: string | null
+          id: string
+          notas: string | null
+          redeemed_at: string | null
+          tipo: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          activa?: boolean
+          codigo: string
+          created_at?: string
+          expira_at?: string | null
+          id?: string
+          notas?: string | null
+          redeemed_at?: string | null
+          tipo?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          activa?: boolean
+          codigo?: string
+          created_at?: string
+          expira_at?: string | null
+          id?: string
+          notas?: string | null
+          redeemed_at?: string | null
+          tipo?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -299,7 +341,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      redimir_licencia: { Args: { p_codigo: string }; Returns: Json }
     }
     Enums: {
       [_ in never]: never
