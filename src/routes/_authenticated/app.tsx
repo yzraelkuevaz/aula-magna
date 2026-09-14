@@ -119,7 +119,11 @@ function AppShell() {
     setActive(key);
   };
 
-  if (loading || !perfil || !perfil.onboarding_completed) {
+  if (error) {
+    return <BackendErrorState message={error} onRetry={recargar} />;
+  }
+
+  if (loading || licLoading || !perfil || !perfil.onboarding_completed) {
     return (
       <div className="min-h-screen grid place-items-center bg-background text-ink-soft">
         <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
