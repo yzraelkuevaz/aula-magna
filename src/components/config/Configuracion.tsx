@@ -43,22 +43,6 @@ export function Configuracion({
     onSaved();
   };
 
-  const agregarAlumno = async () => {
-    const nombre = nuevoAlumno.trim();
-    if (!nombre) return;
-    const { error } = await supabase.from("alumnos").insert({ nombre, user_id: perfil.user_id });
-    if (error) return toast.error("No se pudo agregar el alumno");
-    setNuevoAlumno("");
-    toast.success("Alumno agregado");
-    onSaved();
-  };
-
-  const borrarAlumno = async (id: string) => {
-    const { error } = await supabase.from("alumnos").delete().eq("id", id);
-    if (error) return toast.error("No se pudo eliminar");
-    onSaved();
-  };
-
   const salir = async () => {
     await queryClient.cancelQueries();
     queryClient.clear();
