@@ -44,6 +44,22 @@ function Onboarding() {
       const user = data.user;
       if (!user) return;
       setUserId(user.id);
+
+      // Sin licencia activa el docente no puede configurar ni ver datos.
+      const { data: lic } = await (supabase as never as {
+        from: (t: string) => {
+          select: (c: string) => { eq: (k: string, v: boolean) => { limit: (n: number) => Promise<{ data: unknown[] | null }> } };
+        };
+      })
+        .from("licencias")
+        .select("codigo")
+        .eq("activa", true)
+        .limit(1);
+      if (!lic || lic.length === 0) {
+        navigate({ to: "/licencia", replace: true });
+        return;
+      }
+
       const { data: perfiles } = await supabase
         .from("profiles")
         .select("*")
