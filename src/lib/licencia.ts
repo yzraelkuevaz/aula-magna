@@ -34,6 +34,12 @@ export async function redimirLicencia(codigo: string): Promise<string | null> {
   }
 }
 
+/** true si el docente autenticado tiene una licencia activa asignada. */
+export async function tieneLicencia(): Promise<boolean> {
+  const { data } = await db.from("licencias").select("codigo").eq("activa", true).limit(1);
+  return (data?.length ?? 0) > 0;
+}
+
 /** Lee la licencia activa del docente autenticado (RLS: solo la suya). */
 export function useLicencia() {
   const [loading, setLoading] = useState(true);

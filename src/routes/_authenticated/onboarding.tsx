@@ -3,6 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { tieneLicencia } from "@/lib/licencia";
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
   ssr: false,
@@ -44,6 +45,14 @@ function Onboarding() {
       const user = data.user;
       if (!user) return;
       setUserId(user.id);
+
+      // Sin licencia activa el docente no puede configurar ni ver datos.
+      if (!(await tieneLicencia())) {
+        navigate({ to: "/licencia", replace: true });
+        return;
+      }
+
+
       const { data: perfiles } = await supabase
         .from("profiles")
         .select("*")
