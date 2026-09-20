@@ -4,6 +4,7 @@ import { BookOpen, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
+import { redimirLicencia } from "@/lib/licencia";
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
