@@ -133,6 +133,20 @@ function AuthPage() {
             )}
             <Field label="Correo" type="email" value={email} onChange={setEmail} placeholder="docente@correo.com" required />
             <Field label="Contraseña" type="password" value={password} onChange={setPassword} placeholder="••••••••" required />
+            {modo === "signup" && (
+              <>
+                <Field
+                  label="Código de licencia"
+                  value={codigo}
+                  onChange={(v) => setCodigo(v.toUpperCase())}
+                  placeholder="SIEDMX-DEMO-01"
+                  required
+                />
+                <p className="text-[11px] text-ink-soft">
+                  Tu acceso se activa con el código de licencia que te compartió el equipo de SIED MX.
+                </p>
+              </>
+            )}
 
             <button
               type="submit"
