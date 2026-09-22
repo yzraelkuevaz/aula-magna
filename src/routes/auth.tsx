@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { redimirLicencia } from "@/lib/licencia";
+import { BackendErrorState } from "@/components/shared/BackendErrorState";
+import { getBackendConfigurationError, getBackendErrorMessage } from "@/lib/backend-error";
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
@@ -23,6 +25,7 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
+  const configurationError = getBackendConfigurationError();
   const [modo, setModo] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,10 +34,17 @@ function AuthPage() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    void supabase.auth.getUser().then(({ data }) => {
-      if (data.user) navigate({ to: "/app", replace: true });
-    });
-  }, [navigate]);
+    if (configurationError) return;
+
+    void supabase.auth
+      .getUser()
+      .then(({ data }) => {
+        if (data.user) navigate({ to: "/app", replace: true });
+      })
+      .catch((error: unknown) => {
+        console.error("[SIED MX] No se pudo comprobar la sesión:", error);
+      });
+  }, [configurationError, navigate]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,6 +99,15 @@ function AuthPage() {
     if (result.redirected) return;
     navigate({ to: "/app", replace: true });
   };
+
+  if (configurationError) {
+    return (
+      <BackendErrorState
+        message={getBackendErrorMessage(configurationError)}
+        onRetry={() => window.location.reload()}
+      />
+    );
+  }
 
   return (
     <main className="min-h-screen grid place-items-center px-5 py-12 bg-background text-foreground">
