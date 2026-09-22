@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { getBackendConfigurationError } from "@/lib/backend-error";
 
 
 import appCss from "../styles.css?url";
@@ -125,6 +126,8 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
+    if (getBackendConfigurationError()) return;
+
     try {
       const { data } = supabase.auth.onAuthStateChange((event) => {
         if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
