@@ -51,7 +51,7 @@ function Slot({
       const nuevo = `${userId}/perfil/${campo === "avatar_path" ? "avatar" : "logo"}-${Date.now()}.${ext}`;
       const { error } = await supabase.storage.from(BUCKET).upload(nuevo, file, { contentType: file.type });
       if (error) throw error;
-      const { error: e2 } = await supabase.from("profiles").update({ [campo]: nuevo }).eq("user_id", userId);
+      const { error: e2 } = await supabase.from("profiles").update(campo === "avatar_path" ? { avatar_path: nuevo } : { logo_path: nuevo }).eq("user_id", userId);
       if (e2) throw e2;
       if (path) await supabase.storage.from(BUCKET).remove([path]);
       toast.success(`${label} actualizado`);
