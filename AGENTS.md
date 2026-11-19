@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- All schema changes go through the Lovable Database migration tool (Drizzle). The seven app tables predate it, so only additive changes are allowed and existing tables must never be dropped, renamed, or recreated.
