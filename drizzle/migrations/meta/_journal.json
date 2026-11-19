@@ -15,6 +15,13 @@
       "when": 1795055385960,
       "tag": "0001_exigir_licencia_activa",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795055995369,
+      "tag": "0002_archivos_docente",
+      "breakpoints": true
     }
   ]
 }

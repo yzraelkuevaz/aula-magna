@@ -180,6 +180,50 @@ export type Database = {
           },
         ]
       }
+      evaluaciones_archivos: {
+        Row: {
+          alumno_id: string | null
+          created_at: string
+          file_name: string
+          file_path: string
+          id: string
+          mime: string | null
+          size_bytes: number | null
+          titulo: string
+          user_id: string
+        }
+        Insert: {
+          alumno_id?: string | null
+          created_at?: string
+          file_name: string
+          file_path: string
+          id?: string
+          mime?: string | null
+          size_bytes?: number | null
+          titulo: string
+          user_id: string
+        }
+        Update: {
+          alumno_id?: string | null
+          created_at?: string
+          file_name?: string
+          file_path?: string
+          id?: string
+          mime?: string | null
+          size_bytes?: number | null
+          titulo?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evaluaciones_archivos_alumno_id_fkey"
+            columns: ["alumno_id"]
+            isOneToOne: false
+            referencedRelation: "alumnos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       licencias: {
         Row: {
           activa: boolean
@@ -221,6 +265,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          avatar_path: string | null
           avatar_url: string | null
           ciclo: string | null
           created_at: string
@@ -232,6 +277,7 @@ export type Database = {
           hora_salida: string | null
           id: string
           is_demo: boolean
+          logo_path: string | null
           nivel: string | null
           nombre: string
           nombre_grupo: string | null
@@ -245,6 +291,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          avatar_path?: string | null
           avatar_url?: string | null
           ciclo?: string | null
           created_at?: string
@@ -256,6 +303,7 @@ export type Database = {
           hora_salida?: string | null
           id?: string
           is_demo?: boolean
+          logo_path?: string | null
           nivel?: string | null
           nombre?: string
           nombre_grupo?: string | null
@@ -269,6 +317,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          avatar_path?: string | null
           avatar_url?: string | null
           ciclo?: string | null
           created_at?: string
@@ -280,6 +329,7 @@ export type Database = {
           hora_salida?: string | null
           id?: string
           is_demo?: boolean
+          logo_path?: string | null
           nivel?: string | null
           nombre?: string
           nombre_grupo?: string | null

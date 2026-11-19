@@ -14,6 +14,8 @@ export interface PerfilDocente {
   onboarding_completed: boolean;
   tutorial_completed: boolean;
   is_demo: boolean;
+  avatar_path: string | null;
+  logo_path: string | null;
 }
 
 export interface AlumnoBasico {
@@ -62,7 +64,7 @@ export function usePerfil() {
 
       const [perfilRes, alumnosRes] = await Promise.all([
         supabase.from("profiles").select("*").eq("user_id", user.id).limit(1),
-        supabase.from("alumnos").select("id, nombre, foto_path").order("nombre"),
+        supabase.from("alumnos").select("id, nombre, foto_path").eq("user_id", user.id).order("nombre"),
       ]);
 
       if (perfilRes.error) throw perfilRes.error;

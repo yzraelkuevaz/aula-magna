@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { MisAlumnos } from "@/components/config/MisAlumnos";
+import { ImagenesPerfil } from "@/components/config/ImagenesPerfil";
+import { ImportarAlumnos } from "@/components/config/ImportarAlumnos";
 import type { AlumnoBasico, PerfilDocente } from "@/lib/perfil";
 
 const niveles = ["Preescolar", "Primaria", "Secundaria"];
@@ -80,6 +82,10 @@ export function Configuracion({
           Guardar
         </button>
       </section>
+
+      <ImagenesPerfil userId={perfil.user_id} avatarPath={perfil.avatar_path} logoPath={perfil.logo_path} onChanged={onSaved} />
+
+      <ImportarAlumnos userId={perfil.user_id} existentes={alumnos.map((a) => a.nombre)} onChanged={onSaved} />
 
       <MisAlumnos userId={perfil.user_id} alumnos={alumnos} onChanged={onSaved} />
 

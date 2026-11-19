@@ -17,7 +17,7 @@ import { CentroEvaluacion } from "@/components/evaluacion/CentroEvaluacion";
 import { Planeaciones } from "@/components/planeaciones/Planeaciones";
 import { ModuloPendiente } from "@/components/shared/ModuloPendiente";
 import { Configuracion } from "@/components/config/Configuracion";
-import { DemoBanner } from "@/components/shared/DemoBanner";
+import { ArchivosEvaluacion } from "@/components/archivos/ArchivosEvaluacion";
 import { GuiaPasoAPaso } from "@/components/shared/GuiaPasoAPaso";
 import { BackendErrorState } from "@/components/shared/BackendErrorState";
 import { useLicencia } from "@/lib/licencia";
@@ -175,17 +175,12 @@ function AppShell() {
           <Configuracion perfil={perfil} email={email} alumnos={alumnos} onSaved={recargar} />
         ) : showAula ? (
           <>
-            <DemoBanner />
             <MiAula onAskAI={openAI} />
           </>
         ) : showEvaluacion ? (
-          <>
-            <DemoBanner />
-            <CentroEvaluacion onAskAI={openAI} />
-          </>
+          <ArchivosEvaluacion userId={perfil.user_id} alumnos={alumnos} />
         ) : showPlaneaciones ? (
           <>
-            <DemoBanner />
             <Planeaciones onAskAI={openAI} />
           </>
         ) : showBiblioteca ? (
