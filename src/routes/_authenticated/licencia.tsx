@@ -67,7 +67,7 @@ function LicenciaPage() {
                   value={codigo}
                   required
                   onChange={(e) => setCodigo(e.target.value.toUpperCase())}
-                  placeholder="SIEDMX-DEMO-01"
+                  placeholder="SIEDMX-XXXX-XXXX-XXXX"
                   aria-label="Código de licencia"
                   className="w-full h-12 pl-10 pr-4 rounded-xl bg-primary/5 border border-border focus:outline-none focus:border-[var(--neon-coral)]/40 text-sm tracking-widest text-ink placeholder:text-ink-soft/60"
                 />

@@ -158,7 +158,7 @@ function AuthPage() {
                   label="Código de licencia"
                   value={codigo}
                   onChange={(v) => setCodigo(v.toUpperCase())}
-                  placeholder="SIEDMX-DEMO-01"
+                  placeholder="SIEDMX-XXXX-XXXX-XXXX"
                   required
                 />
                 <p className="text-[11px] text-ink-soft">

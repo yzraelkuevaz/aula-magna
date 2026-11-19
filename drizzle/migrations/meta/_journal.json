@@ -8,6 +8,13 @@
       "when": 1795055209537,
       "tag": "0000_baseline_esquema_sied_mx",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795055385960,
+      "tag": "0001_exigir_licencia_activa",
+      "breakpoints": true
     }
   ]
 }

@@ -342,6 +342,7 @@ export type Database = {
     }
     Functions: {
       redimir_licencia: { Args: { p_codigo: string }; Returns: Json }
+      tiene_licencia_activa: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
